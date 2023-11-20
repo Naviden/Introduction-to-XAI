@@ -33,6 +33,3 @@ Contributions to this repository are welcome! If you would like to add more exam
 
 License
 This project is licensed under the MIT License - see the LICENSE file for details.
-
-Contact
-If you have any questions or feedback, please open an issue in the repository, or contact me directly at your-email@example.com.
