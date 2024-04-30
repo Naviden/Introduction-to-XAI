@@ -24,13 +24,7 @@ where $f(x)$ is the model's prediction for the instance $x$, $N$ is the number o
 
 ### Step 3: Calculate Shapley Values
 
-The Shapley value for each feature is calculated by considering all possible subsets of features and the marginal contribution of the feature to the difference between the model prediction with and without the feature. Formally, the Shapley value for feature $i$ is given by:
-
-$$
-\phi_i = \sum_{S \subseteq F \setminus \{i\}} \frac{|S|!(|F| - |S| - 1)!}{|F|!} [f(S \cup \{i\}) - f(S)]
-$$
-
-where $F$ is the set of all features, $S$ is a subset of features excluding feature $i$, $|S|$ is the number of features in subset $S$, and $|F|$ is the total number of features. $f(S \cup \{i\})$ is the model's prediction with the features in $S$ plus feature $i$, and $f(S)$ is the model's prediction with the features in $S$ alone.
+The Shapley value for each feature is calculated by considering all possible subsets of features and the marginal contribution of the feature to the difference between the model prediction with and without the feature.
 
 ### Step 4: Interpret SHAP Values
 
@@ -64,18 +58,18 @@ SHAP values explain the output of the model by assigning each feature an importa
 The Shapley value for feature \( i \) is given by:
 $$\phi_i = \sum_{S \subseteq N \setminus \{i\}} \frac{|S|! (|N| - |S| - 1)!}{|N|!} [v(S \cup \{i\}) - v(S)]$$
 where:
-- \( N \) is the set of all features.
-- \( S \) is a subset of features excluding \( i \).
-- \( |S| \) is the number of features in subset \( S \).
-- \( |N| \) is the total number of features.
-- \( v(S) \) is the prediction value when only the features in subset \( S \) are used.
-- \( \phi_i \) is the contribution of feature \( i \) to the prediction.
+- $ N $ is the set of all features.
+- $ S $ is a subset of features excluding $ i $.
+- $ |S| $ is the number of features in subset $ S $.
+- $ |N| $ is the total number of features.
+- $ v(S) $ is the prediction value when only the features in subset $ S $ are used.
+- $ \phi_i $ is the contribution of feature $ i $ to the prediction.
 
 ##### Applying Shapley Values
-For our model, \( N = \{\text{Glucose Level}, \text{BMI}, \text{Age}\} \), we calculate the SHAP values by considering all subsets of features and their contributions:
+For our model, $ N = \{\text{Glucose Level}, \text{BMI}, \text{Age}\} $, we calculate the SHAP values by considering all subsets of features and their contributions:
 
 1. **Baseline Prediction**:
-   - \( \text{logit}(\text{Base}) = -6 \)
+   - $ \text{logit}(\text{Base}) = -6 $
 
 2. **Marginal Contributions**:
    - **Glucose Alone**, **BMI Alone**, **Age Alone**, and various combinations as detailed earlier are calculated.
