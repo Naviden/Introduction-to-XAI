@@ -82,7 +82,7 @@ We generate new samples around Alice's features by slightly modifying her age an
 ```
 
 #### Step 2: Weight Calculation
-Weights are assigned based on proximity to Alice's actual features (Age: 35, Education: Bachelor’s), using an exponential kernel with $ \sigma = 3 $ for simplicity:
+Weights are assigned based on proximity to Alice's actual features (Age: 35, Education: Bachelor’s), using an exponential kernel with $\sigma = 3$ for simplicity:
 
 $Weights = exp(-(distance^2) / 9)$
 
