@@ -29,7 +29,7 @@ The Shapley value for each feature is calculated by considering all possible sub
 
 ##### Shapley Value Formula
 The Shapley value for feature $i$ is given by:
-$$\phi_i = \sum_{S \subseteq N \setminus \{i\}} \frac{|S|! (|N| - |S| - 1)!}{|N|!} [v(S \cup \{i\}) - v(S)]$$
+$$\phi_i = \sum_{S \subseteq N \setminus \lbrace i\rbrace} \frac{|S|! (|N| - |S| - 1)!}{|N|!} [v(S \cup \{i\}) - v(S)]$$
 where:
 - $N$ is the set of all features.
 - $S$ is a subset of features excluding $i$.
