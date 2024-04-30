@@ -80,8 +80,45 @@ For our model, $N = \{\text{Glucose Level}, \text{BMI}, \text{Age}\}$, we calcul
    - **SHAP for BMI** and **SHAP for Age**:
      - Similarly, calculated by systematically adding and removing these features from combinations and observing changes in predictions.
 
-#### Detailed Calculations
-We'll provide detailed computation results for one feature, considering its influence across all permutations:
+You’re right; I mentioned detailed calculations but did not provide specific numerical examples showing how the contributions are computed for each subset. Let's go into a more detailed calculation for the Shapley values using our diabetes prediction model.
 
-- **For Glucose Level**:
-  - Calculation involves combining contributions across all subsets, considering the factorial terms for weights, which account for the number of ways features can be arranged.
+---
+
+### Detailed Calculations for SHAP Values
+
+For this example, we will focus on calculating the SHAP value for the feature "Glucose Level". We will provide step-by-step calculations of the Shapley value for this feature.
+
+#### Setting
+- **Features**: $N = \{\text{Glucose Level}, \text{BMI}, \text{Age}\}$
+- **Prediction Model**: Logistic regression
+  - $\text{logit}(P(\text{Diabetes})) = -6 + 0.05 \times \text{Glucose} + 0.01 \times \text{BMI} + 0.02 \times \text{Age}$
+
+#### Steps to Calculate SHAP for Glucose Level
+1. **Compute the prediction with no features (baseline)**:
+   - $v(\emptyset) = -6$ (logit value with no features).
+
+2. **Compute predictions for each subset including "Glucose Level"**:
+   - **Only Glucose**: $v(\{\text{Glucose}\}) = -6 + 0.05 \times 148 = 1.4$
+   - **Glucose + BMI**: $v(\{\text{Glucose, BMI}\}) = -6 + 0.05 \times 148 + 0.01 \times 33.6 = 1.436$
+   - **Glucose + Age**: $v(\{\text{Glucose, Age}\}) = -6 + 0.05 \times 148 + 0.02 \times 50 = 1.4$
+   - **Glucose + BMI + Age**: $v(\{\text{Glucose, BMI, Age}\}) = 1.476$ (full model).
+
+3. **Compute predictions for each subset excluding "Glucose Level"**:
+   - **Only BMI**: $v(\{\text{BMI}\}) = -6 + 0.01 \times 33.6 = -5.664$
+   - **Only Age**: $v(\{\text{Age}\}) = -6 + 0.02 \times 50 = -5$
+   - **BMI + Age**: $v(\{\text{BMI, Age}\}) = -6 + 0.01 \times 33.6 + 0.02 \times 50 = -5.664$
+
+4. **Apply Shapley value formula**:
+   - $\phi_{\text{Glucose}} = \sum_{S \subseteq N \setminus \{\text{Glucose}\}} \frac{|S|! (|N|-|S|-1)!}{|N|!} [v(S \cup \{\text{Glucose}\}) - v(S)]$
+
+   For "Glucose Level":
+   - Contribution when added alone: $[v(\{\text{Glucose}\}) - v(\emptyset)] = [1.4 - (-6)] = 7.4$
+   - Contribution when added to BMI: $[v(\{\text{Glucose, BMI}\}) - v(\{\text{BMI}\})] = [1.436 - (-5.664)] = 7.1$
+   - Contribution when added to Age: $[v(\{\text{Glucose, Age}\}) - v(\{\text{Age}\})] = [1.4 - (-5)] = 6.4$
+   - Contribution when added to BMI + Age: $[v(\{\text{Glucose, BMI, Age}\}) - v(\{\text{BMI, Age}\})] = [1.476 - (-5.664)] = 7.14$
+
+   Calculating the average of these contributions, adjusted for the number of subsets:
+   - $\phi_{\text{Glucose}} = \frac{1}{3} (7.4) + \frac{1}{6} (7.1 + 6.4) + \frac{1}{3} (7.14) = 2.47 + 2.25 + 2.38 = 7.1$
+
+### Explanation
+The SHAP value for "Glucose Level" around 7.1 indicates a significant positive impact on increasing the probability of diabetes prediction, quantifying how much "Glucose Level" pushes the model's prediction toward the higher probability of diabetes compared to the baseline. This calculation takes into account the effect of "Glucose Level" across all possible combinations of features, weighted by the number of features included.
