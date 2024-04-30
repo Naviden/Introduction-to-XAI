@@ -76,7 +76,7 @@ Details for the individual (Bob):
 
 
 #### Setting
-- **Features**: $N = \{\text{Glucose Level}, \text{BMI}, \text{Age}\}$
+- **Features**: \(N = \{\text{Glucose Level}, \text{BMI}, \text{Age}\}\)
 - **Prediction Model**: Logistic regression
   - $\text{logit}(P(\text{Diabetes})) = -6 + 0.05 \times \text{Glucose} + 0.01 \times \text{BMI} + 0.02 \times \text{Age}$
 
