@@ -79,28 +79,6 @@ Details for the individual (Bob):
 - **Model Prediction Probability**: 0.7 (70% chance of having diabetes).
 
 
-##### Applying Shapley Values
-For our model, $N = \{\text{Glucose Level}, \text{BMI}, \text{Age}\}$, we calculate the SHAP values by considering all subsets of features and their contributions:
-
-1. **Baseline Prediction**:
-   - $\text{logit}(\text{Base}) = -6$
-
-2. **Marginal Contributions**:
-   - **Glucose Alone**, **BMI Alone**, **Age Alone**, and various combinations as detailed earlier are calculated.
-
-3. **Computing SHAP Values** for each feature by averaging over all possible combinations of features:
-   - **SHAP for Glucose**:
-     - This value reflects the average change in the prediction when Glucose Level is added to all possible subsets of other features. Calculation involves multiple permutations where Glucose Level's presence or absence changes the outcome.
-   - **SHAP for BMI** and **SHAP for Age**:
-     - Similarly, calculated by systematically adding and removing these features from combinations and observing changes in predictions.
-
-You’re right; I mentioned detailed calculations but did not provide specific numerical examples showing how the contributions are computed for each subset. Let's go into a more detailed calculation for the Shapley values using our diabetes prediction model.
-
----
-
-### Detailed Calculations for SHAP Values
-
-For this example, we will focus on calculating the SHAP value for the feature "Glucose Level". We will provide step-by-step calculations of the Shapley value for this feature.
 
 #### Setting
 - **Features**: $N = \{\text{Glucose Level}, \text{BMI}, \text{Age}\}$
