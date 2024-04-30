@@ -65,7 +65,7 @@ SHAP values can be interpreted directly as the impact of a feature on the model'
 ### Example: Binary Classification
 
 #### Scenario
-We continue with our logistic regression model predicting diabetes likelihood, incorporating the original Shapley value calculations for a more mathematical and comprehensive explanation.
+Let's consider a logistic regression model predicting diabetes likelihood, incorporating the original Shapley value calculations for a more mathematical and comprehensive explanation.
 #### Target Instance
 Details for the individual (Bob):
 - **Glucose Level**: 148
