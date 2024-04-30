@@ -62,9 +62,7 @@ SHAP values explain the output of the model by assigning each feature an importa
 
 ##### Shapley Value Formula
 The Shapley value for feature \( i \) is given by:
-$$
-\phi_i = \sum_{S \subseteq N \setminus \{i\}} \frac{|S|! (|N| - |S| - 1)!}{|N|!} [v(S \cup \{i\}) - v(S)]
-$$
+$$\phi_i = \sum_{S \subseteq N \setminus \{i\}} \frac{|S|! (|N| - |S| - 1)!}{|N|!} [v(S \cup \{i\}) - v(S)]$$
 where:
 - \( N \) is the set of all features.
 - \( S \) is a subset of features excluding \( i \).
