@@ -66,11 +66,6 @@ SHAP values can be interpreted directly as the impact of a feature on the model'
 
 #### Scenario
 We continue with our logistic regression model predicting diabetes likelihood, incorporating the original Shapley value calculations for a more mathematical and comprehensive explanation.
-
-#### Original Model (Black Box)
-Here’s the logistic regression equation again:
-$$\text{logit}(P(\text{Diabetes})) = -6 + 0.05 \times \text{Glucose Level} + 0.01 \times \text{BMI} + 0.02 \times \text{Age}$$
-
 #### Target Instance
 Details for the individual (Bob):
 - **Glucose Level**: 148
