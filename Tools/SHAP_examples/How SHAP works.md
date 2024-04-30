@@ -29,7 +29,7 @@ The Shapley value for each feature is calculated by considering all possible sub
 
 ##### Shapley Value Formula
 The Shapley value for feature $i$ is given by:
-$$\phi_i = \sum_{S \subseteq N \setminus \{{i\}}} \frac{|S|! (|N| - |S| - 1)!}{|N|!} [v(S \cup \{i\}) - v(S)]$$
+$$\phi_i = \sum_{S \subseteq N \setminus \{i\}} \frac{|S|! (|N| - |S| - 1)!}{|N|!} [v(S \cup \{i\}) - v(S)]$$
 where:
 - $N$ is the set of all features.
 - $S$ is a subset of features excluding $i$.
@@ -38,7 +38,7 @@ where:
 - $v(S)$ is the prediction value when only the features in subset $S$ are used.
 - $\phi_i$ is the contribution of feature $i$ to the prediction.
 
-The above formula is a core component of SHAP (SHapley Additive exPlanations) and provides a way to fairly allocate the "payout" (or contribution) of each feature in a model's prediction. 
+The above formula is a core component of SHAP and provides a way to fairly allocate the "payout" (or contribution) of each feature in a model's prediction. 
 
 #### Formula Components:
 1. **Subset $S$ Contribution**: The difference $[v(S \cup \{i\}) - v(S)]$ measures how much adding feature $i$ to the subset $S$ changes the prediction. If the difference is positive, $i$ is enhancing the prediction when added to $S$; if it's negative, $i$ is detracting from it.
