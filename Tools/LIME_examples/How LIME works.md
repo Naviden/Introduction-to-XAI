@@ -1,6 +1,6 @@
 # Local Interpretable Model-agnostic Explanations (LIME)
 
-Local Interpretable Model-agnostic Explanations (LIME) is a technique designed to help us understand the predictions of any machine learning model by approximating the model locally around the prediction. LIME is particularly useful for explaining individual predictions of complex, black-box models such as deep neural networks or ensemble methods. Here's a detailed breakdown suitable for undergraduate students, including some essential formulas.
+Local Interpretable Model-agnostic Explanations (LIME) is a technique designed to help us understand the predictions of any machine learning model by approximating the model locally around the prediction. LIME is particularly useful for explaining individual predictions of complex, black-box models such as deep neural networks or ensemble methods. Here's a detailed breakdown, including some essential formulas.
 
 ## 1. Introduction to LIME
 
@@ -45,3 +45,69 @@ where $f(x_i)$ is the prediction of the complex model for the perturbed instance
 ### Step 6: Interpret the Simple Model
 
 The parameters (like coefficients in linear regression) of the simple model serve as explanations for the prediction at $x$. For example, in a linear model, the coefficients indicate the direction and magnitude of the influence of each feature on the prediction.
+
+
+
+
+
+### Example: Binary Classification
+
+#### Scenario
+We have a model trained to predict if individuals earn more than $50k a year. The features used in the model are:
+- **Age**: Continuous variable.
+- **Education Level**: Categorical variable (High School, Bachelor's, Master's).
+
+#### Original Model (Black Box)
+Let's assume our decision tree has learned the following (simplified for explanation):
+- If age > 30 and has at least a Bachelor's degree, predict > $50k.
+- Otherwise, predict <= $50k.
+
+#### Target Instance
+We want to explain the model's prediction for Alice:
+- **Age**: 35
+- **Education Level**: Bachelor's
+- The model predicts: > $50k (positive class).
+
+#### Step 1: Data Perturbation
+We generate new samples around Alice's features by slightly modifying her age and education:
+```
+| Age | Education     | Model Prediction |
+|-----|---------------|------------------|
+| 34  | Bachelor's    | > $50k           |
+| 32  | High School   | <= $50k          |
+| 37  | Master's      | > $50k           |
+| 29  | Bachelor's    | <= $50k          |
+| 36  | High School   | <= $50k          |
+| 33  | Bachelor's    | > $50k           |
+```
+
+#### Step 2: Weight Calculation
+Weights are assigned based on proximity to Alice's actual features (Age: 35, Education: Bachelor’s), using an exponential kernel with \( \sigma = 3 \) for simplicity:
+
+$Weights = exp(-(distance^2) / 9)$
+
+
+
+Distances (simplified calculation considering categorical as a change/no-change and numerical distance for age):
+```
+| Perturbed Sample | Distance | Weight   |
+|------------------|----------|----------|
+| (34, Bachelor's) | 1        | 0.90     |
+| (32, High School)| 4        | 0.45     |
+| (37, Master's)   | 2.5      | 0.72     |
+| (29, Bachelor's) | 6        | 0.25     |
+| (36, High School)| 3.5      | 0.57     |
+| (33, Bachelor's) | 2        | 0.82     |
+```
+
+#### Step 3: Train Local Interpretable Model
+We train a simple linear regression model using the perturbed data, with the outcome variable being the binary prediction (1 for > $50k, 0 for <= $50k), and weights as calculated:
+
+```
+Model: Predicted = 0.1 * Age + 0.5 * Education_Bachelor’s + 0.4 * Education_Master’s
+```
+
+#### Step 4: Explanation Generation
+The coefficients indicate the importance of each feature:
+- **Age Coefficient**: 0.1 — Suggesting that an increase in age slightly increases the chance of earning > $50k.
+- **Education Coefficients**: Bachelor's (0.5) and Master's (0.4) — Indicating that having at least a Bachelor's degree significantly influences higher earnings predictions.

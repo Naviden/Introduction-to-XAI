@@ -2,3 +2,4 @@
 .DS_Store
 ANCHOR_examples/rt-polaritydata/rt-polarity.pos
 ANCHOR_examples/rt-polaritydata/rt-polarity.neg
+.html
