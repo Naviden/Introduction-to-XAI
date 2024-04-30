@@ -26,6 +26,49 @@ where $f(x)$ is the model's prediction for the instance $x$, $N$ is the number o
 
 The Shapley value for each feature is calculated by considering all possible subsets of features and the marginal contribution of the feature to the difference between the model prediction with and without the feature.
 
+
+##### Shapley Value Formula
+The Shapley value for feature \( i \) is given by:
+$$\phi_i = \sum_{S \subseteq N \setminus \{i\}} \frac{|S|! (|N| - |S| - 1)!}{|N|!} [v(S \cup \{i\}) - v(S)]$$
+where:
+- $N$ is the set of all features.
+- $S$ is a subset of features excluding $i$.
+- $|S|$ is the number of features in subset $S$.
+- $|N|$ is the total number of features.
+- $v(S)$ is the prediction value when only the features in subset $S$ are used.
+- $\phi_i$ is the contribution of feature $i$ to the prediction.
+
+The above formula is a core component of SHAP (SHapley Additive exPlanations) and provides a way to fairly allocate the "payout" (or contribution) of each feature in a model's prediction. Here's a clearer breakdown of the formula and its components:
+
+### The Shapley Value Formula Explained
+
+The Shapley value $\phi_i$ for a feature $i$ is calculated using the following formula:
+$$\phi_i = \sum_{S \subseteq N \setminus \{i\}} \frac{|S|! (|N| - |S| - 1)!}{|N|!} [v(S \cup \{i\}) - v(S)]$$
+
+#### Variables and Symbols:
+- $N$ is the set of all features used in the model.
+- $S$ is a subset of $N$ that does not include the feature $i$. It represents any combination of features excluding $i$.
+- $|S|$ is the number of features in the subset $S$.
+- $|N|$ is the total number of features in the model.
+- $v(S)$ is the model's output or prediction value when only the features in subset $S$ are used.
+- $v(S \cup \{i\})$ is the model's output or prediction when the features in $S$ are used together with feature $i$.
+- $\phi_i$ is the contribution of feature $i$ to the overall prediction.
+
+#### Formula Components:
+1. **Subset $S$ Contribution**: The difference $[v(S \cup \{i\}) - v(S)]$ measures how much adding feature $i$ to the subset $S$ changes the prediction. If the difference is positive, $i$ is enhancing the prediction when added to $S$; if it's negative, $i$ is detracting from it.
+
+2. **Weight of Each Contribution**: The weight $\frac{|S|! (|N| - |S| - 1)!}{|N|!}$ is a crucial part of the Shapley value calculation. It ensures each subset $S$ is weighted appropriately:
+   - $|S|!$ accounts for all possible orders in which the features in $S$ can be arranged.
+   - $(|N| - |S| - 1)!$ counts the permutations of the remaining features in $N$ after $S$ and $i$ have been chosen.
+   - $|N|!$ is the total number of ways to arrange all features in $N$, serving as a normalizing factor to ensure the weights sum to 1.
+
+#### Calculation Procedure:
+The formula calculates the Shapley value by summing over all possible subsets $S$ of $N$ that exclude the feature $i$. For each subset, it computes the change in the prediction caused by adding $i$ to $S$, weighted by the probability of $S$ occurring in the order of features being added to a prediction model.
+
+This approach ensures that the contribution of each feature is fairly evaluated in the context of all possible combinations of other features, reflecting the average marginal effect of including the feature in the model. This method attributes the contribution of each feature to the prediction output in a way that all contributions sum up to the total change in the prediction from the baseline (no features) to the full model.
+
+
+
 ### Step 4: Interpret SHAP Values
 
 SHAP values can be interpreted directly as the impact of a feature on the model's prediction. A positive SHAP value indicates that the feature increases the prediction, while a negative value indicates a decrease. The magnitude of the SHAP value reflects the strength of the feature's impact.
@@ -51,19 +94,6 @@ Details for the individual (Bob):
 - **Age**: 50
 - **Model Prediction Probability**: 0.7 (70% chance of having diabetes).
 
-#### SHAP Values Calculation
-SHAP values explain the output of the model by assigning each feature an importance value for a particular prediction.
-
-##### Shapley Value Formula
-The Shapley value for feature \( i \) is given by:
-$$\phi_i = \sum_{S \subseteq N \setminus \{i\}} \frac{|S|! (|N| - |S| - 1)!}{|N|!} [v(S \cup \{i\}) - v(S)]$$
-where:
-- $N$ is the set of all features.
-- $S$ is a subset of features excluding $i$.
-- $|S|$ is the number of features in subset $S$.
-- $|N|$ is the total number of features.
-- $v(S)$ is the prediction value when only the features in subset $S$ are used.
-- $\phi_i$ is the contribution of feature $i$ to the prediction.
 
 ##### Applying Shapley Values
 For our model, $N = \{\text{Glucose Level}, \text{BMI}, \text{Age}\}$, we calculate the SHAP values by considering all subsets of features and their contributions:
