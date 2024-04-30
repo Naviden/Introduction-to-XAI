@@ -85,24 +85,24 @@ Details for the individual (Bob):
    - $v(\emptyset) = -6$ (logit value with no features).
 
 2. **Compute predictions for each subset including "Glucose Level"**:
-   - **Only Glucose**: $v(\{\text{Glucose}\}) = -6 + 0.05 \times 148 = 1.4$
-   - **Glucose + BMI**: $v(\{\text{Glucose, BMI}\}) = -6 + 0.05 \times 148 + 0.01 \times 33.6 = 1.436$
-   - **Glucose + Age**: $v(\{\text{Glucose, Age}\}) = -6 + 0.05 \times 148 + 0.02 \times 50 = 1.4$
-   - **Glucose + BMI + Age**: $v(\{\text{Glucose, BMI, Age}\}) = 1.476$ (full model).
+   - **Only Glucose**: $v(\lbrace Glucose \rbrace) = -6 + 0.05 \times 148 = 1.4$
+   - **Glucose + BMI**: $v(\lbrace Glucose, BMI \rbrace) = -6 + 0.05 \times 148 + 0.01 \times 33.6 = 1.436$
+   - **Glucose + Age**: $v(\lbrace Glucose, Age \rbrace) = -6 + 0.05 \times 148 + 0.02 \times 50 = 1.4$
+   - **Glucose + BMI + Age**: $v(\lbrace Glucose, BMI, Age \rbrace) = 1.476$ (full model).
 
 3. **Compute predictions for each subset excluding "Glucose Level"**:
-   - **Only BMI**: $v(\{\text{BMI}\}) = -6 + 0.01 \times 33.6 = -5.664$
-   - **Only Age**: $v(\{\text{Age}\}) = -6 + 0.02 \times 50 = -5$
-   - **BMI + Age**: $v(\{\text{BMI, Age}\}) = -6 + 0.01 \times 33.6 + 0.02 \times 50 = -5.664$
+   - **Only BMI**: $v(\lbrace BMI \rbrace) = -6 + 0.01 \times 33.6 = -5.664$
+   - **Only Age**: $v(\lbrace Age \rbrace) = -6 + 0.02 \times 50 = -5$
+   - **BMI + Age**: $v(\lbrace BMI, Age \rbrace) = -6 + 0.01 \times 33.6 + 0.02 \times 50 = -5.664$
 
 4. **Apply Shapley value formula**:
-   - $\phi_{\text{Glucose}} = \sum_{S \subseteq N \setminus \{\text{Glucose}\}} \frac{|S|! (|N|-|S|-1)!}{|N|!} [v(S \cup \{\text{Glucose}\}) - v(S)]$
+   - $\phi_{\text{Glucose}} = \sum_{S \subseteq N \setminus \lbrace Glucose \rbrace} \frac{|S|! (|N|-|S|-1)!}{|N|!} [v(S \cup \lbrace Glucose \rbrace) - v(S)]$
 
    For "Glucose Level":
-   - Contribution when added alone: $[v(\{\text{Glucose}\}) - v(\emptyset)] = [1.4 - (-6)] = 7.4$
-   - Contribution when added to BMI: $[v(\{\text{Glucose, BMI}\}) - v(\{\text{BMI}\})] = [1.436 - (-5.664)] = 7.1$
-   - Contribution when added to Age: $[v(\{\text{Glucose, Age}\}) - v(\{\text{Age}\})] = [1.4 - (-5)] = 6.4$
-   - Contribution when added to BMI + Age: $[v(\{\text{Glucose, BMI, Age}\}) - v(\{\text{BMI, Age}\})] = [1.476 - (-5.664)] = 7.14$
+   - Contribution when added alone: $[v(\lbrace Glucose \rbrace) - v(\emptyset)] = [1.4 - (-6)] = 7.4$
+   - Contribution when added to BMI: $[v(\lbrace Glucose, BMI \rbrace) - v(\lbrace BMI \rbrace)] = [1.436 - (-5.664)] = 7.1$
+   - Contribution when added to Age: $[v(\lbrace Glucose, Age \rbrace) - v(\lbrace Age \rbrace)] = [1.4 - (-5)] = 6.4$
+   - Contribution when added to BMI + Age: $[v(\lbrace Glucose, BMI, Age \rbrace) - v(\lbrace BMI, Age \rbrace)] = [1.476 - (-5.664)] = 7.14$
 
    Calculating the average of these contributions, adjusted for the number of subsets:
    - $\phi_{\text{Glucose}} = \frac{1}{3} (7.4) + \frac{1}{6} (7.1 + 6.4) + \frac{1}{3} (7.14) = 2.47 + 2.25 + 2.38 = 7.1$
