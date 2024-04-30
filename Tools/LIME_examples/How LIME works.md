@@ -47,7 +47,7 @@ where $f(x_i)$ is the prediction of the complex model for the perturbed instance
 The parameters (like coefficients in linear regression) of the simple model serve as explanations for the prediction at $x$. For example, in a linear model, the coefficients indicate the direction and magnitude of the influence of each feature on the prediction.
 
 
-
+---
 
 
 ### Example: Binary Classification
