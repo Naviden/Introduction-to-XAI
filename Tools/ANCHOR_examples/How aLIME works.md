@@ -10,7 +10,7 @@ Anchor Local Interpretable Model-Agnostic Explanations (aLIME) is a methodology 
 
 #### Precision of an Anchor
 The precision of an anchor is defined as the probability that the prediction remains the same when the conditions specified by the anchor are met. Mathematically, it is expressed as:
-$$\text{Precision}(f, x, c, D) = \mathbb{E}_D(z|c,x)[1_{f(x)=f(z)}]$$
+$$Precision(f, x, c, D) = \mathbb{E}_D(z|c,x)[1_{f(x)=f(z)}]$$
 Where:
 - $f$ represents the model.
 - $x$ is the instance being explained.
