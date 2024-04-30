@@ -2,7 +2,7 @@
 
 Local Interpretable Model-agnostic Explanations (LIME) is a technique designed to help us understand the predictions of any machine learning model by approximating the model locally around the prediction. LIME is particularly useful for explaining individual predictions of complex, black-box models such as deep neural networks or ensemble methods. Here's a detailed breakdown, including some essential formulas.
 
-## 1. Introduction to LIME
+## 1. Introduction
 
 LIME generates explanations by creating a simple model (like a linear regression or decision tree) that approximates the behavior of the complex model locally. This is done around the instance (data point) you're interested in explaining. The idea is that while the global model is complex and possibly non-linear, its behavior near a specific instance can be approximated by a simpler, interpretable model.
 
@@ -14,7 +14,7 @@ Suppose you have a complex model $f$ and an instance $x$ whose prediction you wa
 
 ### Step 2: Perturb the Dataset
 
-Generate a new dataset of perturbed samples around $x$. This involves creating variations of $x$ by tweaking the input features slightly. For tabular data, this might involve changing the values of some features. For images, this could mean occluding parts of the image. For text, this could involve removing words or phrases.
+Generate a new dataset of perturbed samples around $x$. This involves creating variations of $x$ by tweaking the input features slightly. For tabular data, this might involve changing the values of some features. For images, this could mean masking parts of the image. For text, this could involve removing words or phrases.
 
 ### Step 3: Use the Complex Model to Predict Outcomes of Perturbed Samples
 
