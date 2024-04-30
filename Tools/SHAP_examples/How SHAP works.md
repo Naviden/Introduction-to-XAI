@@ -58,18 +58,18 @@ SHAP values explain the output of the model by assigning each feature an importa
 The Shapley value for feature \( i \) is given by:
 $$\phi_i = \sum_{S \subseteq N \setminus \{i\}} \frac{|S|! (|N| - |S| - 1)!}{|N|!} [v(S \cup \{i\}) - v(S)]$$
 where:
-- $ N $ is the set of all features.
-- $ S $ is a subset of features excluding $ i $.
-- $ |S| $ is the number of features in subset $ S $.
-- $ |N| $ is the total number of features.
-- $ v(S) $ is the prediction value when only the features in subset $ S $ are used.
-- $ \phi_i $ is the contribution of feature $ i $ to the prediction.
+- $N$ is the set of all features.
+- $S$ is a subset of features excluding $i$.
+- $|S|$ is the number of features in subset $S$.
+- $|N|$ is the total number of features.
+- $v(S)$ is the prediction value when only the features in subset $S$ are used.
+- $\phi_i$ is the contribution of feature $i$ to the prediction.
 
 ##### Applying Shapley Values
-For our model, $ N = \{\text{Glucose Level}, \text{BMI}, \text{Age}\} $, we calculate the SHAP values by considering all subsets of features and their contributions:
+For our model, $N = \{\text{Glucose Level}, \text{BMI}, \text{Age}\}$, we calculate the SHAP values by considering all subsets of features and their contributions:
 
 1. **Baseline Prediction**:
-   - $ \text{logit}(\text{Base}) = -6 $
+   - $\text{logit}(\text{Base}) = -6$
 
 2. **Marginal Contributions**:
    - **Glucose Alone**, **BMI Alone**, **Age Alone**, and various combinations as detailed earlier are calculated.
