@@ -70,13 +70,13 @@ From the data, we observe that:
 #### Rule Ensemble Model:
 The model predicts "Yes" for subscription if any of the rules apply, otherwise it predicts "No".
 
-\[ F(x) = a_0 + a_1 \cdot R1(x) + a_2 \cdot R2(x) \]
+$$F(x) = a_0 + a_1 \cdot R1(x) + a_2 \cdot R2(x)$$
 
-- \( a_0 \) is the intercept (generally 0 if rules are sufficient to explain the output).
-- \( a_1 \) and \( a_2 \) are coefficients indicating the strength of each rule in predicting the outcome.
+- $a_0$ is the intercept (generally 0 if rules are sufficient to explain the output).
+- $a_1$ and $a_2$ are coefficients indicating the strength of each rule in predicting the outcome.
 
 #### Coefficients:
-Assume \( a_1 = 1 \) and \( a_2 = 0.8 \), implying that having a high account balance is a stronger predictor than being young with a moderate balance.
+Assume $a_1 = 1$ and $a_2 = 0.8$, implying that having a high account balance is a stronger predictor than being young with a moderate balance.
 
 #### Predictions:
 - **Customer 1:** Does not meet any rules → Predicted: No
