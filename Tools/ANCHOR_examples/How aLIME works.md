@@ -61,24 +61,29 @@ Identify an anchor that explains this decision.
 ### Anchor Identification Process:
 
 1. **Initial Setup**:
-   - Model prediction for the instance $f(x) = \text{Approve}$.
+   - Model prediction for the instance $f(x) = 	ext{Approve}$.
    - We aim to find conditions (anchors) under which the prediction remains 'Approve'.
 
 2. **Potential Anchors**:
    - Anchor 1: Credit score > 700
    - Anchor 2: Income level > $50,000
+   - Anchor 3: Both Credit score > 700 and Income level > $50,000
 
 3. **Testing Anchors**:
    - For Anchor 1: Vary income level while keeping credit score > 700.
      - Test with income = \$30,000 and income = \$60,000.
-     - Prediction remains 'Approve' regardless of income variation.
+     - **Prediction changes to 'Deny' when income falls below \$50,000.**
+     - This indicates that Anchor 1 alone does not fully explain the decision.
    - For Anchor 2: Vary credit score while keeping income > \$50,000.
      - Test with credit score = 650 and credit score = 710.
-     - Prediction changes to 'Deny' when credit score drops below 700.
+     - **Prediction changes to 'Deny' when credit score drops below 700.**
+     - This indicates that Anchor 2 alone does not fully explain the decision.
+   - For Anchor 3: Vary neither credit score nor income level (both conditions are maintained).
+     - Prediction remains 'Approve' consistently, confirming that both conditions are required.
 
 4. **Choosing the Best Anchor**:
-   - **Anchor 1 (Credit score > 700)** is a valid anchor as the prediction remains stable ('Approve') despite changes in income.
-   - **Anchor 2 (Income level > $50,000)** does not consistently secure the 'Approve' prediction when the credit score varies.
+   - **Anchor 3 (Both Credit score > 700 and Income level > $50,000)** is the valid anchor as the prediction remains stable ('Approve') only when both conditions are satisfied.
+   - **Anchor 1 (Credit score > 700)** and **Anchor 2 (Income level > $50,000)** do not independently secure the 'Approve' prediction when the other condition varies.
 
 ### Conclusion:
-In this example, the anchor "Credit score > 700" sufficiently explains why the loan is approved, independent of the income level, as long as the credit score condition is met. This anchor is minimal (simple) and has high precision, fulfilling the requirements of an effective aLIME explanation.
+In this example, the anchor "Both Credit score > 700 and Income level > $50,000" sufficiently explains why the loan is approved. This anchor is minimal (simple enough) and has high precision, fulfilling the requirements of an effective explanation.
