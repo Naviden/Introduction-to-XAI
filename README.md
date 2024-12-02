@@ -1,35 +1,39 @@
-# Explainable AI Examples Repository
+
+# Explainable AI (XAI) Examples Repository
 
 ## Overview
 
-This repository is dedicated to providing practical examples and educational resources for understanding Explainable AI (XAI). It contains notebooks and scripts demonstrating the use of various XAI frameworks such as LIME (Local Interpretable Model-agnostic Explanations), SHAP (SHapley Additive exPlanations), and more to be added.
-
-The goal is to offer a hands-on approach to learning how these tools can be used to interpret machine learning model predictions and provide insights into the decision-making process of complex algorithms.
+This repository offers practical examples and educational resources to help you understand Explainable AI (XAI). 
+It includes Jupyter notebooks and Python scripts that demonstrate the use of various XAI frameworks, such as 
+LIME (Local Interpretable Model-agnostic Explanations) and SHAP (SHapley Additive exPlanations). 
+The aim is to provide a hands-on approach to interpreting machine learning model predictions and to shed light 
+on the decision-making processes of complex algorithms.
 
 ## Contents
 
-- `LIME_examples/` - Contains Jupyter notebooks and Python scripts demonstrating the usage of LIME for different types of data (tabular, text, and images).
-- `SHAP_examples/` - Contains Jupyter notebooks and Python scripts showing how to use SHAP to explain model predictions.
-- `others/` - This directory will be updated with more XAI frameworks and examples in the future.
+- `Notebooks/` - Contains Jupyter notebooks demonstrating the usage of LIME and SHAP for different types of data (tabular, text, and images).
+- `Tools/` - Includes Python scripts and utilities that support the implementation of XAI techniques.
 
 ## Getting Started
 
-To get started with the examples in this repository, follow these steps:
+To explore the examples in this repository, follow these steps:
 
-1. Clone the repository:
+1. **Clone the repository:**
    ```bash
-   git clone https://github.com/Naviden/XAI-Examples.git
-Install the required dependencies:
-bash
-Copy code
-pip install -r requirements.txt
-Navigate to the desired example directory and open the Jupyter notebooks:
-bash
-Copy code
-cd LIME_Examples/
-jupyter notebook
-Contributing
-Contributions to this repository are welcome! If you would like to add more examples, improve existing ones, or suggest new XAI frameworks to include, please feel free to submit a pull request or open an issue.
+   git clone https://github.com/Naviden/Introduction-to-XAI.git
+   ```
 
-License
-This project is licensed under the MIT License - see the LICENSE file for details.
+2. **Install the required dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. **Navigate to the `Notebooks` directory and open the Jupyter notebooks:**
+   ```bash
+   cd Notebooks/
+   jupyter notebook
+   ```
+
+## Contributing
+
+Contributions are welcome! If you'd like to add new examples, enhance existing ones, or suggest additional XAI frameworks to include, please submit a pull request or open an issue.
