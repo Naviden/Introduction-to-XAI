@@ -61,7 +61,7 @@ Identify an anchor that explains this decision.
 ### Anchor Identification Process:
 
 1. **Initial Setup**:
-   - Model prediction for the instance $f(x) = 	ext{Approve}$.
+   - Model prediction for the instance $f(x) = 	Approve$.
    - We aim to find conditions (anchors) under which the prediction remains 'Approve'.
 
 2. **Potential Anchors**:
