@@ -1,5 +1,5 @@
 
-# Explainable AI (XAI): Thery, examples, ...
+# Explainable AI (XAI): Theory, examples, ...
 ## Overview
 
 This repository offers practical examples and educational resources to help you understand Explainable AI (XAI). 
