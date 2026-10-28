@@ -26,6 +26,7 @@ DEEP = {
     "Tools/SHAP_text_image_examples/SHAP_text_image.ipynb",
 }
 SPECIAL = {
+    "Tools/MethodComparison_examples/Shared_Tabular_Case_Comparison.ipynb",
     "Tools/Merlin_examples/20NG_example.ipynb",
     "Tools/RuleFit_examples/RuleFit_example.ipynb",
 }

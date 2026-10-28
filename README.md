@@ -30,6 +30,12 @@ English tokenizer; no separate spaCy language-model download is required.
 
 ## Notebook guide
 
+Start with [the shared tabular case comparison](Tools/MethodComparison_examples/Shared_Tabular_Case_Comparison.ipynb)
+to compare the applicable methods on one breast-cancer dataset, one split, and
+one fixed case. It includes side-by-side diagnostics, surrogate fidelity, and
+clear notes on methods that require different data or models. This complete
+comparison also needs the MERLIN extras and Java described below.
+
 | Directory | What it covers |
 | --- | --- |
 | `Theory/` | White-box and black-box models, surrogates, local/global explanations, and counterfactuals |
@@ -97,7 +103,7 @@ as a template, not graded as a completed solution.
 For a smaller run, select `--group core`, `--group deep`, or `--group special`,
 or use `--notebook Tools/DiCE_examples/DiCE_example.ipynb`. `core` covers 12
 notebooks, `deep` covers the seven TensorFlow/transformer notebooks, and `special`
-covers MERLIN and RuleFit. `--timeout` controls the time limit per cell in seconds
+covers MERLIN, RuleFit, and the shared-case comparison. `--timeout` controls the time limit per cell in seconds
 (default 1200).
 
 GitHub Actions runs all three groups on pushes and pull requests, along with
@@ -106,6 +112,9 @@ failure details are uploaded as workflow artifacts. External download failures
 remain visible as failures; the runner does not silently skip examples.
 
 ## Contributing
+
+If you think a particular explainer is missing, please let me know by opening an
+issue, or feel free to add it via a pull request.
 
 Submit a pull request with the notebook change and its validation results. Clear
 stale outputs after editing code, keep student exercises unfinished, and rerun
