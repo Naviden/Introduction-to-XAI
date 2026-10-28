@@ -1,41 +1,38 @@
+# Tested together on Python 3.11. MERLIN uses requirements-merlin.txt too.
 # Core ML / data
-numpy>=1.24
-pandas>=2.0
-scikit-learn>=1.3
-scipy>=1.11
-xgboost>=1.7,<2.0  # shap is incompatible with xgboost>=2.0 (base_score parsing bug)
+numpy==2.4.6
+pandas==2.3.3
+scikit-learn==1.9.1
+scipy==1.17.1
+xgboost==3.2.0
 
 # Visualization
-matplotlib>=3.7
-seaborn>=0.12
+matplotlib==3.11.2
+seaborn==0.13.2
 
-# Deep learning (pick ONE backend — TF or PyTorch)
-torch>=2.1
-tensorflow>=2.13
+# Different notebooks use TensorFlow and PyTorch; the complete set needs both.
+tensorflow==2.21.0
+torch==2.14.1
 
 # NLP
-spacy>=3.7
-transformers>=4.35
-tokenizers>=0.15
-nltk>=3.8
+spacy==3.8.18
+transformers==4.57.6
+nltk==3.10.4
 
-# XAI tools
-lime>=0.2
-shap>=0.45
-anchor-exp>=0.0.2
-dice-ml>=0.11
-PyALE>=1.2
+# XAI tools (SHAP 0.50+ supports modern XGBoost base_score values)
+lime==0.2.0.1
+shap==0.51.0
+anchor-exp==0.0.2.0
+dice-ml==0.12
+PyALE==1.2.0
+h2o==3.46.0.12
 
-# RuleFit (uses H2O)
-h2o>=3.42
+# Images / downloads
+scikit-image==0.26.0
+Pillow==12.3.0
+opencv-python-headless==4.14.0.94
+requests==2.34.2
 
-# MERLIN (optional — requires system-level espresso)
-# merlin-xai>=0.1
-# pyeda>=0.29
-
-# Image
-scikit-image>=0.22
-Pillow>=10.0
-
-# Spacy model (install separately)
-# python -m spacy download en_core_web_sm
+# Interactive notebooks
+notebook==7.6.3
+ipykernel==7.4.0

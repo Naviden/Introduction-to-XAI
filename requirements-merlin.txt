@@ -1,0 +1,8 @@
+# Optional dependencies for Tools/Merlin_examples/20NG_example.ipynb.
+# Install requirements.txt first. PyEDA may require a C compiler.
+merlinxai==0.1.2
+pyeda==0.29.0
+# Imported by MERLIN even when the sklearn surrogate is selected.
+rulefit==0.3.1
+# stopit imports pkg_resources, absent in newer setuptools.
+setuptools==80.9.0

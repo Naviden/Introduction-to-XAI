@@ -5,3 +5,10 @@ ANCHOR_examples/rt-polaritydata/rt-polarity.neg
 .html
 LIME_Practice_Notebook.ipynb
 .venv/
+__pycache__/
+.pytest_cache/
+validation/
+adult.zip
+lime_text_explanation.html
+Tools/Merlin_examples/logs/
+Tools/Merlin_examples/results/

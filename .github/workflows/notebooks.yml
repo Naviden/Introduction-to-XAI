@@ -1,0 +1,61 @@
+name: Validate notebooks
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: notebooks-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  notebooks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        group: [core, deep, special]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.11'
+          cache: pip
+          cache-dependency-path: requirements*.txt
+      - uses: actions/setup-java@v6
+        if: matrix.group == 'special'
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install torch==2.14.1 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install -r requirements-dev.txt
+      - name: Install MERLIN
+        if: matrix.group == 'special'
+        run: python -m pip install -r requirements-merlin.txt
+      - name: Check dependency compatibility
+        run: python -m pip check
+      - name: Validate notebook structure and syntax
+        run: python scripts/check_notebooks.py --validate-only --output-dir validation/structure
+      - name: Numerical regression tests
+        if: matrix.group == 'core'
+        run: python -m pytest -q
+      - name: Execute notebooks
+        run: python scripts/check_notebooks.py --group ${{ matrix.group }} --output-dir validation/executed
+      - name: Save execution results
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: notebooks-${{ matrix.group }}
+          path: |
+            validation/executed/
+            validation/structure/results.json
+          if-no-files-found: warn
+          retention-days: 7
