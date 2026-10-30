@@ -6,6 +6,7 @@ The manifests record source hashes, measured times and software/platform version
 
 - [Core XAI Exercises](Practice/Core_XAI_Exercises.ipynb)
 - [Core XAI Solutions](Practice/Instructor/Core_XAI_Solutions.ipynb)
+- [Dimensions](Theory/Dimensions.ipynb)
 - [Causal Recourse](Tools/CausalRecourse_examples/Causal_Recourse.ipynb)
 - [Evaluation and Sensitivity](Tools/Evaluation_examples/Evaluation_and_Sensitivity.ipynb)
 - [Regression Benchmark](Tools/Evaluation_examples/Regression_Benchmark.ipynb)

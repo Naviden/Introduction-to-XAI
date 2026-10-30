@@ -54,8 +54,13 @@ Titanic variants whose source pages do not establish a comprehensive reuse grant
   installed distributions: [LIME](licenses/LIME-BSD.txt),
   [MERLIN](licenses/MERLIN-license.txt), [Captum](licenses/Captum-BSD.txt).
   EBM uses InterpretML 0.7.8; retain its [MIT notice](licenses/InterpretML-MIT.txt).
-- The old survey illustration in `Theory/Dimensions.ipynb` was replaced with an
-  original explanation-axes table. An attribution by itself is not a redistribution grant.
+- `Theory/Dimensions.ipynb` follows Cambria, Malandri, Mercorio, Mezzanzanica and
+  Nobani (2023), [A survey on XAI and natural language explanations](https://doi.org/10.1016/j.ipm.2022.103111).
+  It reproduces Figure 1 from the supplied published PDF, including its original
+  caption, and separates the paper's taxonomy from the notebook's teaching
+  examples. [Figure extraction and hashes](../Theory/images/README.md) retain
+  the notice © 2022 Elsevier Ltd. All rights reserved. The figure is excluded
+  from the repository's original-content license; no broader reuse grant is asserted.
 - Legacy `Tools/RuleFit_examples/boston.csv` and
   `Tools/LIME_examples/lime_explanation.html` remain unused historical assets.
   They are excluded from the original content/code license where third-party

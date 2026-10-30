@@ -11,6 +11,11 @@ Colab badges and setup links were added later as Markdown-only changes. These
 receipts identify the source files before that presentation update; code cells
 and saved results were preserved.
 
+The dimensions notebook was subsequently revised around Cambria et al. (2023).
+Its newer execution is recorded in the [dimensions run receipt](../executed/manifests/dimensions-paper-results.json)
+and [reading copy](../executed/Theory/Dimensions.ipynb), superseding its entry in
+the earlier batch below.
+
 - [All notebook execution receipts](results.json): source/helper/asset hashes,
   measured duration, status and executed-artifact identity.
 - [Installed environment](environment.json): package versions and platform.

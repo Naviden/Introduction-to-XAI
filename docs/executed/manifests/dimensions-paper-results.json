@@ -1,0 +1,14 @@
+[
+  {
+    "notebook": "Theory/Dimensions.ipynb",
+    "mode": "execute",
+    "source_sha256": "21d2016ef8016043840d470ae0efe954f0eaad8de611e707a60587dee5b52e69",
+    "local_dependencies": {
+      "xai_assets.py": "409c87c6764b50b8491de360339e31a9b88f7193cf0689b7d40d7018ec11752d",
+      "assets/manifest.json": "aad280fb65152ec97b244f724dfa31eb78dff8ace50779fddeaefbc39c2d9adf"
+    },
+    "status": "passed",
+    "executed_sha256": "e6692f11bc2d679060b6cb3b593d87a296a0dc6ef0550ce136dff67fa6018113",
+    "seconds": 5.64
+  }
+]
