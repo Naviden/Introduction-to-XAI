@@ -1,24 +1,23 @@
-# How Integrated Gradients Works
+# How Integrated Gradients works
 
-Integrated Gradients (IG) is an attribution method for differentiable models. It assigns an importance score to each input feature by accumulating gradients along a path from a baseline to the actual input.
+**Question:** how can a fixed differentiable model output's change from a chosen baseline to one input be attributed to input coordinates?
 
-## Algorithm
+For scalar output $F$, baseline $x'$ and input $x$,
 
-1. **Choose a baseline**: A reference input (e.g., all zeros) representing "absence of information."
-2. **Interpolate**: Create m intermediate inputs along the straight line from baseline x' to input x.
-3. **Compute gradients**: For each intermediate input, compute the gradient of the output w.r.t. the input.
-4. **Integrate**: Average all the gradients and multiply element-wise by (x - x').
+$$IG_i(x;x')=(x_i-x'_i)\int_0^1\frac{\partial F(x'+\alpha(x-x'))}{\partial x_i}\,d\alpha.$$
 
-## Formula
+Choose a class/score once and keep it fixed along the path. Numerical quadrature approximates the integral; the notebook uses the trapezoidal rule with both endpoints. [Sundararajan, Taly and Yan (2017)](https://proceedings.mlr.press/v70/sundararajan17a.html).
 
-IG_i(x) = (x_i - x'_i) × ∫₀¹ (∂F(x' + α(x - x')) / ∂x_i) dα
+## Units and assumptions
 
-Approximated numerically as:
+Attributions have the scalar output's units. Explaining a probability and explaining its pre-softmax logit are different questions. The baseline is a reference input, not universally “absence of information.” Zero after standardization means the training-feature means; zero pixels mean something different after image normalization. The straight path can cross unrealistic inputs.
 
-IG_i(x) ≈ (x_i - x'_i) × (1/m) Σ_{k=1}^{m} (∂F(x' + k/m × (x - x')) / ∂x_i)
+## Axioms and numerical checks
 
-## Key Axioms
+- **Completeness:** for the exact integral under its regularity assumptions, $\sum_i IG_i=F(x)-F(x')$. A finite-step calculation has numerical error; report the residual and check convergence with more steps.
+- **Sensitivity(a):** if input and baseline differ in **one feature only** and their outputs differ, that feature must receive nonzero attribution. This does not say every changed feature has nonzero attribution when several change.
+- **Implementation invariance:** functionally equivalent models give the same exact IG values under the same target, baseline and path. Finite precision and quadrature can introduce small numerical discrepancies.
 
-- **Completeness**: The attributions sum to the difference between the output at the input and the output at the baseline: Σ_i IG_i(x) = F(x) - F(x')
-- **Sensitivity**: If a feature changes between baseline and input and the output changes, that feature gets non-zero attribution.
-- **Implementation Invariance**: Two functionally equivalent models always produce the same attributions.
+## Limitations and interpretation
+
+A positive value supports this output relative to this baseline; a negative value opposes it. Compare defensible baselines and inspect numerical convergence. Completeness does not establish causality, correct predictions, robustness or human usefulness. Gradient saturation and path selection deserve scrutiny even when the residual is small. The [Iris example](IntegratedGradients_example.ipynb) explains a fixed class probability from the training-mean baseline.

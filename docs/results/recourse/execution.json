@@ -1,0 +1,9 @@
+{
+  "notebook": "Tools/CausalRecourse_examples/Causal_Recourse.ipynb",
+  "mode": "execute",
+  "source_sha256": "297ed674b11af52b93e61aea5cd23793e82f336857ee2c279d24972d990ce430",
+  "local_dependencies": {},
+  "status": "passed",
+  "executed_sha256": "35c0149bc2cf964026766663349a539b2d6bdf2e7f936af57158ecfcccc8d93e",
+  "seconds": 1.33
+}

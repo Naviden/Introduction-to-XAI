@@ -1,14 +1,7 @@
 # Tested together on Python 3.11. MERLIN uses requirements-merlin.txt too.
-# Core ML / data
-numpy==2.4.6
-pandas==2.3.3
-scikit-learn==1.9.1
-scipy==1.17.1
+-r requirements-tabular.txt
+# Additional data / models
 xgboost==3.2.0
-
-# Visualization
-matplotlib==3.11.2
-seaborn==0.13.2
 
 # Different notebooks use TensorFlow and PyTorch; the complete set needs both.
 tensorflow==2.21.0
@@ -20,8 +13,6 @@ transformers==4.57.6
 nltk==3.10.4
 
 # XAI tools (SHAP 0.50+ supports modern XGBoost base_score values)
-lime==0.2.0.1
-shap==0.51.0
 anchor-exp==0.0.2.0
 dice-ml==0.12
 PyALE==1.2.0
@@ -32,7 +23,3 @@ scikit-image==0.26.0
 Pillow==12.3.0
 opencv-python-headless==4.14.0.94
 requests==2.34.2
-
-# Interactive notebooks
-notebook==7.6.3
-ipykernel==7.4.0

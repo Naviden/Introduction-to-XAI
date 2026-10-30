@@ -5,6 +5,7 @@ ANCHOR_examples/rt-polaritydata/rt-polarity.neg
 .html
 LIME_Practice_Notebook.ipynb
 .venv/
+.venv-*/
 __pycache__/
 .pytest_cache/
 validation/
@@ -14,3 +15,4 @@ Tools/Merlin_examples/logs/
 Tools/Merlin_examples/results/
 Tools/MethodComparison_examples/logs/
 Tools/MethodComparison_examples/comparison_merlin_results/
+Tools/*/results/

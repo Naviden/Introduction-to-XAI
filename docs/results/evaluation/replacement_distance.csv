@@ -1,0 +1,589 @@
+scenario,seed,baseline,method,random_repeat,removed,standardized_neighbor_distance
+Independent,11,Training mean,SHAP,0,0,0.8750910354116258
+Independent,11,Training mean,SHAP,0,1,0.7289391805407867
+Independent,11,Training mean,SHAP,0,2,0.8334966047396742
+Independent,11,Training mean,SHAP,0,3,0.6862951674551047
+Independent,11,Training mean,SHAP,0,4,0.6870079990453055
+Independent,11,Training mean,SHAP,0,5,0.6928931348358325
+Independent,11,Training mean,SHAP,0,6,0.6889207436440455
+Independent,11,Training mean,LIME,0,0,0.8750910354116258
+Independent,11,Training mean,LIME,0,1,0.7252796471021563
+Independent,11,Training mean,LIME,0,2,0.8444980352777752
+Independent,11,Training mean,LIME,0,3,0.7822876579111958
+Independent,11,Training mean,LIME,0,4,0.6808829712097513
+Independent,11,Training mean,LIME,0,5,0.6917159630428698
+Independent,11,Training mean,LIME,0,6,0.6889207436440455
+Independent,11,Training mean,Random ranking,0,0,0.8750910354116258
+Independent,11,Training mean,Random ranking,0,1,1.004532114108167
+Independent,11,Training mean,Random ranking,0,2,0.9253961983365092
+Independent,11,Training mean,Random ranking,0,3,0.842897060464452
+Independent,11,Training mean,Random ranking,0,4,0.7653735364125333
+Independent,11,Training mean,Random ranking,0,5,0.6691105160096047
+Independent,11,Training mean,Random ranking,0,6,0.6889207436440455
+Independent,11,Training mean,Random ranking,1,0,0.8750910354116258
+Independent,11,Training mean,Random ranking,1,1,0.8253931234310148
+Independent,11,Training mean,Random ranking,1,2,0.8101383415631345
+Independent,11,Training mean,Random ranking,1,3,0.6597840320507873
+Independent,11,Training mean,Random ranking,1,4,0.6125386108745386
+Independent,11,Training mean,Random ranking,1,5,0.7038857672131563
+Independent,11,Training mean,Random ranking,1,6,0.6889207436440455
+Independent,11,Training mean,Random ranking,2,0,0.8750910354116258
+Independent,11,Training mean,Random ranking,2,1,0.846374808317908
+Independent,11,Training mean,Random ranking,2,2,0.7486837753467154
+Independent,11,Training mean,Random ranking,2,3,0.6678355509677307
+Independent,11,Training mean,Random ranking,2,4,0.6430467781921451
+Independent,11,Training mean,Random ranking,2,5,0.6441123776773082
+Independent,11,Training mean,Random ranking,2,6,0.6889207436440455
+Independent,11,Training mean,Random ranking,3,0,0.8750910354116258
+Independent,11,Training mean,Random ranking,3,1,0.798381448794686
+Independent,11,Training mean,Random ranking,3,2,0.7750243916811183
+Independent,11,Training mean,Random ranking,3,3,0.6826057650424574
+Independent,11,Training mean,Random ranking,3,4,0.6818975527059302
+Independent,11,Training mean,Random ranking,3,5,0.6534683809435673
+Independent,11,Training mean,Random ranking,3,6,0.6889207436440455
+Independent,11,Training mean,Random ranking,4,0,0.8750910354116258
+Independent,11,Training mean,Random ranking,4,1,0.8128268653379912
+Independent,11,Training mean,Random ranking,4,2,0.8568944726426501
+Independent,11,Training mean,Random ranking,4,3,0.8081041140057957
+Independent,11,Training mean,Random ranking,4,4,0.7567824419798029
+Independent,11,Training mean,Random ranking,4,5,0.6828769731464216
+Independent,11,Training mean,Random ranking,4,6,0.6889207436440455
+Independent,11,Empirical joint donors,SHAP,0,0,0.8750910354116259
+Independent,11,Empirical joint donors,SHAP,0,1,0.7880921919981171
+Independent,11,Empirical joint donors,SHAP,0,2,0.8183830787550895
+Independent,11,Empirical joint donors,SHAP,0,3,0.7943852858876239
+Independent,11,Empirical joint donors,SHAP,0,4,0.7126758517634167
+Independent,11,Empirical joint donors,SHAP,0,5,0.5963477106524784
+Independent,11,Empirical joint donors,SHAP,0,6,0.0
+Independent,11,Empirical joint donors,LIME,0,0,0.8750910354116259
+Independent,11,Empirical joint donors,LIME,0,1,0.7990517977741526
+Independent,11,Empirical joint donors,LIME,0,2,0.8861456049044087
+Independent,11,Empirical joint donors,LIME,0,3,0.8386598516162524
+Independent,11,Empirical joint donors,LIME,0,4,0.7251525181419854
+Independent,11,Empirical joint donors,LIME,0,5,0.6123252465429281
+Independent,11,Empirical joint donors,LIME,0,6,0.0
+Independent,11,Empirical joint donors,Random ranking,0,0,0.8750910354116259
+Independent,11,Empirical joint donors,Random ranking,0,1,0.9699872008268099
+Independent,11,Empirical joint donors,Random ranking,0,2,0.9394638553408399
+Independent,11,Empirical joint donors,Random ranking,0,3,0.9457736881793233
+Independent,11,Empirical joint donors,Random ranking,0,4,0.8943510245893508
+Independent,11,Empirical joint donors,Random ranking,0,5,0.7608814755479908
+Independent,11,Empirical joint donors,Random ranking,0,6,0.0
+Independent,11,Empirical joint donors,Random ranking,1,0,0.8750910354116259
+Independent,11,Empirical joint donors,Random ranking,1,1,0.8778694074106966
+Independent,11,Empirical joint donors,Random ranking,1,2,0.9327632237321831
+Independent,11,Empirical joint donors,Random ranking,1,3,0.9204166483228148
+Independent,11,Empirical joint donors,Random ranking,1,4,0.872353957374767
+Independent,11,Empirical joint donors,Random ranking,1,5,0.7347258276404952
+Independent,11,Empirical joint donors,Random ranking,1,6,0.0
+Independent,11,Empirical joint donors,Random ranking,2,0,0.8750910354116259
+Independent,11,Empirical joint donors,Random ranking,2,1,0.8700142913538101
+Independent,11,Empirical joint donors,Random ranking,2,2,0.8117169211843253
+Independent,11,Empirical joint donors,Random ranking,2,3,0.8677114693504974
+Independent,11,Empirical joint donors,Random ranking,2,4,0.8134035644994123
+Independent,11,Empirical joint donors,Random ranking,2,5,0.6084544086052862
+Independent,11,Empirical joint donors,Random ranking,2,6,0.0
+Independent,11,Empirical joint donors,Random ranking,3,0,0.8750910354116259
+Independent,11,Empirical joint donors,Random ranking,3,1,0.9104285671114049
+Independent,11,Empirical joint donors,Random ranking,3,2,0.9429384729856372
+Independent,11,Empirical joint donors,Random ranking,3,3,0.8928787751984162
+Independent,11,Empirical joint donors,Random ranking,3,4,0.85412034552354
+Independent,11,Empirical joint donors,Random ranking,3,5,0.6437966988814697
+Independent,11,Empirical joint donors,Random ranking,3,6,0.0
+Independent,11,Empirical joint donors,Random ranking,4,0,0.8750910354116259
+Independent,11,Empirical joint donors,Random ranking,4,1,0.8952940932826449
+Independent,11,Empirical joint donors,Random ranking,4,2,0.9558674106308382
+Independent,11,Empirical joint donors,Random ranking,4,3,0.9235892438328462
+Independent,11,Empirical joint donors,Random ranking,4,4,0.8762188274689171
+Independent,11,Empirical joint donors,Random ranking,4,5,0.6805301064333534
+Independent,11,Empirical joint donors,Random ranking,4,6,0.0
+Independent,22,Training mean,SHAP,0,0,1.157148752203808
+Independent,22,Training mean,SHAP,0,1,0.9986341696263845
+Independent,22,Training mean,SHAP,0,2,0.8341562535062296
+Independent,22,Training mean,SHAP,0,3,0.8110246068067569
+Independent,22,Training mean,SHAP,0,4,0.7692321340796079
+Independent,22,Training mean,SHAP,0,5,0.6228608678970491
+Independent,22,Training mean,SHAP,0,6,0.43595265605881633
+Independent,22,Training mean,LIME,0,0,1.157148752203808
+Independent,22,Training mean,LIME,0,1,0.9946586332582231
+Independent,22,Training mean,LIME,0,2,0.9455566700697613
+Independent,22,Training mean,LIME,0,3,0.8723273502575539
+Independent,22,Training mean,LIME,0,4,0.7726917743213374
+Independent,22,Training mean,LIME,0,5,0.6327966081569225
+Independent,22,Training mean,LIME,0,6,0.43595265605881633
+Independent,22,Training mean,Random ranking,0,0,1.157148752203808
+Independent,22,Training mean,Random ranking,0,1,1.0649148745018084
+Independent,22,Training mean,Random ranking,0,2,0.7223183149808712
+Independent,22,Training mean,Random ranking,0,3,0.7671408171688556
+Independent,22,Training mean,Random ranking,0,4,0.7276131050774158
+Independent,22,Training mean,Random ranking,0,5,0.6405302944173986
+Independent,22,Training mean,Random ranking,0,6,0.43595265605881633
+Independent,22,Training mean,Random ranking,1,0,1.157148752203808
+Independent,22,Training mean,Random ranking,1,1,1.0521495467966935
+Independent,22,Training mean,Random ranking,1,2,0.9572427010940565
+Independent,22,Training mean,Random ranking,1,3,0.8621611497234603
+Independent,22,Training mean,Random ranking,1,4,0.7696764138794339
+Independent,22,Training mean,Random ranking,1,5,0.6431411608065106
+Independent,22,Training mean,Random ranking,1,6,0.43595265605881633
+Independent,22,Training mean,Random ranking,2,0,1.157148752203808
+Independent,22,Training mean,Random ranking,2,1,1.0032764906270513
+Independent,22,Training mean,Random ranking,2,2,0.8365282217602997
+Independent,22,Training mean,Random ranking,2,3,0.7423287725752807
+Independent,22,Training mean,Random ranking,2,4,0.642894913924147
+Independent,22,Training mean,Random ranking,2,5,0.6174862044172699
+Independent,22,Training mean,Random ranking,2,6,0.43595265605881633
+Independent,22,Training mean,Random ranking,3,0,1.157148752203808
+Independent,22,Training mean,Random ranking,3,1,1.0963435553609926
+Independent,22,Training mean,Random ranking,3,2,1.0364401358258688
+Independent,22,Training mean,Random ranking,3,3,0.9296229363714014
+Independent,22,Training mean,Random ranking,3,4,0.7272770273772428
+Independent,22,Training mean,Random ranking,3,5,0.640647246512202
+Independent,22,Training mean,Random ranking,3,6,0.43595265605881633
+Independent,22,Training mean,Random ranking,4,0,1.157148752203808
+Independent,22,Training mean,Random ranking,4,1,1.104671864568645
+Independent,22,Training mean,Random ranking,4,2,0.9123497797514438
+Independent,22,Training mean,Random ranking,4,3,0.7924883091412815
+Independent,22,Training mean,Random ranking,4,4,0.6848792897540524
+Independent,22,Training mean,Random ranking,4,5,0.5775206242591745
+Independent,22,Training mean,Random ranking,4,6,0.43595265605881633
+Independent,22,Empirical joint donors,SHAP,0,0,1.1571487522038082
+Independent,22,Empirical joint donors,SHAP,0,1,1.1067824293902673
+Independent,22,Empirical joint donors,SHAP,0,2,0.9904425247706706
+Independent,22,Empirical joint donors,SHAP,0,3,0.9773513498165306
+Independent,22,Empirical joint donors,SHAP,0,4,0.950568164767072
+Independent,22,Empirical joint donors,SHAP,0,5,0.7637949225903027
+Independent,22,Empirical joint donors,SHAP,0,6,0.0
+Independent,22,Empirical joint donors,LIME,0,0,1.1571487522038082
+Independent,22,Empirical joint donors,LIME,0,1,1.0980621717043906
+Independent,22,Empirical joint donors,LIME,0,2,1.007618420525654
+Independent,22,Empirical joint donors,LIME,0,3,1.017067436657386
+Independent,22,Empirical joint donors,LIME,0,4,0.9719796009255965
+Independent,22,Empirical joint donors,LIME,0,5,0.7520292772117264
+Independent,22,Empirical joint donors,LIME,0,6,0.0
+Independent,22,Empirical joint donors,Random ranking,0,0,1.1571487522038082
+Independent,22,Empirical joint donors,Random ranking,0,1,1.1150424570699229
+Independent,22,Empirical joint donors,Random ranking,0,2,0.9633009135311529
+Independent,22,Empirical joint donors,Random ranking,0,3,0.9677345466740301
+Independent,22,Empirical joint donors,Random ranking,0,4,0.9372395716896232
+Independent,22,Empirical joint donors,Random ranking,0,5,0.7836774024580327
+Independent,22,Empirical joint donors,Random ranking,0,6,0.0
+Independent,22,Empirical joint donors,Random ranking,1,0,1.1571487522038082
+Independent,22,Empirical joint donors,Random ranking,1,1,1.1279840648547859
+Independent,22,Empirical joint donors,Random ranking,1,2,1.0876055453687792
+Independent,22,Empirical joint donors,Random ranking,1,3,1.0603988064955399
+Independent,22,Empirical joint donors,Random ranking,1,4,0.9695275915615253
+Independent,22,Empirical joint donors,Random ranking,1,5,0.704807878820518
+Independent,22,Empirical joint donors,Random ranking,1,6,0.0
+Independent,22,Empirical joint donors,Random ranking,2,0,1.1571487522038082
+Independent,22,Empirical joint donors,Random ranking,2,1,1.085924918037937
+Independent,22,Empirical joint donors,Random ranking,2,2,1.0472801802319007
+Independent,22,Empirical joint donors,Random ranking,2,3,1.0085053710794532
+Independent,22,Empirical joint donors,Random ranking,2,4,0.9151583293453375
+Independent,22,Empirical joint donors,Random ranking,2,5,0.7180537077832603
+Independent,22,Empirical joint donors,Random ranking,2,6,0.0
+Independent,22,Empirical joint donors,Random ranking,3,0,1.1571487522038082
+Independent,22,Empirical joint donors,Random ranking,3,1,1.1523925104987767
+Independent,22,Empirical joint donors,Random ranking,3,2,1.1302416168858886
+Independent,22,Empirical joint donors,Random ranking,3,3,1.1185321948055187
+Independent,22,Empirical joint donors,Random ranking,3,4,0.9365443017862596
+Independent,22,Empirical joint donors,Random ranking,3,5,0.7421368786401145
+Independent,22,Empirical joint donors,Random ranking,3,6,0.0
+Independent,22,Empirical joint donors,Random ranking,4,0,1.1571487522038082
+Independent,22,Empirical joint donors,Random ranking,4,1,1.1589861260127319
+Independent,22,Empirical joint donors,Random ranking,4,2,1.089854399239199
+Independent,22,Empirical joint donors,Random ranking,4,3,1.0113928794113385
+Independent,22,Empirical joint donors,Random ranking,4,4,0.9640945093136529
+Independent,22,Empirical joint donors,Random ranking,4,5,0.6802723704562457
+Independent,22,Empirical joint donors,Random ranking,4,6,0.0
+Independent,33,Training mean,SHAP,0,0,0.9986820191439412
+Independent,33,Training mean,SHAP,0,1,0.8933883031324091
+Independent,33,Training mean,SHAP,0,2,0.7602387969930952
+Independent,33,Training mean,SHAP,0,3,0.7042455665695857
+Independent,33,Training mean,SHAP,0,4,0.6583791738182648
+Independent,33,Training mean,SHAP,0,5,0.6315655878168622
+Independent,33,Training mean,SHAP,0,6,0.4664618362174548
+Independent,33,Training mean,LIME,0,0,0.9986820191439412
+Independent,33,Training mean,LIME,0,1,0.9606541151613824
+Independent,33,Training mean,LIME,0,2,0.8122614458878544
+Independent,33,Training mean,LIME,0,3,0.742376859456542
+Independent,33,Training mean,LIME,0,4,0.7098524601251689
+Independent,33,Training mean,LIME,0,5,0.6153647277668478
+Independent,33,Training mean,LIME,0,6,0.4664618362174548
+Independent,33,Training mean,Random ranking,0,0,0.9986820191439412
+Independent,33,Training mean,Random ranking,0,1,0.9352876394317745
+Independent,33,Training mean,Random ranking,0,2,0.8553897668257266
+Independent,33,Training mean,Random ranking,0,3,0.7397574940987326
+Independent,33,Training mean,Random ranking,0,4,0.6968010959651907
+Independent,33,Training mean,Random ranking,0,5,0.6246574758417525
+Independent,33,Training mean,Random ranking,0,6,0.4664618362174548
+Independent,33,Training mean,Random ranking,1,0,0.9986820191439412
+Independent,33,Training mean,Random ranking,1,1,0.9719174341069641
+Independent,33,Training mean,Random ranking,1,2,0.8942828482821019
+Independent,33,Training mean,Random ranking,1,3,0.8914421547071542
+Independent,33,Training mean,Random ranking,1,4,0.75433086392795
+Independent,33,Training mean,Random ranking,1,5,0.5853837207765012
+Independent,33,Training mean,Random ranking,1,6,0.4664618362174548
+Independent,33,Training mean,Random ranking,2,0,0.9986820191439412
+Independent,33,Training mean,Random ranking,2,1,1.0209310778769762
+Independent,33,Training mean,Random ranking,2,2,0.907665890062748
+Independent,33,Training mean,Random ranking,2,3,0.8409269270245607
+Independent,33,Training mean,Random ranking,2,4,0.7893144098404227
+Independent,33,Training mean,Random ranking,2,5,0.6574340677710943
+Independent,33,Training mean,Random ranking,2,6,0.4664618362174548
+Independent,33,Training mean,Random ranking,3,0,0.9986820191439412
+Independent,33,Training mean,Random ranking,3,1,1.0237746127341407
+Independent,33,Training mean,Random ranking,3,2,0.913867266539253
+Independent,33,Training mean,Random ranking,3,3,0.835853154335871
+Independent,33,Training mean,Random ranking,3,4,0.8061083631297566
+Independent,33,Training mean,Random ranking,3,5,0.6197673636344789
+Independent,33,Training mean,Random ranking,3,6,0.4664618362174548
+Independent,33,Training mean,Random ranking,4,0,0.9986820191439412
+Independent,33,Training mean,Random ranking,4,1,1.0856368577823388
+Independent,33,Training mean,Random ranking,4,2,0.9891478620756513
+Independent,33,Training mean,Random ranking,4,3,0.8437249831657634
+Independent,33,Training mean,Random ranking,4,4,0.7252884077930087
+Independent,33,Training mean,Random ranking,4,5,0.6785044389093016
+Independent,33,Training mean,Random ranking,4,6,0.4664618362174548
+Independent,33,Empirical joint donors,SHAP,0,0,0.9986820191439412
+Independent,33,Empirical joint donors,SHAP,0,1,0.9547595796056118
+Independent,33,Empirical joint donors,SHAP,0,2,0.9013152602877333
+Independent,33,Empirical joint donors,SHAP,0,3,0.8347032607795337
+Independent,33,Empirical joint donors,SHAP,0,4,0.7891113462535825
+Independent,33,Empirical joint donors,SHAP,0,5,0.6164784590227189
+Independent,33,Empirical joint donors,SHAP,0,6,0.0
+Independent,33,Empirical joint donors,LIME,0,0,0.9986820191439412
+Independent,33,Empirical joint donors,LIME,0,1,0.9975865748486622
+Independent,33,Empirical joint donors,LIME,0,2,0.9503973668143052
+Independent,33,Empirical joint donors,LIME,0,3,0.8950090694373772
+Independent,33,Empirical joint donors,LIME,0,4,0.7869927604300818
+Independent,33,Empirical joint donors,LIME,0,5,0.7138990144923222
+Independent,33,Empirical joint donors,LIME,0,6,0.0
+Independent,33,Empirical joint donors,Random ranking,0,0,0.9986820191439412
+Independent,33,Empirical joint donors,Random ranking,0,1,1.0383515535678514
+Independent,33,Empirical joint donors,Random ranking,0,2,0.9863833040984958
+Independent,33,Empirical joint donors,Random ranking,0,3,0.984763325869419
+Independent,33,Empirical joint donors,Random ranking,0,4,0.9236041522253043
+Independent,33,Empirical joint donors,Random ranking,0,5,0.7318434776814301
+Independent,33,Empirical joint donors,Random ranking,0,6,0.0
+Independent,33,Empirical joint donors,Random ranking,1,0,0.9986820191439412
+Independent,33,Empirical joint donors,Random ranking,1,1,1.026305336856712
+Independent,33,Empirical joint donors,Random ranking,1,2,0.9935718280377062
+Independent,33,Empirical joint donors,Random ranking,1,3,0.9802870792786821
+Independent,33,Empirical joint donors,Random ranking,1,4,0.8627290611837743
+Independent,33,Empirical joint donors,Random ranking,1,5,0.7357702994195773
+Independent,33,Empirical joint donors,Random ranking,1,6,0.0
+Independent,33,Empirical joint donors,Random ranking,2,0,0.9986820191439412
+Independent,33,Empirical joint donors,Random ranking,2,1,1.0188723252093768
+Independent,33,Empirical joint donors,Random ranking,2,2,1.0027522284550052
+Independent,33,Empirical joint donors,Random ranking,2,3,1.0073038113297883
+Independent,33,Empirical joint donors,Random ranking,2,4,0.9551410694302026
+Independent,33,Empirical joint donors,Random ranking,2,5,0.7697675988275359
+Independent,33,Empirical joint donors,Random ranking,2,6,0.0
+Independent,33,Empirical joint donors,Random ranking,3,0,0.9986820191439412
+Independent,33,Empirical joint donors,Random ranking,3,1,1.0021073471383832
+Independent,33,Empirical joint donors,Random ranking,3,2,0.987654801466331
+Independent,33,Empirical joint donors,Random ranking,3,3,0.9507178243909998
+Independent,33,Empirical joint donors,Random ranking,3,4,0.9453420292228721
+Independent,33,Empirical joint donors,Random ranking,3,5,0.7718370424925537
+Independent,33,Empirical joint donors,Random ranking,3,6,0.0
+Independent,33,Empirical joint donors,Random ranking,4,0,0.9986820191439412
+Independent,33,Empirical joint donors,Random ranking,4,1,1.0411521400937593
+Independent,33,Empirical joint donors,Random ranking,4,2,1.029538100444972
+Independent,33,Empirical joint donors,Random ranking,4,3,1.0305939648789295
+Independent,33,Empirical joint donors,Random ranking,4,4,0.9341688322587575
+Independent,33,Empirical joint donors,Random ranking,4,5,0.7612614724912065
+Independent,33,Empirical joint donors,Random ranking,4,6,0.0
+Correlated proxy,11,Training mean,SHAP,0,0,0.8409000215125174
+Correlated proxy,11,Training mean,SHAP,0,1,0.9286316661089048
+Correlated proxy,11,Training mean,SHAP,0,2,0.6873311600985099
+Correlated proxy,11,Training mean,SHAP,0,3,0.655571440853944
+Correlated proxy,11,Training mean,SHAP,0,4,0.6107498451734382
+Correlated proxy,11,Training mean,SHAP,0,5,0.5719860719535472
+Correlated proxy,11,Training mean,SHAP,0,6,0.6335226735661815
+Correlated proxy,11,Training mean,LIME,0,0,0.8409000215125174
+Correlated proxy,11,Training mean,LIME,0,1,0.9464129075849703
+Correlated proxy,11,Training mean,LIME,0,2,0.7296482120423885
+Correlated proxy,11,Training mean,LIME,0,3,0.6637156012900983
+Correlated proxy,11,Training mean,LIME,0,4,0.6211457975058138
+Correlated proxy,11,Training mean,LIME,0,5,0.55820494404087
+Correlated proxy,11,Training mean,LIME,0,6,0.6335226735661815
+Correlated proxy,11,Training mean,Random ranking,0,0,0.8409000215125174
+Correlated proxy,11,Training mean,Random ranking,0,1,0.8859084106814499
+Correlated proxy,11,Training mean,Random ranking,0,2,0.9175657732081065
+Correlated proxy,11,Training mean,Random ranking,0,3,0.9205803936156721
+Correlated proxy,11,Training mean,Random ranking,0,4,0.8395370879973197
+Correlated proxy,11,Training mean,Random ranking,0,5,0.8072275690803257
+Correlated proxy,11,Training mean,Random ranking,0,6,0.6335226735661815
+Correlated proxy,11,Training mean,Random ranking,1,0,0.8409000215125174
+Correlated proxy,11,Training mean,Random ranking,1,1,0.7759775234447291
+Correlated proxy,11,Training mean,Random ranking,1,2,0.8558026151529137
+Correlated proxy,11,Training mean,Random ranking,1,3,0.7396772364715661
+Correlated proxy,11,Training mean,Random ranking,1,4,0.6930316411368723
+Correlated proxy,11,Training mean,Random ranking,1,5,0.734646552193792
+Correlated proxy,11,Training mean,Random ranking,1,6,0.6335226735661815
+Correlated proxy,11,Training mean,Random ranking,2,0,0.8409000215125174
+Correlated proxy,11,Training mean,Random ranking,2,1,0.8452388386106171
+Correlated proxy,11,Training mean,Random ranking,2,2,0.720168157287976
+Correlated proxy,11,Training mean,Random ranking,2,3,0.7348591555221223
+Correlated proxy,11,Training mean,Random ranking,2,4,0.6403241387558186
+Correlated proxy,11,Training mean,Random ranking,2,5,0.6653720047896352
+Correlated proxy,11,Training mean,Random ranking,2,6,0.6335226735661815
+Correlated proxy,11,Training mean,Random ranking,3,0,0.8409000215125174
+Correlated proxy,11,Training mean,Random ranking,3,1,0.8323210715032688
+Correlated proxy,11,Training mean,Random ranking,3,2,0.893385599639743
+Correlated proxy,11,Training mean,Random ranking,3,3,0.7664180816423003
+Correlated proxy,11,Training mean,Random ranking,3,4,0.7552766901127964
+Correlated proxy,11,Training mean,Random ranking,3,5,0.6540825314862285
+Correlated proxy,11,Training mean,Random ranking,3,6,0.6335226735661815
+Correlated proxy,11,Training mean,Random ranking,4,0,0.8409000215125174
+Correlated proxy,11,Training mean,Random ranking,4,1,0.8140830790509868
+Correlated proxy,11,Training mean,Random ranking,4,2,0.7993512651907935
+Correlated proxy,11,Training mean,Random ranking,4,3,0.7239894338876608
+Correlated proxy,11,Training mean,Random ranking,4,4,0.7421858370569302
+Correlated proxy,11,Training mean,Random ranking,4,5,0.7379503700443873
+Correlated proxy,11,Training mean,Random ranking,4,6,0.6335226735661815
+Correlated proxy,11,Empirical joint donors,SHAP,0,0,0.8409000215125174
+Correlated proxy,11,Empirical joint donors,SHAP,0,1,1.1482028105425337
+Correlated proxy,11,Empirical joint donors,SHAP,0,2,0.8580494708184075
+Correlated proxy,11,Empirical joint donors,SHAP,0,3,0.7593336377961966
+Correlated proxy,11,Empirical joint donors,SHAP,0,4,0.7101175608062632
+Correlated proxy,11,Empirical joint donors,SHAP,0,5,0.5420860736193042
+Correlated proxy,11,Empirical joint donors,SHAP,0,6,0.0
+Correlated proxy,11,Empirical joint donors,LIME,0,0,0.8409000215125174
+Correlated proxy,11,Empirical joint donors,LIME,0,1,1.1721372465839888
+Correlated proxy,11,Empirical joint donors,LIME,0,2,0.977487723304988
+Correlated proxy,11,Empirical joint donors,LIME,0,3,0.802218385935845
+Correlated proxy,11,Empirical joint donors,LIME,0,4,0.728167105079733
+Correlated proxy,11,Empirical joint donors,LIME,0,5,0.5327162274805274
+Correlated proxy,11,Empirical joint donors,LIME,0,6,0.0
+Correlated proxy,11,Empirical joint donors,Random ranking,0,0,0.8409000215125174
+Correlated proxy,11,Empirical joint donors,Random ranking,0,1,0.9221595719296509
+Correlated proxy,11,Empirical joint donors,Random ranking,0,2,1.0655737843077262
+Correlated proxy,11,Empirical joint donors,Random ranking,0,3,1.1557738896568461
+Correlated proxy,11,Empirical joint donors,Random ranking,0,4,1.0547588590380736
+Correlated proxy,11,Empirical joint donors,Random ranking,0,5,0.9055418041001445
+Correlated proxy,11,Empirical joint donors,Random ranking,0,6,0.0
+Correlated proxy,11,Empirical joint donors,Random ranking,1,0,0.8409000215125174
+Correlated proxy,11,Empirical joint donors,Random ranking,1,1,0.9230893470793781
+Correlated proxy,11,Empirical joint donors,Random ranking,1,2,1.0722846094243688
+Correlated proxy,11,Empirical joint donors,Random ranking,1,3,0.925091107670208
+Correlated proxy,11,Empirical joint donors,Random ranking,1,4,0.8909944698948058
+Correlated proxy,11,Empirical joint donors,Random ranking,1,5,0.8057699494862097
+Correlated proxy,11,Empirical joint donors,Random ranking,1,6,0.0
+Correlated proxy,11,Empirical joint donors,Random ranking,2,0,0.8409000215125174
+Correlated proxy,11,Empirical joint donors,Random ranking,2,1,0.9723890891388862
+Correlated proxy,11,Empirical joint donors,Random ranking,2,2,0.9092518485378583
+Correlated proxy,11,Empirical joint donors,Random ranking,2,3,1.0020417345260701
+Correlated proxy,11,Empirical joint donors,Random ranking,2,4,0.863374693582434
+Correlated proxy,11,Empirical joint donors,Random ranking,2,5,0.6377608359134549
+Correlated proxy,11,Empirical joint donors,Random ranking,2,6,0.0
+Correlated proxy,11,Empirical joint donors,Random ranking,3,0,0.8409000215125174
+Correlated proxy,11,Empirical joint donors,Random ranking,3,1,0.9993480272587797
+Correlated proxy,11,Empirical joint donors,Random ranking,3,2,1.1534278938929838
+Correlated proxy,11,Empirical joint donors,Random ranking,3,3,0.9846107397818304
+Correlated proxy,11,Empirical joint donors,Random ranking,3,4,0.9107198474378461
+Correlated proxy,11,Empirical joint donors,Random ranking,3,5,0.6752279508174649
+Correlated proxy,11,Empirical joint donors,Random ranking,3,6,0.0
+Correlated proxy,11,Empirical joint donors,Random ranking,4,0,0.8409000215125174
+Correlated proxy,11,Empirical joint donors,Random ranking,4,1,0.9419666189593373
+Correlated proxy,11,Empirical joint donors,Random ranking,4,2,1.0169426500479057
+Correlated proxy,11,Empirical joint donors,Random ranking,4,3,0.8929641163637995
+Correlated proxy,11,Empirical joint donors,Random ranking,4,4,0.9243457936643216
+Correlated proxy,11,Empirical joint donors,Random ranking,4,5,0.814121938852106
+Correlated proxy,11,Empirical joint donors,Random ranking,4,6,0.0
+Correlated proxy,22,Training mean,SHAP,0,0,1.090544350684411
+Correlated proxy,22,Training mean,SHAP,0,1,1.066486855723171
+Correlated proxy,22,Training mean,SHAP,0,2,0.8249098479050905
+Correlated proxy,22,Training mean,SHAP,0,3,0.6888085689407846
+Correlated proxy,22,Training mean,SHAP,0,4,0.6336052201166623
+Correlated proxy,22,Training mean,SHAP,0,5,0.5773999076785833
+Correlated proxy,22,Training mean,SHAP,0,6,0.4919468381666177
+Correlated proxy,22,Training mean,LIME,0,0,1.090544350684411
+Correlated proxy,22,Training mean,LIME,0,1,1.123528005764267
+Correlated proxy,22,Training mean,LIME,0,2,0.8780617042632256
+Correlated proxy,22,Training mean,LIME,0,3,0.810097413280879
+Correlated proxy,22,Training mean,LIME,0,4,0.7024239991123542
+Correlated proxy,22,Training mean,LIME,0,5,0.5922006068113027
+Correlated proxy,22,Training mean,LIME,0,6,0.4919468381666177
+Correlated proxy,22,Training mean,Random ranking,0,0,1.090544350684411
+Correlated proxy,22,Training mean,Random ranking,0,1,0.9873124614374178
+Correlated proxy,22,Training mean,Random ranking,0,2,0.8443771129579565
+Correlated proxy,22,Training mean,Random ranking,0,3,0.8402566855049091
+Correlated proxy,22,Training mean,Random ranking,0,4,0.7794788077946647
+Correlated proxy,22,Training mean,Random ranking,0,5,0.6791385036102829
+Correlated proxy,22,Training mean,Random ranking,0,6,0.4919468381666177
+Correlated proxy,22,Training mean,Random ranking,1,0,1.090544350684411
+Correlated proxy,22,Training mean,Random ranking,1,1,1.0285010063705349
+Correlated proxy,22,Training mean,Random ranking,1,2,1.0148947478919101
+Correlated proxy,22,Training mean,Random ranking,1,3,0.9061170853818313
+Correlated proxy,22,Training mean,Random ranking,1,4,0.8178450746245951
+Correlated proxy,22,Training mean,Random ranking,1,5,0.6325171708559919
+Correlated proxy,22,Training mean,Random ranking,1,6,0.4919468381666177
+Correlated proxy,22,Training mean,Random ranking,2,0,1.090544350684411
+Correlated proxy,22,Training mean,Random ranking,2,1,0.9156113778319493
+Correlated proxy,22,Training mean,Random ranking,2,2,0.7806443781492144
+Correlated proxy,22,Training mean,Random ranking,2,3,0.784639773583617
+Correlated proxy,22,Training mean,Random ranking,2,4,0.711550668542535
+Correlated proxy,22,Training mean,Random ranking,2,5,0.6601593194436951
+Correlated proxy,22,Training mean,Random ranking,2,6,0.4919468381666177
+Correlated proxy,22,Training mean,Random ranking,3,0,1.090544350684411
+Correlated proxy,22,Training mean,Random ranking,3,1,1.0926047751775525
+Correlated proxy,22,Training mean,Random ranking,3,2,1.019769033111586
+Correlated proxy,22,Training mean,Random ranking,3,3,0.9546808907137644
+Correlated proxy,22,Training mean,Random ranking,3,4,0.8006603313880554
+Correlated proxy,22,Training mean,Random ranking,3,5,0.6332187820932983
+Correlated proxy,22,Training mean,Random ranking,3,6,0.4919468381666177
+Correlated proxy,22,Training mean,Random ranking,4,0,1.090544350684411
+Correlated proxy,22,Training mean,Random ranking,4,1,0.8787097691752149
+Correlated proxy,22,Training mean,Random ranking,4,2,0.9447241108801293
+Correlated proxy,22,Training mean,Random ranking,4,3,0.7706311595921395
+Correlated proxy,22,Training mean,Random ranking,4,4,0.7323005234424663
+Correlated proxy,22,Training mean,Random ranking,4,5,0.66151252902718
+Correlated proxy,22,Training mean,Random ranking,4,6,0.4919468381666177
+Correlated proxy,22,Empirical joint donors,SHAP,0,0,1.0905443506844108
+Correlated proxy,22,Empirical joint donors,SHAP,0,1,1.1630596758029978
+Correlated proxy,22,Empirical joint donors,SHAP,0,2,0.9757911843646448
+Correlated proxy,22,Empirical joint donors,SHAP,0,3,0.8789134040161833
+Correlated proxy,22,Empirical joint donors,SHAP,0,4,0.8388655314032105
+Correlated proxy,22,Empirical joint donors,SHAP,0,5,0.6885499264764959
+Correlated proxy,22,Empirical joint donors,SHAP,0,6,0.0
+Correlated proxy,22,Empirical joint donors,LIME,0,0,1.0905443506844108
+Correlated proxy,22,Empirical joint donors,LIME,0,1,1.264754721719734
+Correlated proxy,22,Empirical joint donors,LIME,0,2,0.9275669607099509
+Correlated proxy,22,Empirical joint donors,LIME,0,3,0.8544603107035286
+Correlated proxy,22,Empirical joint donors,LIME,0,4,0.8676365415042054
+Correlated proxy,22,Empirical joint donors,LIME,0,5,0.7287604288172661
+Correlated proxy,22,Empirical joint donors,LIME,0,6,0.0
+Correlated proxy,22,Empirical joint donors,Random ranking,0,0,1.0905443506844108
+Correlated proxy,22,Empirical joint donors,Random ranking,0,1,1.097333174626178
+Correlated proxy,22,Empirical joint donors,Random ranking,0,2,1.1149148137351232
+Correlated proxy,22,Empirical joint donors,Random ranking,0,3,1.027710805858084
+Correlated proxy,22,Empirical joint donors,Random ranking,0,4,0.9549315118099279
+Correlated proxy,22,Empirical joint donors,Random ranking,0,5,0.7465466155194767
+Correlated proxy,22,Empirical joint donors,Random ranking,0,6,0.0
+Correlated proxy,22,Empirical joint donors,Random ranking,1,0,1.0905443506844108
+Correlated proxy,22,Empirical joint donors,Random ranking,1,1,1.1088548248026147
+Correlated proxy,22,Empirical joint donors,Random ranking,1,2,1.1567533896519564
+Correlated proxy,22,Empirical joint donors,Random ranking,1,3,1.0826439908468428
+Correlated proxy,22,Empirical joint donors,Random ranking,1,4,0.9837086802684545
+Correlated proxy,22,Empirical joint donors,Random ranking,1,5,0.7368658372127371
+Correlated proxy,22,Empirical joint donors,Random ranking,1,6,0.0
+Correlated proxy,22,Empirical joint donors,Random ranking,2,0,1.0905443506844108
+Correlated proxy,22,Empirical joint donors,Random ranking,2,1,0.9780703738187574
+Correlated proxy,22,Empirical joint donors,Random ranking,2,2,0.9565728536574477
+Correlated proxy,22,Empirical joint donors,Random ranking,2,3,0.9803355321127807
+Correlated proxy,22,Empirical joint donors,Random ranking,2,4,0.9282499948807142
+Correlated proxy,22,Empirical joint donors,Random ranking,2,5,0.6848422958573587
+Correlated proxy,22,Empirical joint donors,Random ranking,2,6,0.0
+Correlated proxy,22,Empirical joint donors,Random ranking,3,0,1.0905443506844108
+Correlated proxy,22,Empirical joint donors,Random ranking,3,1,1.1995505859588926
+Correlated proxy,22,Empirical joint donors,Random ranking,3,2,1.1492550557039072
+Correlated proxy,22,Empirical joint donors,Random ranking,3,3,1.2014633676090243
+Correlated proxy,22,Empirical joint donors,Random ranking,3,4,1.0503442650502846
+Correlated proxy,22,Empirical joint donors,Random ranking,3,5,0.7439560031769616
+Correlated proxy,22,Empirical joint donors,Random ranking,3,6,0.0
+Correlated proxy,22,Empirical joint donors,Random ranking,4,0,1.0905443506844108
+Correlated proxy,22,Empirical joint donors,Random ranking,4,1,1.0050903566793918
+Correlated proxy,22,Empirical joint donors,Random ranking,4,2,1.1447010305508647
+Correlated proxy,22,Empirical joint donors,Random ranking,4,3,1.0427345951269997
+Correlated proxy,22,Empirical joint donors,Random ranking,4,4,1.0163604234655932
+Correlated proxy,22,Empirical joint donors,Random ranking,4,5,0.7351935799089988
+Correlated proxy,22,Empirical joint donors,Random ranking,4,6,0.0
+Correlated proxy,33,Training mean,SHAP,0,0,0.7668042670977067
+Correlated proxy,33,Training mean,SHAP,0,1,0.8593143813075018
+Correlated proxy,33,Training mean,SHAP,0,2,0.8365668423266733
+Correlated proxy,33,Training mean,SHAP,0,3,0.6424701106493456
+Correlated proxy,33,Training mean,SHAP,0,4,0.5730884745555979
+Correlated proxy,33,Training mean,SHAP,0,5,0.5366293911012322
+Correlated proxy,33,Training mean,SHAP,0,6,0.47354735699500616
+Correlated proxy,33,Training mean,LIME,0,0,0.7668042670977067
+Correlated proxy,33,Training mean,LIME,0,1,0.882855034348723
+Correlated proxy,33,Training mean,LIME,0,2,0.8549285804616722
+Correlated proxy,33,Training mean,LIME,0,3,0.6957621244796712
+Correlated proxy,33,Training mean,LIME,0,4,0.4982592267141461
+Correlated proxy,33,Training mean,LIME,0,5,0.5416028586444649
+Correlated proxy,33,Training mean,LIME,0,6,0.47354735699500616
+Correlated proxy,33,Training mean,Random ranking,0,0,0.7668042670977067
+Correlated proxy,33,Training mean,Random ranking,0,1,0.8039564194432615
+Correlated proxy,33,Training mean,Random ranking,0,2,0.8367051396426475
+Correlated proxy,33,Training mean,Random ranking,0,3,0.7607836130665323
+Correlated proxy,33,Training mean,Random ranking,0,4,0.6267467172435977
+Correlated proxy,33,Training mean,Random ranking,0,5,0.535971407816354
+Correlated proxy,33,Training mean,Random ranking,0,6,0.47354735699500616
+Correlated proxy,33,Training mean,Random ranking,1,0,0.7668042670977067
+Correlated proxy,33,Training mean,Random ranking,1,1,0.800929262083733
+Correlated proxy,33,Training mean,Random ranking,1,2,0.8150434091508729
+Correlated proxy,33,Training mean,Random ranking,1,3,0.7129672621232331
+Correlated proxy,33,Training mean,Random ranking,1,4,0.6331567228593127
+Correlated proxy,33,Training mean,Random ranking,1,5,0.4909881818633252
+Correlated proxy,33,Training mean,Random ranking,1,6,0.47354735699500616
+Correlated proxy,33,Training mean,Random ranking,2,0,0.7668042670977067
+Correlated proxy,33,Training mean,Random ranking,2,1,0.8165105673004395
+Correlated proxy,33,Training mean,Random ranking,2,2,0.7824889601104444
+Correlated proxy,33,Training mean,Random ranking,2,3,0.8244278602820629
+Correlated proxy,33,Training mean,Random ranking,2,4,0.6762863955008357
+Correlated proxy,33,Training mean,Random ranking,2,5,0.5919982465434835
+Correlated proxy,33,Training mean,Random ranking,2,6,0.47354735699500616
+Correlated proxy,33,Training mean,Random ranking,3,0,0.7668042670977067
+Correlated proxy,33,Training mean,Random ranking,3,1,0.7790021847318102
+Correlated proxy,33,Training mean,Random ranking,3,2,0.8646810102678538
+Correlated proxy,33,Training mean,Random ranking,3,3,0.8414488806017085
+Correlated proxy,33,Training mean,Random ranking,3,4,0.7688104573674934
+Correlated proxy,33,Training mean,Random ranking,3,5,0.6897894898176876
+Correlated proxy,33,Training mean,Random ranking,3,6,0.47354735699500616
+Correlated proxy,33,Training mean,Random ranking,4,0,0.7668042670977067
+Correlated proxy,33,Training mean,Random ranking,4,1,0.8199038713962598
+Correlated proxy,33,Training mean,Random ranking,4,2,0.7934061954542608
+Correlated proxy,33,Training mean,Random ranking,4,3,0.8459128843710267
+Correlated proxy,33,Training mean,Random ranking,4,4,0.722415077471125
+Correlated proxy,33,Training mean,Random ranking,4,5,0.5990567094740333
+Correlated proxy,33,Training mean,Random ranking,4,6,0.47354735699500616
+Correlated proxy,33,Empirical joint donors,SHAP,0,0,0.7668042670977067
+Correlated proxy,33,Empirical joint donors,SHAP,0,1,0.9808412857779333
+Correlated proxy,33,Empirical joint donors,SHAP,0,2,0.8982949842700028
+Correlated proxy,33,Empirical joint donors,SHAP,0,3,0.8027836802680529
+Correlated proxy,33,Empirical joint donors,SHAP,0,4,0.7197610377181926
+Correlated proxy,33,Empirical joint donors,SHAP,0,5,0.5594146479206527
+Correlated proxy,33,Empirical joint donors,SHAP,0,6,0.0
+Correlated proxy,33,Empirical joint donors,LIME,0,0,0.7668042670977067
+Correlated proxy,33,Empirical joint donors,LIME,0,1,1.0652073539495424
+Correlated proxy,33,Empirical joint donors,LIME,0,2,1.0850832242715436
+Correlated proxy,33,Empirical joint donors,LIME,0,3,0.8247720230807595
+Correlated proxy,33,Empirical joint donors,LIME,0,4,0.6577685589522186
+Correlated proxy,33,Empirical joint donors,LIME,0,5,0.5828493451456199
+Correlated proxy,33,Empirical joint donors,LIME,0,6,0.0
+Correlated proxy,33,Empirical joint donors,Random ranking,0,0,0.7668042670977067
+Correlated proxy,33,Empirical joint donors,Random ranking,0,1,0.9319615015629715
+Correlated proxy,33,Empirical joint donors,Random ranking,0,2,1.0116655159358572
+Correlated proxy,33,Empirical joint donors,Random ranking,0,3,1.0309310714446236
+Correlated proxy,33,Empirical joint donors,Random ranking,0,4,0.9174477096093533
+Correlated proxy,33,Empirical joint donors,Random ranking,0,5,0.6955501196016449
+Correlated proxy,33,Empirical joint donors,Random ranking,0,6,0.0
+Correlated proxy,33,Empirical joint donors,Random ranking,1,0,0.7668042670977067
+Correlated proxy,33,Empirical joint donors,Random ranking,1,1,0.9497131847708938
+Correlated proxy,33,Empirical joint donors,Random ranking,1,2,0.9892054300236316
+Correlated proxy,33,Empirical joint donors,Random ranking,1,3,0.8934197853523705
+Correlated proxy,33,Empirical joint donors,Random ranking,1,4,0.8245756290172261
+Correlated proxy,33,Empirical joint donors,Random ranking,1,5,0.7133844503419521
+Correlated proxy,33,Empirical joint donors,Random ranking,1,6,0.0
+Correlated proxy,33,Empirical joint donors,Random ranking,2,0,0.7668042670977067
+Correlated proxy,33,Empirical joint donors,Random ranking,2,1,0.8816100484686946
+Correlated proxy,33,Empirical joint donors,Random ranking,2,2,0.9589717592904904
+Correlated proxy,33,Empirical joint donors,Random ranking,2,3,1.0687384281104555
+Correlated proxy,33,Empirical joint donors,Random ranking,2,4,0.9243073487463688
+Correlated proxy,33,Empirical joint donors,Random ranking,2,5,0.7343081284209374
+Correlated proxy,33,Empirical joint donors,Random ranking,2,6,0.0
+Correlated proxy,33,Empirical joint donors,Random ranking,3,0,0.7668042670977067
+Correlated proxy,33,Empirical joint donors,Random ranking,3,1,0.8593999556683317
+Correlated proxy,33,Empirical joint donors,Random ranking,3,2,0.9433870825689592
+Correlated proxy,33,Empirical joint donors,Random ranking,3,3,0.9770044186227267
+Correlated proxy,33,Empirical joint donors,Random ranking,3,4,0.9085862902607045
+Correlated proxy,33,Empirical joint donors,Random ranking,3,5,0.7896453427514395
+Correlated proxy,33,Empirical joint donors,Random ranking,3,6,0.0
+Correlated proxy,33,Empirical joint donors,Random ranking,4,0,0.7668042670977067
+Correlated proxy,33,Empirical joint donors,Random ranking,4,1,0.9234843547097009
+Correlated proxy,33,Empirical joint donors,Random ranking,4,2,0.9745494533560307
+Correlated proxy,33,Empirical joint donors,Random ranking,4,3,1.031622245367113
+Correlated proxy,33,Empirical joint donors,Random ranking,4,4,0.9508353127944602
+Correlated proxy,33,Empirical joint donors,Random ranking,4,5,0.7465109531365298
+Correlated proxy,33,Empirical joint donors,Random ranking,4,6,0.0

@@ -1,24 +1,21 @@
-# How ALE (Accumulated Local Effects) Works
+# How accumulated local effects work
 
-ALE plots show the isolated effect of a feature on the prediction, without being biased by feature correlations (a known issue with Partial Dependence Plots).
+**Question:** how does a model's output change locally with one feature, averaged over nearby observed cases?
 
-## Algorithm
+For a continuous feature, partition its values into bins. In each bin, replace that feature by its lower and upper boundaries for the observations inside the bin; average the prediction difference. Accumulate those differences and subtract a sample-weighted centering constant:
 
-1. **Divide feature range into intervals**: Split feature x_j into K small intervals (bins).
-2. **Compute local effects**: For each interval, compute the average difference in predictions when the feature moves from the lower to the upper bound of the interval, using only the data points that fall within that interval.
-3. **Accumulate**: Sum up the local effects from left to right across intervals.
-4. **Center**: Subtract the mean so the ALE effect averages to zero.
+$$\widehat{ALE}_j(x)=\sum_{k=1}^{k(x)}\frac{1}{n_k}\sum_{i:x_{ij}\in B_k}[f(z_k,x_{i,-j})-f(z_{k-1},x_{i,-j})]-C.$$
 
-## Formula
+This finite-bin calculation estimates accumulated conditional local effects. Two-feature ALE additionally removes lower-order effects to isolate the interaction component. [Apley and Zhu (2020)](https://arxiv.org/abs/1612.08468).
 
-ALE(x_j) = Σ_{k=1}^{k_j} (1/n_k) Σ_{i: x_ij ∈ N_k} [f(z_k, x_i\j) - f(z_{k-1}, x_i\j)] - constant
+## Units and assumptions
 
-Where:
-- N_k is the k-th interval
-- n_k is the number of samples in interval k
-- z_k and z_{k-1} are the upper and lower bounds of interval k
-- x_i\j are all features except x_j (kept at their observed values)
+The vertical scale is the chosen model response's units, **centered around zero**. A classifier must expose a specified class probability or score rather than unexplained integer class labels. An ALE value of zero is not a probability of zero or a decision threshold. State the reference sample, bin count and response transformation.
 
-## Why ALE > PDP for Correlated Features
+## ALE versus PDP
 
-PDP marginalizes over all feature values, creating impossible combinations (e.g., 10 rooms but low income). ALE only uses nearby observed values, avoiding this issue.
+PDP substitutes a feature value across all reference rows. ALE makes local substitutions within occupied bins, reducing long-range extrapolation for dependent features. Finite bins still introduce synthetic boundary combinations. Sparse regions, sharp nonlinearities, bin choices and dependence structure affect the estimated curve; “unbiased under all correlations” is not a valid general claim.
+
+## Limitations and checks
+
+Check bin counts and compare several bin resolutions. Centering removes absolute prediction level, and averaging hides individual heterogeneity. A curve describes model behavior under these local substitutions, not an intervention's causal effect. It does not explain one selected case. In the [California housing notebook](ALE_example.ipynb), the model response is median house value in units of 100000 dollars; the curves therefore show centered changes in those units.

@@ -1,29 +1,17 @@
-# How Grad-CAM Works
+# How Grad-CAM works
 
-Grad-CAM (Gradient-weighted Class Activation Mapping) explains CNN predictions by highlighting important image regions.
+**Question:** which spatial activations contribute positive evidence to a selected CNN output?
 
-## Algorithm
+Select a differentiable scalar class score $y^c$ and a convolutional layer with activation maps $A^k$. Average the score's gradients across spatial positions and use those averages to weight the maps:
 
-1. **Forward pass**: Feed the image through the CNN and get the prediction for the target class.
-2. **Backward pass**: Compute the gradient of the target class score with respect to the feature maps of the last convolutional layer.
-3. **Global average pooling**: Average each gradient channel over its spatial dimensions to get importance weights α_k.
-4. **Weighted combination**: Compute a weighted sum of the feature maps using these weights.
-5. **ReLU activation**: Apply ReLU to keep only features with positive influence on the target class.
+$$\alpha_k^c=\frac{1}{Z}\sum_{i,j}\frac{\partial y^c}{\partial A^k_{ij}},\qquad L^c=\operatorname{ReLU}\left(\sum_k\alpha_k^c A^k\right).$$
 
-## Formula
+Upsample the resulting coarse map to overlay it on the input. No model retraining is required, but access to activations and gradients is necessary. [Selvaraju et al. (2017)](https://arxiv.org/abs/1610.02391).
 
-α_k = (1/Z) Σ_i Σ_j ∂y^c / ∂A^k_ij
+## Units and assumptions
 
-L_GradCAM = ReLU(Σ_k α_k · A^k)
+Record the exact target score and layer. The [VGG16 example](GradCAM_example.ipynb) uses a class logit. A normalized heatmap shows relative positive activation evidence for that image/layer/target; its colors are not calibrated probabilities or comparable absolute scores across images. ReLU discards negative evidence, and spatial resolution is limited by the selected feature maps.
 
-Where:
-- y^c is the score for class c (before softmax)
-- A^k is the k-th feature map of the last convolutional layer
-- α_k is the importance weight for feature map k
-- Z is the number of spatial locations (width × height)
+## Limitations and checks
 
-## Key Properties
-
-- **Class-discriminative**: Produces different heatmaps for different classes.
-- **Architecture-agnostic**: Works with any CNN that has convolutional layers.
-- **No retraining needed**: Uses only the existing model's gradients.
+A visually plausible map does not prove faithful reasoning, object segmentation or a causal effect. Different layers/targets and input preprocessing can change the map. Gradients may vanish; handle an all-zero map without division by zero. Test class sensitivity, model randomization and input perturbations rather than judging quality only by visual appeal. Generic tabular models and models without suitable differentiable spatial features require a different approach or an explicitly adapted formulation.

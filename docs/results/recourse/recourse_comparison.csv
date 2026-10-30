@@ -1,0 +1,4 @@
+search,found_valid_candidate,training,skill,probability,feasible_under_stated_SCM,L1_feature_change,training_action_cost
+Independent skill edit,True,0.5,2.0,0.5,False,1.4,
+Training-only input edit,False,,0.6,,False,,
+Causal training action,True,1.75,1.6,0.5049998333399998,True,2.25,1.25

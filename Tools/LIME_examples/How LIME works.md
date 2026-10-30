@@ -1,113 +1,47 @@
-# Local Interpretable Model-agnostic Explanations (LIME)
+# How LIME works
 
-Local Interpretable Model-agnostic Explanations (LIME) is a technique designed to help us understand the predictions of any machine learning model by approximating the model locally around the prediction. LIME is particularly useful for explaining individual predictions of complex, black-box models such as deep neural networks or ensemble methods. Here's a detailed breakdown, including some essential formulas.
+**Question:** which simple model approximates a selected prediction in a chosen neighborhood?
 
-## 1. Introduction
+LIME samples perturbations, queries the fitted model, weights samples by proximity, and fits an interpretable surrogate. Its objective balances local fit and explanation complexity:
 
-LIME generates explanations by creating a simple model (like a linear regression or decision tree) that approximates the behavior of the complex model locally. This is done around the instance (data point) you're interested in explaining. The idea is that while the global model is complex and possibly non-linear, its behavior near a specific instance can be approximated by a simpler, interpretable model.
+$$\xi(x)=\arg\min_{g\in G}\mathcal L(f,g,\pi_x)+\Omega(g).$$
 
-## 2. How LIME Works
+For a weighted least-squares surrogate, $\mathcal L=\sum_i\pi_x(z_i)[f(z_i)-g(z_i')]^2$. Here $g$ includes an intercept, $\pi_x$ supplies neighborhood weights, and $\Omega$ penalizes explanation complexity, for example by limiting the number of selected features.
 
-### Step 1: Select Your Instance for Explanation
+The surrogate may use an interpretable representation $z'$ such as word presence or discretized feature conditions, rather than the model's original input coordinates. The loss measures agreement with the model's outputs, not agreement with the true labels. [Ribeiro, Singh and Guestrin (2016)](https://arxiv.org/abs/1602.04938).
 
-Suppose you have a complex model $f$ and an instance $x$ whose prediction you want to explain. $x$ can be anything from a row of tabular data to an image or a piece of text, depending on the model's input.
+## Units and assumptions
 
-### Step 2: Perturb the Dataset
+Specify the target class, model response, perturbation distribution, feature representation, distance and kernel width. For class-probability explanations, the surrogate predicts that class's probability. A coefficient is a change in that approximation per unit of its encoded feature; it is not a causal effect or automatically an additive SHAP value. The intercept plus active terms gives the surrogate prediction, which can differ from the original prediction.
 
-Generate a new dataset of perturbed samples around $x$. This involves creating variations of $x$ by tweaking the input features slightly. For tabular data, this might involve changing the values of some features. For images, this could mean masking parts of the image. For text, this could involve removing words or phrases.
+## Checked example: neighborhood weights
 
-### Step 3: Use the Complex Model to Predict Outcomes of Perturbed Samples
+For this example choose $w(d)=\exp(-d^2/\sigma^2)$ with $\sigma=3$. Distances below are illustrative, already computed in an agreed scaled representation. They are not raw distances between age and education categories. Library kernels can use a different convention, so inspect the implementation before interpreting a numeric width.
 
-Use the original complex model $f$ to make predictions on this new dataset of perturbed samples. This gives you a set of outcomes that reflect how changes in the input influence the prediction.
+<!-- checked-example: lime-kernel -->
+```python
+from math import exp
 
-### Step 4: Weight the Perturbed Samples
-
-Assign weights to the perturbed samples based on their similarity to the original instance $x$. A common way to do this is by using an exponential kernel:
-
-$$
-w = exp\left(-\frac{d(x, x')^2}{\sigma^2}\right)
-$$
-
-where $d(x, x')$ is a distance measure between the original instance $x$ and a perturbed instance $x'$, and $\sigma$ controls the width of the kernel, determining how the similarity decreases as the distance increases.
-
-### Step 5: Train a Simple Model
-
-Train a simple, interpretable model (like linear regression) on the dataset of perturbed samples, using the outcomes predicted by the complex model as the target variable and the perturbed sample features as the input. Use the weights $w$ from the previous step as sample weights during training, ensuring that perturbed samples closer to $x$ have a greater influence on the model.
-
-The formula for the linear regression model, for instance, would aim to minimize the weighted least squares:
-
-$$
-\min_{\theta} \sum w_i (f(x_i) - \theta^T x_i)^2
-$$
-
-where $f(x_i)$ is the prediction of the complex model for the perturbed instance $x_i$, $\theta^T x_i$ is the prediction of the simple linear model, and $w_i$ is the weight for instance $x_i$.
-
-### Step 6: Interpret the Simple Model
-
-The parameters (like coefficients in linear regression) of the simple model serve as explanations for the prediction at $x$. For example, in a linear model, the coefficients indicate the direction and magnitude of the influence of each feature on the prediction.
-
-
----
-
-
-### Example: Binary Classification
-
-#### Scenario
-We have a model trained to predict if individuals earn more than $50k a year. The features used in the model are:
-- **Age**: Continuous variable.
-- **Education Level**: Categorical variable (High School, Bachelor's, Master's).
-
-#### Original Model (Black Box)
-Let's assume our decision tree has learned the following (simplified for explanation):
-- If age > 30 and has at least a Bachelor's degree, predict > $50k.
-- Otherwise, predict <= $50k.
-
-#### Target Instance
-We want to explain the model's prediction for Alice:
-- **Age**: 35
-- **Education Level**: Bachelor's
-- The model predicts: > $50k (positive class).
-
-#### Step 1: Data Perturbation
-We generate new samples around Alice's features by slightly modifying her age and education:
+sigma = 3.0
+distances = [1.0, 4.0, 2.5, 6.0, 3.5, 2.0]
+print("distance weight")
+for distance in distances:
+    weight = exp(-(distance / sigma) ** 2)
+    print(f"{distance:g} {weight:.6f}")
 ```
-| Age | Education     | Model Prediction |
-|-----|---------------|------------------|
-| 34  | Bachelor's    | > $50k           |
-| 32  | High School   | <= $50k          |
-| 37  | Master's      | > $50k           |
-| 29  | Bachelor's    | <= $50k          |
-| 36  | High School   | <= $50k          |
-| 33  | Bachelor's    | > $50k           |
+```text
+distance weight
+1 0.894839
+4 0.169013
+2.5 0.499352
+6 0.018316
+3.5 0.256376
+2 0.641180
 ```
+<!-- /checked-example -->
 
-#### Step 2: Weight Calculation
-Weights are assigned based on proximity to Alice's actual features (Age: 35, Education: Bachelor’s), using an exponential kernel with $\sigma = 3$ for simplicity:
+A point twice as far away does not get half the weight. These weights specify a regression problem only after model outputs, the intercept, encoded features and regularization are supplied; they do not by themselves establish any fitted coefficient.
 
-$Weights = exp(-(distance^2) / 9)$
+## Limitations and checks
 
-
-
-Distances (simplified calculation considering categorical as a change/no-change and numerical distance for age):
-```
-| Perturbed Sample | Distance | Weight   |
-|------------------|----------|----------|
-| (34, Bachelor's) | 1        | 0.90     |
-| (32, High School)| 4        | 0.45     |
-| (37, Master's)   | 2.5      | 0.72     |
-| (29, Bachelor's) | 6        | 0.25     |
-| (36, High School)| 3.5      | 0.57     |
-| (33, Bachelor's) | 2        | 0.82     |
-```
-
-#### Step 3: Train Local Interpretable Model
-We train a simple linear regression model using the perturbed data, with the outcome variable being the binary prediction (1 for > $50k, 0 for <= $50k), and weights as calculated:
-
-```
-Model: Predicted = 0.1 * Age + 0.5 * Education_Bachelor’s + 0.4 * Education_Master’s
-```
-
-#### Step 4: Explanation Generation
-The coefficients indicate the importance of each feature:
-- **Age Coefficient**: 0.1 — Suggesting that an increase in age slightly increases the chance of earning > $50k.
-- **Education Coefficients**: Bachelor's (0.5) and Master's (0.4) — Indicating that having at least a Bachelor's degree significantly influences higher earnings predictions.
+A sparse explanation can fit its sampled neighborhood poorly. Report local weighted fit and the gap at the query, and repeat sampling with multiple seeds/kernel widths. Perturbations can create unrealistic correlated-feature combinations, unnatural text, or masked images unlike training data. A stable approximation in this artificial neighborhood need not remain faithful elsewhere. The notebooks provide full fitted examples in [tabular](LIME_tabular.ipynb), [text](LIME_textual.ipynb), and [image](LIME_image.ipynb) settings.

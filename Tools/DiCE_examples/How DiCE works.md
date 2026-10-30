@@ -1,37 +1,19 @@
-# How DiCE (Diverse Counterfactual Explanations) Works
+# How DiCE works
 
-DiCE generates "what-if" scenarios: minimal changes to an input that would change the model's prediction.
+**Question:** which alternative input vectors receive a desired prediction, and how can we show several different candidates?
 
-## Algorithm
+DiCE supports several searches, including random sampling, genetic search, nearest observed candidates via KD-tree, and differentiable optimization. The original optimization balances desired-output loss, proximity and diversity, schematically:
 
-DiCE optimizes for three objectives simultaneously:
+$$\mathcal L=\lambda_y L_{target}+\lambda_d d(x,cf)-\lambda_{div}\operatorname{diversity}(cf_1,\ldots,cf_k).$$
 
-1. **Validity**: The counterfactual must have the desired prediction.
-2. **Proximity**: The counterfactual should be close to the original input (minimal changes).
-3. **Diversity**: Multiple counterfactuals should be different from each other.
+This objective describes one family of algorithms, not a claim that every DiCE backend solves the same optimization. [Mothilal, Sharma and Tan (2020)](https://arxiv.org/abs/1905.07697), [DiCE documentation](https://interpret.ml/DiCE/).
 
-## Optimization
+## Units and assumptions
 
-The loss function balances:
+Validity is checked against a specified model output and target/threshold. Distance depends on feature scaling, categorical encoding and the chosen cost definition; a small numeric distance need not be a small human effort. Fix immutable features and permitted ranges explicitly. Model access differs by backend: gradient optimization needs a compatible differentiable model, while other searches can use prediction queries.
 
-```
-L = λ₁ · yloss(f(cf), y_desired) + λ₂ · dist(cf, x) - λ₃ · diversity(cf₁, cf₂, ..., cf_k)
-```
+## Interpretation and limitations
 
-Where:
-- **yloss**: ensures the counterfactual has the desired prediction
-- **dist**: penalizes large changes from the original input
-- **diversity**: encourages diverse counterfactuals (uses determinantal point processes or simple pairwise distance)
+A candidate that flips the prediction is not necessarily globally minimal, diverse, plausible or actionable. Random search can fail to find any candidate within its budget. A nearest training example supplies an observed feature vector but does not establish that the person can reach it. Constraints on individual coordinates do not capture causal dependencies or downstream consequences.
 
-## Methods
-
-DiCE supports multiple generation methods:
-- **Random**: Sample random perturbations, keep valid ones.
-- **Genetic**: Evolutionary algorithm to evolve counterfactuals.
-- **KD-tree**: Use nearest neighbors from the opposite class in the training data.
-
-## Key Properties
-
-- **Actionable**: Constraints can limit which features change and their allowed ranges.
-- **Model-agnostic**: Works with any classifier.
-- **User-friendly**: "Change X to Y" is intuitive for non-technical users.
+Report the fraction of queries with valid candidates, actual prediction flips, normalized distances, changed-feature counts and constraint violations. Recheck candidates after rounding or inverse preprocessing. Interpret results as what-if inputs to a predictor; a causal action plan needs additional assumptions about how actions change features and outcomes. The [example](DiCE_example.ipynb) contrasts unconstrained and constrained random search.

@@ -3,9 +3,12 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
+from importlib.metadata import distributions
 import json
 import os
 from pathlib import Path
+import platform
 import sys
 import tempfile
 import time
@@ -30,6 +33,20 @@ SPECIAL = {
     "Tools/Merlin_examples/20NG_example.ipynb",
     "Tools/RuleFit_examples/RuleFit_example.ipynb",
 }
+FOUNDATION_FOLDERS = {
+    "Starter_examples", "InterpretableModels_examples", "Evaluation_examples",
+    "CausalRecourse_examples", "PracticalWorkflow_examples",
+}
+IMAGE_TRAINING = {"Tools/LIME_examples/LIME_image.ipynb"}
+NEURAL_COMPARISONS = {"Tools/NeuralComparison_examples/Shared_Image_Attribution.ipynb"}
+DEEP |= NEURAL_COMPARISONS
+
+
+def local_dependencies(path):
+    """Fingerprint notebook-local Python helpers, including newly added files."""
+    return {p.relative_to(ROOT).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
+            for p in sorted(path.parent.rglob("*.py"))
+            if not any(part in {"__pycache__", "results", "logs"} for part in p.parts)}
 
 
 def notebook_paths(group="all"):
@@ -38,14 +55,18 @@ def notebook_paths(group="all"):
             if ".ipynb_checkpoints" in path.parts:
                 continue
             relative = path.relative_to(ROOT).as_posix()
-            category = "deep" if relative in DEEP else "special" if relative in SPECIAL else "core"
-            if group in ("all", category):
+            category = ("foundations" if path.parent.name in FOUNDATION_FOLDERS else
+                        "deep" if relative in DEEP else "special" if relative in SPECIAL else "core")
+            selected = group in ("all", category)
+            selected |= group == "neural" and relative in DEEP - IMAGE_TRAINING
+            selected |= group == "image-training" and relative in IMAGE_TRAINING
+            if selected:
                 yield path
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--group", choices=("all", "core", "deep", "special"), default="all")
+    parser.add_argument("--group", choices=("all", "core", "deep", "special", "foundations", "neural", "image-training"), default="all")
     parser.add_argument("--notebook", action="append", help="Repository-relative notebook path; repeat to select several.")
     parser.add_argument("--validate-only", action="store_true", help="Check notebook schemas and code syntax, without executing.")
     parser.add_argument("--timeout", type=int, default=1200, help="Maximum seconds per cell (default: 1200).")
@@ -57,6 +78,11 @@ def main():
     if not paths:
         parser.error("No notebooks selected.")
     args.output_dir.mkdir(parents=True, exist_ok=True)
+    (args.output_dir / "environment.json").write_text(json.dumps({
+        "schema_version": 1, "python": sys.version, "platform": platform.platform(),
+        "machine": platform.machine(), "processor": platform.processor(),
+        "packages": dict(sorted((d.metadata["Name"], d.version) for d in distributions() if d.metadata["Name"])),
+    }, indent=2) + "\n")
     cache = args.cache_dir.resolve()
     cache.mkdir(parents=True, exist_ok=True)
     for variable, subdirectory in {
@@ -81,7 +107,9 @@ def main():
         for path in paths:
             relative = path.relative_to(ROOT)
             started = time.monotonic()
-            result = {"notebook": relative.as_posix(), "mode": "validate" if args.validate_only else "execute"}
+            source_hash = hashlib.sha256(path.read_bytes()).hexdigest()
+            result = {"notebook": relative.as_posix(), "mode": "validate" if args.validate_only else "execute",
+                      "source_sha256": source_hash, "local_dependencies": local_dependencies(path)}
             notebook = None
             print(f"RUN  {relative}", flush=True)
             try:
@@ -103,9 +131,15 @@ def main():
             except Exception as error:
                 result.update(status="failed", error=f"{type(error).__name__}: {error}")
             if notebook is not None and not args.validate_only:
+                notebook.metadata["validation"] = {
+                    "source_sha256": source_hash, "status": result["status"],
+                    "local_dependencies": result["local_dependencies"],
+                    "python": platform.python_version(),
+                }
                 destination = args.output_dir / relative
                 destination.parent.mkdir(parents=True, exist_ok=True)
                 nbformat.write(notebook, destination)
+                result["executed_sha256"] = hashlib.sha256(destination.read_bytes()).hexdigest()
             result["seconds"] = round(time.monotonic() - started, 2)
             results.append(result)
             print(f"{result['status'].upper()} {relative} ({result['seconds']}s)", flush=True)

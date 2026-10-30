@@ -1,0 +1,11 @@
+{
+  "notebook": "Tools/PracticalWorkflow_examples/Mixed_Data_Workflow.ipynb",
+  "mode": "execute",
+  "source_sha256": "60d631494abcd6833f90ba9d2b27c50c02d047bf69c8d492ed1368fefd7158d8",
+  "local_dependencies": {
+    "Tools/PracticalWorkflow_examples/workflow_helpers.py": "a543c16daac8a9ec25c67ed54630e1928172db55a2c1f67f46dec8d7c3714604"
+  },
+  "status": "passed",
+  "executed_sha256": "3877264c809c9f811cb7bf101bc080bae2235acb9988dfca418c003cb7d5dd73",
+  "seconds": 2.24
+}

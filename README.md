@@ -35,119 +35,154 @@ Grad-CAM highlights image regions contributing to VGG16's selected class score.
 The heatmap describes this model's response; it is not an object segmentation.
 [Try the Grad-CAM example →](Tools/GradCAM_examples/GradCAM_example.ipynb)
 
-## Getting started
+## Start here
 
-Use **Python 3.11** on Linux or Apple silicon macOS 14+. The pinned deep-learning
-packages do not support Intel Macs. The dependency versions in `requirements.txt` are a compatible
-set used for validation; they are not a promise that every newer release works.
-The full installation includes both TensorFlow and PyTorch because different
-notebooks use different backends.
+Learn to **choose, run, evaluate and adapt** an explanation. The first path uses
+small bundled or synthetic data and runs on CPU without Java, pretrained-model
+downloads, TensorFlow or PyTorch.
 
 ```bash
 git clone https://github.com/Naviden/Introduction-to-XAI.git
 cd Introduction-to-XAI
 python3.11 -m venv .venv
-source .venv/bin/activate  # Windows: .venv\Scripts\activate
+source .venv/bin/activate
 python -m pip install --upgrade pip
-# On Linux, install the CPU build first to avoid unnecessary CUDA packages:
-# python -m pip install torch==2.14.1 --index-url https://download.pytorch.org/whl/cpu
-python -m pip install -r requirements.txt
+python -m pip install -r requirements-tabular.txt
 python -m notebook
 ```
 
-Open a notebook and use **Restart Kernel and Run All**. Run notebooks from their
-own directories so relative data paths resolve. The Anchors notebook uses spaCy's
-English tokenizer; no separate spaCy language-model download is required.
+Open [First XAI Comparison](Tools/Starter_examples/First_XAI_Comparison.ipynb)
+and use **Restart Kernel and Run All**. Run notebooks from their own directories.
+For exact resolved Mac/Linux environments, use the hash-checked lockfiles in the
+[reproducibility guide](docs/REPRODUCIBILITY.md).
 
-## Notebook guide
+Prefer to read first? [Validated notebooks with outputs](docs/executed/README.md)
+are committed reading copies. [Recorded evaluation tables](docs/results/README.md)
+include raw measurements and assumptions. Source notebooks remain easy to edit.
 
-Start with [the shared tabular case comparison](Tools/MethodComparison_examples/Shared_Tabular_Case_Comparison.ipynb)
-to compare the applicable methods on one breast-cancer dataset, one split, and
-one fixed case. It includes side-by-side diagnostics, surrogate fidelity, and
-clear notes on methods that require different data or models. This complete
-comparison also needs the MERLIN extras and Java described below.
+## Choose a learning path
 
-| Directory | What it covers |
+| Path | Suggested sequence |
 | --- | --- |
-| `Theory/` | White-box and black-box models, surrogates, local/global explanations, and counterfactuals |
-| `Tools/LIME_examples/` | Tabular classification/regression, text, and images |
-| `Tools/SHAP_examples/` | Tabular explanations, summary plots, and survival models |
-| `Tools/SHAP_text_image_examples/` | Transformer text explanations and ImageNet image explanations |
-| `Tools/ANCHOR_examples/` | **Text** anchors on bundled movie reviews (the historical filename is `Anchor_tabular.ipynb`) |
-| Other `Tools/` folders | The individual XAI methods named above |
-| `Practice/` | An intentionally unfinished student LIME exercise; setup cells run, and students complete the marked tasks |
+| **Beginner** | [Basics](Theory/Basics.ipynb) → [explanation dimensions](Theory/Dimensions.ipynb) → [lightweight starter](Tools/Starter_examples/First_XAI_Comparison.ipynb) → [method-selection guide](docs/METHOD_GUIDE.md). Basics includes a neural example requiring the full environment; the starter is independent. |
+| **Practitioner** | [Interpretable models](Tools/InterpretableModels_examples/Interpretable_Models_Comparison.ipynb) → [mixed-data workflow](Tools/PracticalWorkflow_examples/Mixed_Data_Workflow.ipynb) → [evaluation protocol](docs/EVALUATION.md) → [causal recourse](Tools/CausalRecourse_examples/Causal_Recourse.ipynb). |
+| **Researcher** | [Evaluation and sensitivity lab](Tools/Evaluation_examples/Evaluation_and_Sensitivity.ipynb) → [complete tabular comparison](Tools/MethodComparison_examples/Shared_Tabular_Case_Comparison.ipynb) → [shared image comparison](Tools/NeuralComparison_examples/Shared_Image_Attribution.ipynb) → [reproducibility](docs/REPRODUCIBILITY.md). |
 
-Several notebooks download public datasets or pretrained models on first use.
-Internet access, disk space for model weights, and several minutes of CPU time
-are needed for the complete suite. Survival SHAP interaction values, BERT anchor
-sampling, and image explanations are the most expensive examples. No GPU is
-required. Explanations illustrate model behavior, not causal effects.
+## Core comparisons and laboratories
 
-## RuleFit and MERLIN
+| Notebook | What you learn | Environment |
+| --- | --- | --- |
+| [First XAI comparison](Tools/Starter_examples/First_XAI_Comparison.ipynb) | Permutation, SHAP and LIME for one forest/case, including local approximation error | Tabular |
+| [Interpretable models](Tools/InterpretableModels_examples/Interpretable_Models_Comparison.ipynb) | Logistic regression, a small tree, an additive spline GAM and a forest; exact intrinsic decompositions and held-out performance | Tabular |
+| [Evaluation and sensitivity](Tools/Evaluation_examples/Evaluation_and_Sensitivity.ipynb) | Repeated cases/seeds, correlated features, background/masking sensitivity, random controls and a misleading-shortcut example | Tabular |
+| [Mixed-data workflow](Tools/PracticalWorkflow_examples/Mixed_Data_Workflow.ipynb) | Missing values, unknown categories, preprocessing, original-feature grouping and adapting your own model/data | Tabular |
+| [Causal recourse](Tools/CausalRecourse_examples/Causal_Recourse.ipynb) | Prediction-flipping inputs versus feasible interventions under an explicit synthetic causal model | Tabular |
+| [Shared image attribution](Tools/NeuralComparison_examples/Shared_Image_Attribution.ipynb) | Gradients, input×gradient, IG, SmoothGrad, occlusion, Grad-CAM, SHAP and LIME for one digits CNN/class/image | Full; no data/model download |
+| [Complete shared tabular case](Tools/MethodComparison_examples/Shared_Tabular_Case_Comparison.ipynb) | Importance, response curves, local attributions, rules, counterfactuals and model comparisons | Full + MERLIN + Java |
 
-**RuleFit** uses H2O and needs a Java runtime (tested with Java 21). Check it with
-`java -version` before opening its notebook. The notebook starts a local H2O
-server, limited to two threads and 2 GB of heap when launched here. The final cell shuts
-down only a server started by this notebook; a pre-existing server is left running.
+The complete tabular case mostly explains one forest. IG uses a separate neural
+model, and RuleFit/tree sections fit explanatory surrogates. Their output scales
+and meanings differ. The laboratories preserve failed or weak explanations and
+explain what their diagnostics can—and cannot—establish.
 
-**MERLIN** has extra dependencies and is installed separately:
+## Individual methods
+
+| Area | Examples |
+| --- | --- |
+| Local feature attribution | [LIME: tabular](Tools/LIME_examples/LIME_tabular.ipynb), [text](Tools/LIME_examples/LIME_textual.ipynb), [images](Tools/LIME_examples/LIME_image.ipynb); [SHAP: tabular](Tools/SHAP_examples/SHAP_tabular.ipynb), [summary plots](Tools/SHAP_examples/SHAP_summary_plot.ipynb), [text/images](Tools/SHAP_text_image_examples/SHAP_text_image.ipynb) |
+| Importance and response curves | [Importance comparison](Tools/FeatureImportanceComparison_examples/FeatureImportanceComparison.ipynb), [permutation](Tools/PermutationImportance_examples/PermutationImportance_example.ipynb), [PDP/ICE](Tools/Visual%20Explanation_example/PDP_ICE.ipynb), [ALE](Tools/ALE_examples/ALE_example.ipynb) |
+| Rules and counterfactuals | [Text Anchors](Tools/ANCHOR_examples/Anchor_tabular.ipynb) (historical filename), [DiCE](Tools/DiCE_examples/DiCE_example.ipynb), [RuleFit](Tools/RuleFit_examples/RuleFit_example.ipynb), [MERLIN](Tools/Merlin_examples/20NG_example.ipynb) |
+| Neural and specialized | [Integrated Gradients](Tools/IntegratedGradients_examples/IntegratedGradients_example.ipynb), [Grad-CAM](Tools/GradCAM_examples/GradCAM_example.ipynb), [attention](Tools/Attention_examples/Attention_visualization.ipynb), [survival SHAP](Tools/SHAP_examples/SHAP_survival_model.ipynb) |
+| Practice | [Student LIME exercise](Practice/LIME_Practice_Notebook_student.ipynb), intentionally unfinished |
+
+The method folders include corrected mathematical introductions with primary
+references. SHAP, LIME and RuleFit numerical examples are checked automatically.
+See [coverage boundaries and selection criteria](docs/METHOD_GUIDE.md) and the
+[roadmap](docs/ROADMAP.md) for remaining families and research extensions.
+
+## Full environment and optional tools
+
+Use **Python 3.11** on Linux or Apple silicon macOS 14+. The pinned full neural
+packages do not support Intel Macs; Windows has not been validated. Versions are
+a tested compatible set, not a promise about every newer release.
+
+```bash
+# In the active environment:
+# Linux: install CPU PyTorch first to avoid unnecessary CUDA packages:
+# python -m pip install torch==2.14.1 --index-url https://download.pytorch.org/whl/cpu
+python -m pip install -r requirements.txt
+```
+
+The full profile includes TensorFlow and PyTorch because examples use both.
+Older examples download public datasets or model weights on first use. No GPU
+is required. The new foundations and digits comparison work offline after package
+installation. [Provenance](docs/PROVENANCE.md) records sources and remaining asset
+versioning limits. Explanations describe model behavior; causal claims require
+additional assumptions.
+
+**RuleFit** requires Java (tested with Java 21). Its H2O server uses two threads
+and up to 2 GB heap; notebooks shut down only servers they start.
+
+**MERLIN** requires additional packages and potentially a C compiler:
 
 ```bash
 python -m pip install -r requirements-merlin.txt
 ```
 
-The package name is `merlinxai`, while the Python import is `merlin`. PyEDA supplies
-Espresso internally, and may need a C compiler to build. On recent macOS Clang,
-PyEDA 0.29 can fail on legacy C function-pointer warnings. This command-scoped
-workaround was used for local validation:
+The package is `merlinxai`, imported as `merlin`. PyEDA supplies Espresso.
+On recent macOS Clang, its legacy function-pointer warnings may require:
 
 ```bash
 CFLAGS="-Wno-error=incompatible-function-pointer-types" python -m pip install -r requirements-merlin.txt
 ```
 
-The optional requirements pin the legacy `pkg_resources` provider needed by
-MERLIN's `stopit` dependency. Graphviz is only needed if you enable saved diagrams;
-the example leaves that feature disabled.
+The extras pin the legacy `pkg_resources` provider used by `stopit`. Graphviz is
+needed only if you enable diagram exports. Anchors uses spaCy's English tokenizer;
+no separate spaCy model download is needed.
 
-## Validation
-
-Install the test tools, and the MERLIN extras to run **all** notebooks:
+## Validation and reproducibility
 
 ```bash
-python -m pip install -r requirements-dev.txt
-python -m pip install -r requirements-merlin.txt
-python -m pytest -q
+# For the lightweight path:
+python -m pip install -r requirements-validation.txt
+python scripts/check_worked_examples.py
+python scripts/check_links.py
 python scripts/check_notebooks.py --validate-only
+python scripts/check_notebooks.py --group foundations
+
+# For the complete suite, also install the full/dev/MERLIN requirements and Java:
+python -m pip install -r requirements-dev.txt -r requirements-merlin.txt
+python -m pytest -q
 python scripts/check_notebooks.py --group all
 ```
 
-The runner starts a fresh kernel per notebook using the active Python interpreter,
-executes every code cell, and exits with a failure status if any notebook fails.
-It writes executed copies and `results.json` under `validation/`, leaving the
-source notebooks unchanged. Supported dataset/model caches and plotting configuration are redirected there;
-use `--cache-dir PATH` to select another location. Some libraries manage their own
-files: SHAP caches packaged datasets in its installation, DiCE saves `adult.zip`
-in the notebook directory, and MERLIN creates local `logs/` and `results/`.
-These generated files are ignored by Git. The student exercise is checked
-as a template, not graded as a completed solution.
+The runner uses the active interpreter and a fresh kernel per notebook, executes
+all code cells, and fails on errors. It writes executed copies, source/helper
+hashes, timings and an environment manifest under `validation/`. Source notebooks
+are unchanged. Use `--notebook PATH`, `--output-dir PATH`, `--cache-dir PATH`, or
+`--timeout SECONDS` (per cell; default 1200).
 
-For a smaller run, select `--group core`, `--group deep`, or `--group special`,
-or use `--notebook Tools/DiCE_examples/DiCE_example.ipynb`. `core` covers 12
-notebooks, `deep` covers the seven TensorFlow/transformer notebooks, and `special`
-covers MERLIN, RuleFit, and the shared-case comparison. `--timeout` controls the time limit per cell in seconds
-(default 1200).
+Groups are `foundations`, `core`, `deep`, and `special`; `neural` and
+`image-training` split `deep` for CI. CI uses the locked lightweight installation
+for foundations and the full environment elsewhere. It checks worked examples,
+local document links, notebook schemas, numerical regressions and execution.
+Artifacts are retained for 30 days; committed reading copies/results are durable.
 
-GitHub Actions runs all three groups on pushes and pull requests, along with
-schema/syntax checks and numerical regression tests. Executed notebooks and
-failure details are uploaded as workflow artifacts. External download failures
-remain visible as failures; the runner does not silently skip examples.
+Supported caches are redirected to `validation/cache`. SHAP also uses its package
+cache, DiCE may save `adult.zip`, and MERLIN creates local logs/results. These are
+ignored by Git. The student exercise is validated as a template, not graded as a
+completed solution. See [the reproduction and publication commands](docs/REPRODUCIBILITY.md).
 
-## Contributing
+## Contributing and reuse
 
 If you think a particular explainer is missing, please let me know by opening an
 issue, or feel free to add it via a pull request.
 
-Submit a pull request with the notebook change and its validation results. Clear
-stale outputs after editing code, keep student exercises unfinished, and rerun
-the affected notebook from a fresh kernel. Revalidate the full suite when changing
-shared dependencies.
+Follow the [contribution checklist](CONTRIBUTING.md): a precise question, runnable
+example, assumptions, interpretation, validation, failure case and primary sources.
+
+**Original code is [MIT licensed](LICENSE); original teaching text and figures are
+[CC BY 4.0](LICENSE-CONTENT.md).** Both permit free reuse, including commercial use,
+subject to their terms. Third-party materials retain their own licenses and
+attribution requirements; see [provenance](docs/PROVENANCE.md). Please cite the
+repository using [CITATION.cff](CITATION.cff) and credit the original method papers.

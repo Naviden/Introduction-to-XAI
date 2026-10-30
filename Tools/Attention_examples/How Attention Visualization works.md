@@ -1,29 +1,19 @@
-# How Attention Visualization Works
+# How attention visualization works
 
-Attention visualization displays the self-attention weights from transformer models to show which tokens influence each other during processing.
+**Question:** how does a selected attention head mix token representations at a particular layer?
 
-## Mechanism
+Scaled dot-product attention computes
 
-In a transformer, self-attention computes:
+$$A=\operatorname{softmax}(QK^T/\sqrt{d_k}+M),\qquad\operatorname{Attention}=AV,$$
 
-Attention(Q, K, V) = softmax(QK^T / √d_k) V
+where $M$ masks disallowed positions. In evaluation mode, each row of $A$ is a normalized distribution over permitted key positions for one query. The attended values, output projections, other heads, residual connections and later layers also affect the prediction. [Vaswani et al. (2017)](https://arxiv.org/abs/1706.03762).
 
-The softmax(QK^T / √d_k) matrix contains the attention weights — a probability distribution showing how much each token attends to every other token.
+## Units and assumptions
 
-## What Attention Reveals
+Weights are dimensionless, nonnegative mixing coefficients, not signed contributions to a selected output class. State the model, layer/head, query/key orientation, tokenization and masking. A row sums to one before attention dropout; returned training-mode weights may differ. Averaging heads or layers is a visualization choice that can conceal distinct behavior.
 
-- **Syntactic patterns**: Some heads learn subject-verb agreement or dependency parsing.
-- **Positional patterns**: Some heads attend primarily to adjacent or nearby tokens.
-- **Semantic patterns**: Some heads attend to semantically related tokens.
+## Limitations and interpretation
 
-## Visualization Approaches
+Inspecting a heatmap can generate hypotheses about representation use. High attention alone does not show that a token causes the final decision or is the most important input. Evidence about attention's explanatory usefulness depends on the task and the test: compare [Jain and Wallace (2019)](https://aclanthology.org/N19-1357/) with [Wiegreffe and Pinter (2019)](https://aclanthology.org/D19-1002/).
 
-1. **Single-head heatmap**: A matrix where entry (i,j) shows how much token i attends to token j.
-2. **Multi-head comparison**: Side-by-side heatmaps for different heads, showing each captures different relationships.
-3. **Aggregated attention**: Average or max across heads/layers for a global view.
-
-## Limitations
-
-- Attention ≠ explanation: High attention doesn't necessarily mean high importance for the final prediction.
-- Gradient-based methods (like Integrated Gradients) provide more principled attributions.
-- Attention patterns can be misleading — attending to a token doesn't mean using it for the output.
+For prediction-level claims, test ablations/interventions and appropriate attribution methods, with their own assumptions. Neither agreement with gradients nor an attractive pattern is a universal validation. The [notebook](Attention_visualization.ipynb) visualizes encoder attention; it does not demonstrate faithful natural-language rationales or generative-model reasoning.

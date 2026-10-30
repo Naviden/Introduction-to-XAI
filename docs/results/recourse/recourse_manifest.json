@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "case": "synthetic_training_skill_SCM",
+  "seed": 42,
+  "python": "3.11.16",
+  "numpy": "2.4.6",
+  "pandas": "2.3.3",
+  "action": "increase training up to 4",
+  "immutable": [
+    "debt",
+    "skill residual"
+  ],
+  "structural_equation": "skill = 0.8 * training + residual",
+  "score": "sigmoid(intercept + 0.4*training + 1.2*skill - 0.3*debt)",
+  "threshold": 0.5,
+  "grid_step": 0.05,
+  "intercept_scenarios": [
+    -2.0,
+    -2.15,
+    -2.3
+  ],
+  "factual": {
+    "training": 0.5,
+    "skill": 0.6,
+    "debt": 2.0
+  },
+  "cohort_summary": {
+    "generated_profiles": 100,
+    "initially_rejected": 96,
+    "valid_recourse_rate_among_rejected": 0.8541666666666666,
+    "failure_rate_among_rejected": 0.14583333333333337,
+    "mean_training_cost_among_successes": 1.7118378228930693
+  },
+  "causal_training": 1.75,
+  "scenario_robust_training": 2.0,
+  "causal_cost": 1.25,
+  "scenario_robust_cost": 1.5
+}

@@ -1,111 +1,62 @@
-# SHapley Additive exPlanations (SHAP)
+# How SHAP works
 
-SHapley Additive exPlanations (SHAP) is a method for explaining individual predictions of machine learning models, based on the concept of Shapley values from cooperative game theory. SHAP values provide a way to understand the impact of each feature on the model's output, offering insights into the model's behavior at a granular level. This approach is model-agnostic, meaning it can be applied to any machine learning model.
+**Question:** how can the difference between one model output and a specified reference be allocated among input features?
 
-## 1. Introduction to SHAP
+For a chosen coalition value function $v$, Shapley values satisfy
 
-SHAP leverages the idea of Shapley values, which originated in cooperative game theory to allocate profits (or costs) among players based on their contribution to the total profit (or cost). In the context of machine learning, SHAP values explain the prediction of an instance by quantifying the contribution of each feature to the prediction.
+$$\phi_i=\sum_{S\subseteq N\setminus\{i\}}\frac{|S|!(|N|-|S|-1)!}{|N|!}\,[v(S\cup\{i\})-v(S)],\qquad f(x)=\phi_0+\sum_i\phi_i.$$
 
-## 2. How SHAP Works
+Here $\phi_0=v(\emptyset)$. A coalition is a subset of available features; the definition of a “missing” feature is part of the explanation, not a property of the model alone. Conditional expectations, interventional background samples and tree-path-dependent calculations can allocate credit differently when features depend on each other. TreeExplainer exploits tree structure; other SHAP explainers have different requirements and approximation errors. [Lundberg and Lee (2017)](https://arxiv.org/abs/1705.07874), [TreeExplainer documentation](https://shap.readthedocs.io/en/latest/generated/shap.TreeExplainer.html).
 
-### Step 1: Select Your Instance for Explanation
+## Units and assumptions
 
-Identify the instance $x$ you wish to explain, along with the output from the machine learning model for this instance.
+Fix the target class, output transformation and background before interpreting a plot. Attributions add in the explained output's units: regression response, probability, or logit. A logit attribution is **not** a probability change. The baseline generally is an expected model output under the chosen reference, not necessarily the observed class prevalence or the model intercept. Positive and negative values refer to this specified output and reference.
 
-### Step 2: Decompose the Model Prediction
+## Checked example: an explicit zero-reference game
 
-For a given instance, SHAP decomposes the model prediction into the sum of contributions from each feature. The prediction can be represented as:
+This synthetic logistic model uses glucose, BMI and age only to illustrate arithmetic; it is not a fitted medical model. Define $v(S)$ as the **logit** obtained by setting absent inputs to zero. Zero is unrealistic for these measurements, so this game is useful for calculation rather than clinical interpretation. The following code enumerates every feature order to compute the average marginal contributions.
 
-$$
-f(x) = \phi_0 + \sum_{i=1}^{N} \phi_i
-$$
+<!-- checked-example: shap-logit -->
+```python
+from itertools import permutations
+from math import exp, isclose
 
-where $f(x)$ is the model's prediction for the instance $x$, $N$ is the number of features, $\phi_0$ is the base value (the model's output when no features are present), and $\phi_i$ is the SHAP value or the contribution of feature $i$ to the prediction.
+values = {"glucose": 148.0, "BMI": 33.6, "age": 50.0}
+coefficients = {"glucose": 0.05, "BMI": 0.01, "age": 0.02}
 
-### Step 3: Calculate Shapley Values
+def value(present):
+    return -6.0 + sum(coefficients[name] * values[name] for name in present)
 
-The Shapley value for each feature is calculated by considering all possible subsets of features and the marginal contribution of the feature to the difference between the model prediction with and without the feature.
+orders = list(permutations(values))
+contributions = dict.fromkeys(values, 0.0)
+for order in orders:
+    present = []
+    for name in order:
+        before = value(present)
+        present.append(name)
+        contributions[name] += (value(present) - before) / len(orders)
 
+baseline = value([])
+full_logit = value(list(values))
+assert isclose(baseline + sum(contributions.values()), full_logit)
+print(f"Baseline logit: {baseline:.3f}")
+for name, contribution in contributions.items():
+    print(f"{name}: {contribution:.3f} logit units")
+print(f"Full logit: {full_logit:.3f}")
+print(f"Full probability: {1 / (1 + exp(-full_logit)):.6f}")
+```
+```text
+Baseline logit: -6.000
+glucose: 7.400 logit units
+BMI: 0.336 logit units
+age: 1.000 logit units
+Full logit: 2.736
+Full probability: 0.939118
+```
+<!-- /checked-example -->
 
-##### Shapley Value Formula
-The Shapley value for feature $i$ is given by:
-$$\phi_i = \sum_{S \subseteq N \setminus \lbrace i\rbrace} \frac{|S|! (|N| - |S| - 1)!}{|N|!} [v(S \cup \{i\}) - v(S)]$$
-where:
-- $N$ is the set of all features.
-- $S$ is a subset of features excluding $i$.
-- $|S|$ is the number of features in subset $S$.
-- $|N|$ is the total number of features.
-- $v(S)$ is the prediction value when only the features in subset $S$ are used.
-- $\phi_i$ is the contribution of feature $i$ to the prediction.
+Each feature has the same marginal contribution in every order because the logit is additive. Applying the sigmoid separately to each attribution would destroy additivity. To explain probability instead, define a probability-valued game and recompute its Shapley values.
 
-The above formula is a core component of SHAP and provides a way to fairly allocate the "payout" (or contribution) of each feature in a model's prediction. 
+## Limitations and checks
 
-#### Formula Components:
-1. **Subset $S$ Contribution**: The difference $[v(S \cup \{i\}) - v(S)]$ measures how much adding feature $i$ to the subset $S$ changes the prediction. If the difference is positive, $i$ is enhancing the prediction when added to $S$; if it's negative, $i$ is detracting from it.
-
-2. **Weight of Each Contribution**: The weight $\frac{|S|! (|N| - |S| - 1)!}{|N|!}$ is a crucial part of the Shapley value calculation. It ensures each subset $S$ is weighted appropriately:
-   - $|S|!$ accounts for all possible orders in which the features in $S$ can be arranged.
-   - $(|N| - |S| - 1)!$ counts the permutations of the remaining features in $N$ after $S$ and $i$ have been chosen.
-   - $|N|!$ is the total number of ways to arrange all features in $N$, serving as a normalizing factor to ensure the weights sum to 1.
-
-#### Calculation Procedure:
-The formula calculates the Shapley value by summing over all possible subsets $S$ of $N$ that exclude the feature $i$. For each subset, it computes the change in the prediction caused by adding $i$ to $S$, weighted by the probability of $S$ occurring in the order of features being added to a prediction model.
-
-This approach ensures that the contribution of each feature is fairly evaluated in the context of all possible combinations of other features, reflecting the average marginal effect of including the feature in the model. This method attributes the contribution of each feature to the prediction output in a way that all contributions sum up to the total change in the prediction from the baseline (no features) to the full model.
-
-
-
-### Step 4: Interpret SHAP Values
-
-SHAP values can be interpreted directly as the impact of a feature on the model's prediction. A positive SHAP value indicates that the feature increases the prediction, while a negative value indicates a decrease. The magnitude of the SHAP value reflects the strength of the feature's impact.
-
-
----
-
-### Example: Binary Classification
-
-#### Scenario
-Let's consider a  logistic regression model predicting diabetes likelihood, incorporating the original Shapley value calculations for a more mathematical and comprehensive explanation.
-#### Target Instance
-Details for the individual (Bob):
-- **Glucose Level**: 148
-- **BMI**: 33.6
-- **Age**: 50
-- **Model Prediction Probability**: 0.7 (70% chance of having diabetes).
-
-
-
-#### Setting
-- **Features**: $N = \lbrace\text{Glucose Level}, \text{BMI}, \text{Age}\rbrace$
-- **Prediction Model**: Logistic regression
-  - $\text{logit}(P(\text{Diabetes})) = -6 + 0.05 \times \text{Glucose} + 0.01 \times \text{BMI} + 0.02 \times \text{Age}$
-
-#### Steps to Calculate SHAP for Glucose Level
-1. **Compute the prediction with no features (baseline)**:
-   - $v(\emptyset) = -6$ (logit value with no features).
-
-2. **Compute predictions for each subset including "Glucose Level"**:
-   - **Only Glucose**: $v(\lbrace Glucose \rbrace) = -6 + 0.05 \times 148 = 1.4$
-   - **Glucose + BMI**: $v(\lbrace Glucose, BMI \rbrace) = -6 + 0.05 \times 148 + 0.01 \times 33.6 = 1.436$
-   - **Glucose + Age**: $v(\lbrace Glucose, Age \rbrace) = -6 + 0.05 \times 148 + 0.02 \times 50 = 1.4$
-   - **Glucose + BMI + Age**: $v(\lbrace Glucose, BMI, Age \rbrace) = 1.476$ (full model).
-
-3. **Compute predictions for each subset excluding "Glucose Level"**:
-   - **Only BMI**: $v(\lbrace BMI \rbrace) = -6 + 0.01 \times 33.6 = -5.664$
-   - **Only Age**: $v(\lbrace Age \rbrace) = -6 + 0.02 \times 50 = -5$
-   - **BMI + Age**: $v(\lbrace BMI, Age \rbrace) = -6 + 0.01 \times 33.6 + 0.02 \times 50 = -5.664$
-
-4. **Apply Shapley value formula**:
-   - $\phi_{\text{Glucose}} = \sum_{S \subseteq N \setminus \lbrace Glucose \rbrace} \frac{|S|! (|N|-|S|-1)!}{|N|!} [v(S \cup \lbrace Glucose \rbrace) - v(S)]$
-
-   For "Glucose Level":
-   - Contribution when added alone: $[v(\lbrace Glucose \rbrace) - v(\emptyset)] = [1.4 - (-6)] = 7.4$
-   - Contribution when added to BMI: $[v(\lbrace Glucose, BMI \rbrace) - v(\lbrace BMI \rbrace)] = [1.436 - (-5.664)] = 7.1$
-   - Contribution when added to Age: $[v(\lbrace Glucose, Age \rbrace) - v(\lbrace Age \rbrace)] = [1.4 - (-5)] = 6.4$
-   - Contribution when added to BMI + Age: $[v(\lbrace Glucose, BMI, Age \rbrace) - v(\lbrace BMI, Age \rbrace)] = [1.476 - (-5.664)] = 7.14$
-
-   Calculating the average of these contributions, adjusted for the number of subsets:
-   - $\phi_{\text{Glucose}} = \frac{1}{3} (7.4) + \frac{1}{6} (7.1 + 6.4) + \frac{1}{3} (7.14) = 2.47 + 2.25 + 2.38 = 7.1$
-
-### Explanation
-The SHAP value for "Glucose Level" around 7.1 indicates a significant positive impact on increasing the probability of diabetes prediction, quantifying how much "Glucose Level" pushes the model's prediction toward the higher probability of diabetes compared to the baseline. This calculation takes into account the effect of "Glucose Level" across all possible combinations of features, weighted by the number of features included.
+Additivity checks numerical reconstruction, not causality or explanation usefulness. Background selection, correlated features, feature grouping and masking choices can change results. Compare sensible backgrounds and inspect approximation error. Mean absolute SHAP is a dataset summary of attribution magnitude; it is not a measure of held-out accuracy loss or proof of a feature's real-world effect.

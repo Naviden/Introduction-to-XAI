@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+message: "Please cite this repository and the original method papers when using these examples. Include the commit used in reproducible experiments."
+title: "Introduction to Explainable AI"
+type: software
+authors:
+  - name: "Naviden and contributors"
+repository-code: "https://github.com/Naviden/Introduction-to-XAI"
+url: "https://github.com/Naviden/Introduction-to-XAI"
+abstract: "Executable tutorials, controlled comparisons, and evaluation labs for explainable machine learning. Original code is MIT licensed; original teaching content is CC BY 4.0. Third-party materials retain their own terms."
+keywords:
+  - explainable AI
+  - interpretable machine learning
+  - explanation evaluation

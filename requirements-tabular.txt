@@ -1,0 +1,11 @@
+# Lightweight, CPU-only learning path. No Java or neural frameworks required.
+numpy==2.4.6
+pandas==2.3.3
+scikit-learn==1.9.1
+scipy==1.17.1
+matplotlib==3.11.2
+seaborn==0.13.2
+lime==0.2.0.1
+shap==0.51.0
+notebook==7.6.3
+ipykernel==7.4.0

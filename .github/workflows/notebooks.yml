@@ -19,20 +19,26 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        group: [core, deep, special]
+        group: [foundations, core, neural, image-training, special]
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-python@v7
         with:
           python-version: '3.11'
           cache: pip
-          cache-dependency-path: requirements*.txt
+          cache-dependency-path: |
+            requirements*.txt
+            requirements*.lock
       - uses: actions/setup-java@v6
         if: matrix.group == 'special'
         with:
           distribution: temurin
           java-version: '21'
-      - name: Install dependencies
+      - name: Install lightweight dependencies
+        if: matrix.group == 'foundations'
+        run: python -m pip install --require-hashes -r requirements-tabular-linux.lock
+      - name: Install full dependencies
+        if: matrix.group != 'foundations'
         run: |
           python -m pip install --upgrade pip
           python -m pip install torch==2.14.1 --index-url https://download.pytorch.org/whl/cpu
@@ -47,6 +53,15 @@ jobs:
       - name: Numerical regression tests
         if: matrix.group == 'core'
         run: python -m pytest -q
+      - name: Check worked mathematics and documentation links
+        if: matrix.group == 'core'
+        run: |
+          python scripts/check_worked_examples.py
+          python scripts/check_links.py
+      - name: Verify lightweight profile
+        if: matrix.group == 'foundations'
+        run: |
+          python -c "import importlib.util; assert importlib.util.find_spec('torch') is None; assert importlib.util.find_spec('tensorflow') is None"
       - name: Execute notebooks
         run: python scripts/check_notebooks.py --group ${{ matrix.group }} --output-dir validation/executed
       - name: Save execution results
@@ -58,4 +73,4 @@ jobs:
             validation/executed/
             validation/structure/results.json
           if-no-files-found: warn
-          retention-days: 7
+          retention-days: 30
