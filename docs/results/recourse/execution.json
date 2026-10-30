@@ -4,6 +4,6 @@
   "source_sha256": "297ed674b11af52b93e61aea5cd23793e82f336857ee2c279d24972d990ce430",
   "local_dependencies": {},
   "status": "passed",
-  "executed_sha256": "35c0149bc2cf964026766663349a539b2d6bdf2e7f936af57158ecfcccc8d93e",
-  "seconds": 1.33
+  "executed_sha256": "5529c2b2e8dd8074fa5c434df3301e1fc6f2c4a9a1a730642a453196723abe75",
+  "seconds": 0.89
 }

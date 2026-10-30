@@ -3,9 +3,10 @@
   "mode": "execute",
   "source_sha256": "2263fe509487384784034f2a51a58e511887fb07eccc4ec7c005de21c3355737",
   "local_dependencies": {
-    "Tools/Evaluation_examples/evaluation_helpers.py": "8295a5eda6c8e3a07ef44df1ada0cb3078e52c68ed1e43fd41e1d34a078dbf23"
+    "Tools/Evaluation_examples/evaluation_helpers.py": "8295a5eda6c8e3a07ef44df1ada0cb3078e52c68ed1e43fd41e1d34a078dbf23",
+    "Tools/Evaluation_examples/regression_helpers.py": "046e2cfc27c8170330cdc0ab61fca7f0aad1ddc67cef629a2c0e519a3ab1032e"
   },
   "status": "passed",
-  "executed_sha256": "195b870ec5dbfb17b9614a81105b7339dc4d5532683632ef5dea36686202eb54",
-  "seconds": 8.81
+  "executed_sha256": "0e647b69f03b5fc47b6f12cae2fd5929af0bba14a85440271b6c6aa7b1973de3",
+  "seconds": 6.47
 }

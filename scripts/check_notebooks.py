@@ -44,9 +44,14 @@ DEEP |= NEURAL_COMPARISONS
 
 def local_dependencies(path):
     """Fingerprint notebook-local Python helpers, including newly added files."""
-    return {p.relative_to(ROOT).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
+    dependencies = {p.relative_to(ROOT).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
             for p in sorted(path.parent.rglob("*.py"))
             if not any(part in {"__pycache__", "results", "logs"} for part in p.parts)}
+
+    if "xai_assets" in path.read_text():
+        for relative in ("xai_assets.py", "assets/manifest.json"):
+            dependencies[relative] = hashlib.sha256((ROOT / relative).read_bytes()).hexdigest()
+    return dependencies
 
 
 def notebook_paths(group="all"):

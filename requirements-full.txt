@@ -1,0 +1,5 @@
+# Every notebook and validation tool, including optional MERLIN dependencies.
+# H2O additionally needs Java 21, installed outside Python.
+-r requirements.txt
+-r requirements-merlin.txt
+-r requirements-validation.txt

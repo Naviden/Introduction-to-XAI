@@ -1,8 +1,10 @@
 # Introduction to Explainable AI
 
-Practical Jupyter notebooks for understanding and comparing explainable AI methods:
-LIME, SHAP, Anchors, Grad-CAM, Integrated Gradients, ALE, DiCE, RuleFit, MERLIN,
-partial dependence, and feature importance.
+An executable XAI learning and reference collection for researchers and practitioners.
+Choose a method, understand its assumptions, compare explanations on shared cases,
+evaluate their limitations, and adapt the workflow to your own model and data.
+The collection includes worked theory, reproducible notebooks, research protocols,
+student exercises and separate instructor materials.
 
 ## Example outputs
 
@@ -35,6 +37,24 @@ Grad-CAM highlights image regions contributing to VGG16's selected class score.
 The heatmap describes this model's response; it is not an object segmentation.
 [Try the Grad-CAM example →](Tools/GradCAM_examples/GradCAM_example.ipynb)
 
+### One review, several explanatory questions
+
+![Signed word-level results for one fixed negative-class text score: TF-IDF coordinate contributions, SHAP, LIME and word deletion](docs/images/shared-text-attributions.png)
+
+The model, review and target stay fixed. The panels use different definitions,
+so matching signs or similar bars do not establish equivalent explanations.
+[Read the text comparison](docs/executed/Tools/TextComparison_examples/Shared_Text_Comparison.ipynb)
+or [run its source](Tools/TextComparison_examples/Shared_Text_Comparison.ipynb).
+
+### The model can differ from the generating mechanism
+
+![Mean absolute Shapley values for a known synthetic function and a fitted forest, including a correlated proxy used by the forest](docs/images/generating-function-vs-model.png)
+
+The fitted forest uses a correlated proxy that the known synthetic function does
+not directly use. Explaining the forest accurately is different from recovering
+that function. [Read the regression benchmark](docs/executed/Tools/Evaluation_examples/Regression_Benchmark.ipynb)
+or [run its source](Tools/Evaluation_examples/Regression_Benchmark.ipynb).
+
 ## Start here
 
 Learn to **choose, run, evaluate and adapt** an explanation. The first path uses
@@ -66,24 +86,30 @@ include raw measurements and assumptions. Source notebooks remain easy to edit.
 | --- | --- |
 | **Beginner** | [Basics](Theory/Basics.ipynb) → [explanation dimensions](Theory/Dimensions.ipynb) → [lightweight starter](Tools/Starter_examples/First_XAI_Comparison.ipynb) → [method-selection guide](docs/METHOD_GUIDE.md). Basics includes a neural example requiring the full environment; the starter is independent. |
 | **Practitioner** | [Interpretable models](Tools/InterpretableModels_examples/Interpretable_Models_Comparison.ipynb) → [mixed-data workflow](Tools/PracticalWorkflow_examples/Mixed_Data_Workflow.ipynb) → [evaluation protocol](docs/EVALUATION.md) → [causal recourse](Tools/CausalRecourse_examples/Causal_Recourse.ipynb). |
-| **Researcher** | [Evaluation and sensitivity lab](Tools/Evaluation_examples/Evaluation_and_Sensitivity.ipynb) → [complete tabular comparison](Tools/MethodComparison_examples/Shared_Tabular_Case_Comparison.ipynb) → [shared image comparison](Tools/NeuralComparison_examples/Shared_Image_Attribution.ipynb) → [reproducibility](docs/REPRODUCIBILITY.md). |
+| **Researcher** | [Evaluation and sensitivity lab](Tools/Evaluation_examples/Evaluation_and_Sensitivity.ipynb) → [regression benchmark](Tools/Evaluation_examples/Regression_Benchmark.ipynb) → [shared image](Tools/NeuralComparison_examples/Shared_Image_Attribution.ipynb) and [text](Tools/TextComparison_examples/Shared_Text_Comparison.ipynb) comparisons → [human-study design](docs/HUMAN_STUDY.md). |
+| **Teacher / learner** | [Core exercises](Practice/Core_XAI_Exercises.ipynb) → [separate instructor solutions](Practice/Instructor/Core_XAI_Solutions.ipynb) and [rubric](Practice/Instructor/Core_XAI_Rubric.md). The student TODO cells remain intentionally unfinished. |
 
 ## Core comparisons and laboratories
 
 | Notebook | What you learn | Environment |
 | --- | --- | --- |
 | [First XAI comparison](Tools/Starter_examples/First_XAI_Comparison.ipynb) | Permutation, SHAP and LIME for one forest/case, including local approximation error | Tabular |
-| [Interpretable models](Tools/InterpretableModels_examples/Interpretable_Models_Comparison.ipynb) | Logistic regression, a small tree, an additive spline GAM and a forest; exact intrinsic decompositions and held-out performance | Tabular |
+| [Interpretable models](Tools/InterpretableModels_examples/Interpretable_Models_Comparison.ipynb) · [read outputs](docs/executed/Tools/InterpretableModels_examples/Interpretable_Models_Comparison.ipynb) | Logistic regression, tree, spline GAM, native EBM with/without interactions and a forest; exact term/logit reconstruction | Tabular (`interpret-core`, no dashboard extras) |
 | [Evaluation and sensitivity](Tools/Evaluation_examples/Evaluation_and_Sensitivity.ipynb) | Repeated cases/seeds, correlated features, background/masking sensitivity, random controls and a misleading-shortcut example | Tabular |
+| [Regression benchmark](Tools/Evaluation_examples/Regression_Benchmark.ipynb) · [read outputs](docs/executed/Tools/Evaluation_examples/Regression_Benchmark.ipynb) | Three tasks, five repeats each, presampled cases, SHAP Exact/LIME, independent numerical reference, random controls, measured time/calls/traced allocations | Tabular |
 | [Mixed-data workflow](Tools/PracticalWorkflow_examples/Mixed_Data_Workflow.ipynb) | Missing values, unknown categories, preprocessing, original-feature grouping and adapting your own model/data | Tabular |
 | [Causal recourse](Tools/CausalRecourse_examples/Causal_Recourse.ipynb) | Prediction-flipping inputs versus feasible interventions under an explicit synthetic causal model | Tabular |
-| [Shared image attribution](Tools/NeuralComparison_examples/Shared_Image_Attribution.ipynb) | Gradients, input×gradient, IG, SmoothGrad, occlusion, Grad-CAM, SHAP and LIME for one digits CNN/class/image | Full; no data/model download |
+| [Shared image attribution](Tools/NeuralComparison_examples/Shared_Image_Attribution.ipynb) · [read outputs](docs/executed/Tools/NeuralComparison_examples/Shared_Image_Attribution.ipynb) | Gradients, input×gradient, IG, DeepLIFT Rescale, ε-LRP, SmoothGrad, occlusion, Grad-CAM, SHAP and LIME on one digits CNN/target | Neural or full; no data/model download |
+| [Shared text comparison](Tools/TextComparison_examples/Shared_Text_Comparison.ipynb) · [read outputs](docs/executed/Tools/TextComparison_examples/Shared_Text_Comparison.ipynb) | One TF-IDF classifier and word-deletion protocol for SHAP, LIME, occlusion and Anchors; cohort and stability checks | Tabular + `anchor-exp==0.0.2.0`, or neural/full; bundled reviews |
 | [Complete shared tabular case](Tools/MethodComparison_examples/Shared_Tabular_Case_Comparison.ipynb) | Importance, response curves, local attributions, rules, counterfactuals and model comparisons | Full + MERLIN + Java |
 
 The complete tabular case mostly explains one forest. IG uses a separate neural
 model, and RuleFit/tree sections fit explanatory surrogates. Their output scales
 and meanings differ. The laboratories preserve failed or weak explanations and
-explain what their diagnostics can—and cannot—establish.
+explain what their diagnostics can—and cannot—establish. DeepLIFT and LRP use
+explicit rules and report reconstruction/relevance residuals; they do not claim
+coverage of every variant. Regression cost records distinguish public prediction
+calls from arithmetic work and traced allocations from total process memory.
 
 ## Individual methods
 
@@ -93,16 +119,22 @@ explain what their diagnostics can—and cannot—establish.
 | Importance and response curves | [Importance comparison](Tools/FeatureImportanceComparison_examples/FeatureImportanceComparison.ipynb), [permutation](Tools/PermutationImportance_examples/PermutationImportance_example.ipynb), [PDP/ICE](Tools/Visual%20Explanation_example/PDP_ICE.ipynb), [ALE](Tools/ALE_examples/ALE_example.ipynb) |
 | Rules and counterfactuals | [Text Anchors](Tools/ANCHOR_examples/Anchor_tabular.ipynb) (historical filename), [DiCE](Tools/DiCE_examples/DiCE_example.ipynb), [RuleFit](Tools/RuleFit_examples/RuleFit_example.ipynb), [MERLIN](Tools/Merlin_examples/20NG_example.ipynb) |
 | Neural and specialized | [Integrated Gradients](Tools/IntegratedGradients_examples/IntegratedGradients_example.ipynb), [Grad-CAM](Tools/GradCAM_examples/GradCAM_example.ipynb), [attention](Tools/Attention_examples/Attention_visualization.ipynb), [survival SHAP](Tools/SHAP_examples/SHAP_survival_model.ipynb) |
-| Practice | [Student LIME exercise](Practice/LIME_Practice_Notebook_student.ipynb), intentionally unfinished |
+| Practice | [Core exercises](Practice/Core_XAI_Exercises.ipynb) · [read template](docs/executed/Practice/Core_XAI_Exercises.ipynb); [instructor solutions](Practice/Instructor/Core_XAI_Solutions.ipynb) · [read solutions](docs/executed/Practice/Instructor/Core_XAI_Solutions.ipynb); [LIME student exercise](Practice/LIME_Practice_Notebook_student.ipynb). Student TODO cells are intentionally unfinished. |
 
 The method folders include corrected mathematical introductions with primary
 references. SHAP, LIME and RuleFit numerical examples are checked automatically.
+For evaluation involving people, [the human-study materials](docs/HUMAN_STUDY.md)
+provide a protocol, preregistration, participant-information draft and reporting
+template. These are study-design materials; no participants or empirical human
+study results are claimed.
+
 See [coverage boundaries and selection criteria](docs/METHOD_GUIDE.md) and the
 [roadmap](docs/ROADMAP.md) for remaining families and research extensions.
 
 ## Full environment and optional tools
 
-Use **Python 3.11** on Linux or Apple silicon macOS 14+. The pinned full neural
+Use **Python 3.11**. Resolved profiles target **Apple silicon macOS 14+** and
+**Linux x86-64 with glibc 2.28+**; Linux locks select CPU PyTorch. The pinned full neural
 packages do not support Intel Macs; Windows has not been validated. Versions are
 a tested compatible set, not a promise about every newer release.
 
@@ -113,12 +145,19 @@ a tested compatible set, not a promise about every newer release.
 python -m pip install -r requirements.txt
 ```
 
+Profiles and hash-checked transitive lockfiles cover tabular, neural and full
+stacks; [the reproducibility guide](docs/REPRODUCIBILITY.md) lists installation
+commands and platform limits. `requirements-full.txt` includes MERLIN and test
+tools. **Java 21 is an external prerequisite**, outside Python lockfiles.
+
 The full profile includes TensorFlow and PyTorch because examples use both.
-Older examples download public datasets or model weights on first use. No GPU
-is required. The new foundations and digits comparison work offline after package
-installation. [Provenance](docs/PROVENANCE.md) records sources and remaining asset
-versioning limits. Explanations describe model behavior; causal claims require
-additional assumptions.
+The new foundations, digits comparison and bundled-review text comparison run
+offline after installing their packages. Older examples need public data or model
+weights on first use. [The asset guide](docs/ASSETS.md) explains the registered
+checksums, immutable Hugging Face revisions, cache preparation and offline
+verification. A verified file download may not populate a library's native cache.
+[Provenance](docs/PROVENANCE.md) records source and reuse information. Explanations
+describe model behavior; causal claims require additional assumptions.
 
 **RuleFit** requires Java (tested with Java 21). Its H2O server uses two threads
 and up to 2 GB heap; notebooks shut down only servers they start.
@@ -163,15 +202,19 @@ are unchanged. Use `--notebook PATH`, `--output-dir PATH`, `--cache-dir PATH`, o
 `--timeout SECONDS` (per cell; default 1200).
 
 Groups are `foundations`, `core`, `deep`, and `special`; `neural` and
-`image-training` split `deep` for CI. CI uses the locked lightweight installation
-for foundations and the full environment elsewhere. It checks worked examples,
-local document links, notebook schemas, numerical regressions and execution.
+`image-training` split `deep` for CI. CI uses the tabular lock for foundations,
+the neural lock for neural/image-training, and the full lock for core/special.
+It checks worked examples,
+local document links, notebook schemas, numerical regressions, asset verification
+and execution.
 Artifacts are retained for 30 days; committed reading copies/results are durable.
+See the [recorded local validation](docs/validation-records/README.md) for the tested
+notebooks, dependency environment and execution receipts.
 
 Supported caches are redirected to `validation/cache`. SHAP also uses its package
 cache, DiCE may save `adult.zip`, and MERLIN creates local logs/results. These are
-ignored by Git. The student exercise is validated as a template, not graded as a
-completed solution. See [the reproduction and publication commands](docs/REPRODUCIBILITY.md).
+ignored by Git. Student exercises are validated as templates, not graded as
+completed solutions; instructor solutions execute their own checks. See [the reproduction and publication commands](docs/REPRODUCIBILITY.md).
 
 ## Contributing and reuse
 
@@ -184,5 +227,7 @@ example, assumptions, interpretation, validation, failure case and primary sourc
 **Original code is [MIT licensed](LICENSE); original teaching text and figures are
 [CC BY 4.0](LICENSE-CONTENT.md).** Both permit free reuse, including commercial use,
 subject to their terms. Third-party materials retain their own licenses and
-attribution requirements; see [provenance](docs/PROVENANCE.md). Please cite the
+attribution requirements; see [provenance](docs/PROVENANCE.md). Some historical
+third-party data/image redistribution grants remain unverified. Content hashes
+identify assets; they do not grant redistribution rights. Please cite the
 repository using [CITATION.cff](CITATION.cff) and credit the original method papers.

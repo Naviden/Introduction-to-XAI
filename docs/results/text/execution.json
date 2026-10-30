@@ -1,0 +1,13 @@
+{
+  "notebook": "Tools/TextComparison_examples/Shared_Text_Comparison.ipynb",
+  "mode": "execute",
+  "source_sha256": "afbc48549cb5a22cb03f25ef814b5fcf1782838417aa5408f4ac6e1a2983c5bf",
+  "local_dependencies": {
+    "Tools/TextComparison_examples/text_helpers.py": "2a7db35bd084b158513969cf677f246b7dd4d1414f48dae13ce645d826bb4192",
+    "xai_assets.py": "409c87c6764b50b8491de360339e31a9b88f7193cf0689b7d40d7018ec11752d",
+    "assets/manifest.json": "aad280fb65152ec97b244f724dfa31eb78dff8ace50779fddeaefbc39c2d9adf"
+  },
+  "status": "passed",
+  "executed_sha256": "fd7e90278bda0bd9c358cc6277dbc2748f9a3b3b9a9ef262ae067593c6c51523",
+  "seconds": 5.84
+}

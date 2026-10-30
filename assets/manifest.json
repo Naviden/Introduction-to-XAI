@@ -1,0 +1,190 @@
+{
+  "schema_version": 1,
+  "files": {
+    "nhanesi_X": {
+      "url": "https://raw.githubusercontent.com/shap/shap/fc3e290e97ce12f76d1175d24c6e3023b4ca7d69/data/NHANESI_X.csv",
+      "filename": "NHANESI_X.csv",
+      "sha256": "0fa1e524900008da254c365b501c96768e55b94858fdc4045886d887654a1ba8",
+      "terms_reference": "https://github.com/shap/shap/blob/fc3e290e97ce12f76d1175d24c6e3023b4ca7d69/shap/datasets.py",
+      "notes": "SHAP-packaged teaching data; underlying data/image terms are distinct from the code license."
+    },
+    "nhanesi_y": {
+      "url": "https://raw.githubusercontent.com/shap/shap/fc3e290e97ce12f76d1175d24c6e3023b4ca7d69/data/NHANESI_y.csv",
+      "filename": "NHANESI_y.csv",
+      "sha256": "70c8d6ab022e7b080752b339ee8edc991f2fd203c294b5ca55b36bcb902aab93",
+      "terms_reference": "https://github.com/shap/shap/blob/fc3e290e97ce12f76d1175d24c6e3023b4ca7d69/shap/datasets.py",
+      "notes": "SHAP-packaged teaching data; underlying data/image terms are distinct from the code license."
+    },
+    "imagenet50_images": {
+      "url": "https://raw.githubusercontent.com/shap/shap/fc3e290e97ce12f76d1175d24c6e3023b4ca7d69/data/imagenet50_224x224.npy",
+      "filename": "imagenet50_224x224.npy",
+      "sha256": "7027529080119f98d72abab00865814348a550afc32defbca6eef9b336dec45d",
+      "terms_reference": "https://github.com/shap/shap/blob/fc3e290e97ce12f76d1175d24c6e3023b4ca7d69/shap/datasets.py",
+      "notes": "SHAP-packaged teaching data; underlying data/image terms are distinct from the code license."
+    },
+    "imagenet50_labels": {
+      "url": "https://raw.githubusercontent.com/shap/shap/fc3e290e97ce12f76d1175d24c6e3023b4ca7d69/data/imagenet50_labels.csv",
+      "filename": "imagenet50_labels.csv",
+      "sha256": "147c2226a3c7b55ff807009f23979e09838c0f34b2bfe2b0fa35024624cfcb31",
+      "terms_reference": "https://github.com/shap/shap/blob/fc3e290e97ce12f76d1175d24c6e3023b4ca7d69/shap/datasets.py",
+      "notes": "SHAP-packaged teaching data; underlying data/image terms are distinct from the code license."
+    },
+    "titanic_seaborn": {
+      "url": "https://raw.githubusercontent.com/mwaskom/seaborn-data/71e2436a092d714350de0fc409ca8a8714e7e78f/titanic.csv",
+      "filename": "titanic.csv",
+      "sha256": "81787d320d7f7b03df935e91de8bd19e11d45c5bbcab86ef4d4a76dc91b7d4f2",
+      "terms_reference": "https://github.com/mwaskom/seaborn-data",
+      "notes": "Exact seaborn example dataset bytes; separate from the H2O variant."
+    },
+    "titanic_h2o": {
+      "url": "https://s3.amazonaws.com/h2o-public-test-data/smalldata/gbm_test/titanic.csv",
+      "filename": "titanic.csv",
+      "sha256": "2cb4b71fa885a52f1c222437ba07669c6d2f403af9aa7b18275ddd92afb92d17",
+      "terms_reference": "https://github.com/h2oai/h2o-3",
+      "notes": "Content fixed by SHA-256 even though endpoint itself is mutable."
+    },
+    "merlin_20news": {
+      "url": "https://raw.githubusercontent.com/Crisp-Unimib/MERLIN/5accc404e41ab50c4238cbafacaf875abe071193/tests/test_data/20newsgroups.zip",
+      "filename": "20newsgroups.zip",
+      "sha256": "c6760fe61dbb6f8b5c065d1a2032b416ddbb1f3bbd44f6ccf44610cdc6c11a62",
+      "terms_reference": "https://github.com/Crisp-Unimib/MERLIN",
+      "notes": "Authors test archive; original 20 Newsgroups text is third-party material."
+    },
+    "adult_zip": {
+      "url": "https://archive.ics.uci.edu/static/public/2/adult.zip",
+      "filename": "adult.zip",
+      "sha256": "7537312dd56c2b98035880805ce99e68183a30ee468aa5329d6df0fbb3cc21bb",
+      "terms_reference": "https://archive.ics.uci.edu/dataset/2/adult",
+      "notes": "Read the UCI dataset terms; code preparation is adapted from DiCE."
+    },
+    "vgg16_weights": {
+      "url": "https://storage.googleapis.com/tensorflow/keras-applications/vgg16/vgg16_weights_tf_dim_ordering_tf_kernels.h5",
+      "filename": "vgg16_weights_tf_dim_ordering_tf_kernels.h5",
+      "sha256": "8b81f25be4126c5ec088f19901b2b34e9a40e3d46246c9d208a3d727462b4f5c",
+      "terms_reference": "https://keras.io/api/applications/",
+      "notes": "Keras-provided ImageNet model/label asset, checked by content hash."
+    },
+    "resnet50_weights": {
+      "url": "https://storage.googleapis.com/tensorflow/keras-applications/resnet/resnet50_weights_tf_dim_ordering_tf_kernels.h5",
+      "filename": "resnet50_weights_tf_dim_ordering_tf_kernels.h5",
+      "sha256": "7011d39ea4f61f4ddb8da99c4addf3fae4209bfda7828adb4698b16283258fbe",
+      "terms_reference": "https://keras.io/api/applications/",
+      "notes": "Keras-provided ImageNet model/label asset, checked by content hash."
+    },
+    "imagenet_classes": {
+      "url": "https://storage.googleapis.com/download.tensorflow.org/data/imagenet_class_index.json",
+      "filename": "imagenet_class_index.json",
+      "sha256": "a1e7a966a1f601d39e4b43e119b3e7dd4a2ad3ea08cf69847cbaf021013767bc",
+      "terms_reference": "https://keras.io/api/applications/",
+      "notes": "Keras-provided ImageNet model/label asset, checked by content hash."
+    },
+    "cifar10_archive": {
+      "url": "https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz",
+      "filename": "cifar-10-python.tar.gz",
+      "sha256": "6d958be074577803d12ecdefd02955f39262c83c16fe9348329d7fe0b5c001ce",
+      "terms_reference": "https://www.cs.toronto.edu/~kriz/cifar.html",
+      "notes": "Keras also verifies this SHA-256 on its native download; decoded arrays are checked by the notebook."
+    },
+    "california_archive": {
+      "url": "https://ndownloader.figshare.com/files/5976036",
+      "filename": "cal_housing.tgz",
+      "sha256": "aaa5c9a6afe2225cc2aed2723682ae403280c4a3695a2ddda4ffb5d8215ea681",
+      "terms_reference": "https://scikit-learn.org/stable/datasets/real_world.html#california-housing-dataset",
+      "notes": "scikit-learn archive URL/checksum; decoded cached arrays are independently checked."
+    },
+    "newsgroups_archive": {
+      "url": "https://ndownloader.figshare.com/files/5975967",
+      "filename": "20news-bydate.tar.gz",
+      "sha256": "8f1b2514ca22a5ade8fbb9cfa5727df95fa587f4c87b786e15c759fa66d95610",
+      "terms_reference": "http://qwone.com/~jason/20Newsgroups/",
+      "notes": "scikit-learn archive URL/checksum; decoded cached train/test documents are independently checked."
+    },
+    "bike_arff": {
+      "url": "https://openml.org/data/v1/download/22044627/Bike_Sharing_Demand.arff",
+      "filename": "Bike_Sharing_Demand.arff",
+      "sha256": "24c7f663c80a0f0820f92b00fbc76d63c66aac4a133164ce51513a6a8bbb8cd6",
+      "terms_reference": "https://www.openml.org/search?type=data&id=42712",
+      "notes": "OpenML dataset ID42712/version2/file22044627; decoded table is independently checked."
+    }
+  },
+  "huggingface": {
+    "bert_attention": {
+      "repo_id": "google-bert/bert-base-uncased",
+      "revision": "86b5e0934494bd15c9632b12f734a8a67f723594",
+      "files": {
+        "config.json": "7160e1553ad2ca51d8c1cb066be533db31826e12d173824c1bb0cb1a4f187d20",
+        "model.safetensors": "68d45e234eb4a928074dfd868cead0219ab85354cc53d20e772753c6bb9169d3",
+        "tokenizer.json": "ce64fce797c24f68df90b40a3f74f579b336a493db14bd583fd520ea0d8c9a98",
+        "tokenizer_config.json": "a025160ef0431f1a392f6f050c1310f4c5d9fb6f275932dbccba73c4d214bf10",
+        "vocab.txt": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3"
+      },
+      "terms_reference": "https://huggingface.co/google-bert/bert-base-uncased/blob/86b5e0934494bd15c9632b12f734a8a67f723594/README.md"
+    },
+    "distilbert_sentiment": {
+      "repo_id": "distilbert/distilbert-base-uncased-finetuned-sst-2-english",
+      "revision": "714eb0fa89d2f80546fda750413ed43d93601a13",
+      "files": {
+        "config.json": "582122c8f414793d131e10022ce9ba04e3811a9da6389137ee2f18665b4f4d15",
+        "model.safetensors": "7c3919835e442510166d267fe7cbe847e0c51cd26d9ba07b89a57b952b49b8aa",
+        "tokenizer_config.json": "5ab9097b4149371c5fd52b2d6e26cb6f9c07c0d19fcfdda895b1adad6b57c3e0",
+        "vocab.txt": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3"
+      },
+      "terms_reference": "https://huggingface.co/distilbert/distilbert-base-uncased-finetuned-sst-2-english/blob/714eb0fa89d2f80546fda750413ed43d93601a13/README.md"
+    },
+    "distilbert_anchor": {
+      "repo_id": "distilbert-base-cased",
+      "revision": "6ea81172465e8b0ad3fddeed32b986cdcdcffcf0",
+      "files": {
+        "config.json": "165376e2c837d836c75ae30fde8c5569beb3ed7325b7473c18a76e4608cdec22",
+        "model.safetensors": "64080c2b1998c3bd1214311ab9f1e97b40052fa81d508b8b534a936c4ba1626b",
+        "tokenizer.json": "5b3360be30cdf39081153cf9d30bfb0503c011462fc9f77f097127c83ef0f4d9",
+        "tokenizer_config.json": "0f6d13e6f4da6f9e24f22ada6bc3be571123d858d7c0c05a8a7cd55a9c23c2e8",
+        "vocab.txt": "eeaa9875b23b04b4c54ef759d03db9d1ba1554838f8fb26c5d96fa551df93d02"
+      },
+      "terms_reference": "https://huggingface.co/distilbert-base-cased/blob/6ea81172465e8b0ad3fddeed32b986cdcdcffcf0/README.md"
+    }
+  },
+  "decoded_datasets": {
+    "california": {
+      "sha256": "b2438d8bdfff3144d3c93f93615f6db305d1c6ef8b07a710efd58b7ea5e724db",
+      "source": "california_archive",
+      "representation": "data matrix, target array"
+    },
+    "newsgroups_train": {
+      "sha256": "90da141299e880f27702b6a247933ed183c6cd63ea9f7c419441c00653081051",
+      "source": "newsgroups_archive",
+      "representation": "ordered raw documents, target array; headers/footers/quotes retained"
+    },
+    "newsgroups_test": {
+      "sha256": "29b19f4f2b4641dad1cf3b04445466c9e2a0353fb7c76ab1309fbfbdabfcdf4f",
+      "source": "newsgroups_archive",
+      "representation": "ordered raw documents, target array; headers/footers/quotes retained"
+    },
+    "bike_sharing": {
+      "sha256": "e601fbe2f974f415197042aca1b4ce859753fcf781d2d9338ea73eaae54db6e0",
+      "source": "bike_arff",
+      "representation": "full ordered feature DataFrame and target Series, before subsampling"
+    },
+    "cifar10": {
+      "sha256": "09af8e09475b1ad3373d5887ce8f48f03e16f0ca1727e1e503acef77c7efb3c1",
+      "source": "cifar10_archive",
+      "representation": "uint8 NHWC training images/labels and test images/labels, before scaling"
+    }
+  },
+  "bundled": {
+    "polarity_negative": {
+      "path": "Tools/ANCHOR_examples/rt-polaritydata/rt-polarity.neg",
+      "sha256": "4af43bf489620b498a0852c5a8c6a535155dec7985fdfea782b8f7756b957ccc",
+      "source": "https://www.cs.cornell.edu/people/pabo/movie-review-data/",
+      "version": "sentence polarity v1.0 (2005)",
+      "terms": "Original corpus terms apply; not covered by repository MIT/CC BY grants."
+    },
+    "polarity_positive": {
+      "path": "Tools/ANCHOR_examples/rt-polaritydata/rt-polarity.pos",
+      "sha256": "d79ef14009bbf87cd6be21f91c3ea1a3cbcb73b34dfb4231aef7bbcd7677abc4",
+      "source": "https://www.cs.cornell.edu/people/pabo/movie-review-data/",
+      "version": "sentence polarity v1.0 (2005)",
+      "terms": "Original corpus terms apply; not covered by repository MIT/CC BY grants."
+    }
+  }
+}

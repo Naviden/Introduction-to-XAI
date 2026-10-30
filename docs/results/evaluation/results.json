@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "study": "Synthetic XAI evaluation and sensitivity",
-  "git_commit": "55ceba77b45708972a0ed792a0faa4bd0b8b78c4",
+  "git_commit": "f8cd64fa7b86af6b56c3be546206452c558f4333",
   "git_dirty": true,
   "source_sha256": {
     "Evaluation_and_Sensitivity.ipynb": "2263fe509487384784034f2a51a58e511887fb07eccc4ec7c005de21c3355737",

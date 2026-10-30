@@ -17,22 +17,26 @@ sources used in an experiment.
 | Handwritten digits | Shared image comparison | Bundled scikit-learn digits; [UCI optical digits](https://archive.ics.uci.edu/dataset/80/optical+recognition+of+handwritten+digits); 8×8 reduced benchmark images |
 | California housing | ALE | Downloaded via scikit-learn; [dataset documentation](https://scikit-learn.org/stable/datasets/real_world.html#california-housing-dataset) |
 | Titanic | LIME tabular and H2O RuleFit | Separate [seaborn example dataset](https://github.com/mwaskom/seaborn-data) and [H2O example data](https://github.com/h2oai/h2o-3); do not assume identical rows/preprocessing |
-| Adult income | DiCE | Downloaded by DiCE's helper; [UCI Adult source and terms](https://archive.ics.uci.edu/dataset/2/adult) |
-| Bike Sharing Demand, OpenML version 2 | PDP/ICE | Downloaded via OpenML; notebook explicitly selects version 2; [UCI original](https://archive.ics.uci.edu/dataset/275/bike+sharing+dataset) |
+| Adult income | DiCE | Verified UCI archive; preparation adapted from DiCE 0.12; [UCI Adult source and terms](https://archive.ics.uci.edu/dataset/2/adult) |
+| Bike Sharing Demand, OpenML version 2 | PDP/ICE | Downloaded via OpenML; notebook selects dataset ID 42712 (version 2) and checks decoded content; [UCI original](https://archive.ics.uci.edu/dataset/275/bike+sharing+dataset) |
 | CIFAR-10 | LIME image | Keras downloader; [original dataset and citation](https://www.cs.toronto.edu/~kriz/cifar.html); notebook uses a stratified teaching subset and original test partition |
 | 20 Newsgroups | LIME text and MERLIN | [Original collection](http://qwone.com/~jason/20Newsgroups/); scikit-learn partitions for LIME, a [MERLIN test archive](https://github.com/Crisp-Unimib/MERLIN/tree/main/tests/test_data) for MERLIN. These are different loaders/samples |
-| Movie-review polarity snippets | Anchors, bundled `rt-polaritydata` | Pang & Lee, [Cornell polarity dataset](https://www.cs.cornell.edu/people/pabo/movie-review-data/); 5,331 positive and 5,331 negative Latin-1 snippets. Retain source citation; not relicensed as original prose |
-| NHANES I and 50 ImageNet examples | SHAP survival and image | SHAP's dataset loaders; [SHAP dataset source](https://github.com/shap/shap/blob/master/shap/datasets.py) identifies downloads. Loader versions do not replace underlying data terms |
+| Movie-review polarity snippets | Anchors and shared text comparison; bundled `rt-polaritydata` | Pang & Lee, [Cornell polarity dataset](https://www.cs.cornell.edu/people/pabo/movie-review-data/); 5,331 positive and 5,331 negative Latin-1 snippets. Retain source citation; not relicensed as original prose |
+| NHANES I and 50 ImageNet examples | SHAP survival and image | Commit-pinned, checksummed files originally packaged by SHAP; [SHAP dataset source](https://github.com/shap/shap/blob/master/shap/datasets.py) identifies downloads. Loader versions do not replace underlying data terms |
 | Chelsea cat photograph | Grad-CAM and README gallery | `skimage.data.chelsea`, Stefan van der Walt, CC0; [scikit-image sample documentation](https://scikit-image.org/docs/stable/api/skimage.data.html#skimage.data.chelsea) |
-| BERT / DistilBERT weights and tokenizers | Attention, text SHAP and Anchors | Downloaded by Transformers/Anchor. Refer to each Hugging Face model card and revision; these are not original repository weights |
+| BERT / DistilBERT weights and tokenizers | Attention, text SHAP and Anchors | Immutable Hugging Face revisions with per-file hashes, loaded locally. Refer to each model card; these are not original repository weights |
 | VGG16 / ResNet50 pretrained weights | Grad-CAM / SHAP image | Keras applications, pretrained on ImageNet; [Keras applications](https://keras.io/api/applications/) and upstream model/data terms apply |
 
-The new foundations and digits examples need no runtime network access once
-their packages are installed. Older external-download examples are not fully
-offline or bit-for-bit reproducible from dependency pins alone. The runner records
-the installed environment; asset revisions and checksums for every legacy loader
-remain a [roadmap item](ROADMAP.md). Do not claim a model/dataset was pinned when
-only its loader package was pinned.
+The foundations, regression, practice and shared image/text comparisons use
+bundled/generated data. Legacy downloads now have an [asset manifest](../assets/manifest.json)
+with pinned GitHub/Hugging Face revisions, SHA-256 content hashes and explicit
+decoded-data checks for native library caches. See [download and offline guidance](ASSETS.md).
+Hash identity does not establish permission to redistribute. In particular, the
+SHAP ImageNet sample's loader describes replacement images found via reuse-filtered
+search, but does not supply a per-image license inventory. Those images remain
+external downloads; do not treat the repository's content license as a grant for
+them. Similar upstream due diligence remains necessary for historical text and
+Titanic variants whose source pages do not establish a comprehensive reuse grant.
 
 ## Adapted teaching material and retained assets
 
@@ -44,13 +48,29 @@ only its loader package was pinned.
   is MIT licensed; retain its [license notice](licenses/SHAP-MIT.txt).
 - The text Anchors workflow uses the authors' Anchor implementation and teaching
   approach; retain the [upstream license](licenses/Anchor-BSD.txt).
-- The survey illustration embedded in `Theory/Dimensions.ipynb` is attributed
-  there to Cambria et al. It is third-party material, excluded from the original
-  content license; attribution alone is not a new redistribution grant.
-- The legacy `Tools/RuleFit_examples/boston.csv` and saved
-  `Tools/LIME_examples/lime_explanation.html` are retained historical assets and
-  are not used by the current RuleFit or LIME tabular notebook. Their presence
-  does not make them newly authored or relicensed data.
+- DiCE 0.12's Adult preparation is adapted in `xai_assets.py`; retain its
+  [MIT notice](licenses/DiCE-MIT.txt).
+- LIME 0.2.0.1, MERLIN 0.1.2 and Captum 0.9.0 notices are preserved from their
+  installed distributions: [LIME](licenses/LIME-BSD.txt),
+  [MERLIN](licenses/MERLIN-license.txt), [Captum](licenses/Captum-BSD.txt).
+  EBM uses InterpretML 0.7.8; retain its [MIT notice](licenses/InterpretML-MIT.txt).
+- The old survey illustration in `Theory/Dimensions.ipynb` was replaced with an
+  original explanation-axes table. An attribution by itself is not a redistribution grant.
+- Legacy `Tools/RuleFit_examples/boston.csv` and
+  `Tools/LIME_examples/lime_explanation.html` remain unused historical assets.
+  They are excluded from the original content/code license where third-party
+  rights apply. Their provenance and redistribution permissions have not been
+  independently established; they are not part of the checked active input set.
+
+## Reuse status
+
+| Material group | Recorded evidence | Boundary |
+|---|---|---|
+| Original code and teaching figures/text | Repository MIT / CC BY 4.0 notices | Applies only to original contributions |
+| Adapted library examples/helpers | Packaged notices and linked upstream versions | Retain corresponding notices |
+| Bundled polarity reviews | Source/version and file hashes | Original review excerpts and corpus terms remain distinct |
+| External model/data assets | Source/terms links, revisions, hashes | Not redistributed in Git; upstream terms must be assessed for the intended reuse |
+| Legacy unused assets | Paths and explicit unknown status | No new reuse permission is asserted |
 
 For new contributions, record source URL, author, asset identifier/version,
 license reference, download mechanism and checksum where available. Prefer

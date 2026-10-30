@@ -27,6 +27,9 @@ def checked_notebook(directory, record, root=ROOT):
     dependencies = {p.relative_to(root).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
                     for p in sorted((root / relative).parent.rglob("*.py"))
                     if not any(part in {"__pycache__", "results", "logs"} for part in p.parts)}
+    if "xai_assets" in (root / relative).read_text():
+        for dependency in ("xai_assets.py", "assets/manifest.json"):
+            dependencies[dependency] = hashlib.sha256((root / dependency).read_bytes()).hexdigest()
     if dependencies != record.get("local_dependencies"):
         raise ValueError(f"Local helper dependencies changed since execution: {relative}")
     if hashlib.sha256((directory / relative).read_bytes()).hexdigest() != record.get("executed_sha256"):

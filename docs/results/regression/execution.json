@@ -1,0 +1,12 @@
+{
+  "notebook": "Tools/Evaluation_examples/Regression_Benchmark.ipynb",
+  "mode": "execute",
+  "source_sha256": "228713283d21bd5abc50ef5a54a99a4d4653686d84794b9e42cef3eed43deaa1",
+  "local_dependencies": {
+    "Tools/Evaluation_examples/evaluation_helpers.py": "8295a5eda6c8e3a07ef44df1ada0cb3078e52c68ed1e43fd41e1d34a078dbf23",
+    "Tools/Evaluation_examples/regression_helpers.py": "046e2cfc27c8170330cdc0ab61fca7f0aad1ddc67cef629a2c0e519a3ab1032e"
+  },
+  "status": "passed",
+  "executed_sha256": "5c4448ed3a1fa527d4aaf10ee1060ab77e2c7b50e075ab731fec865ea0d22ebb",
+  "seconds": 23.66
+}

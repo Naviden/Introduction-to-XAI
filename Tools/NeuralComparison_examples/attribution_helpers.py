@@ -99,3 +99,72 @@ def occlusion_scores(model, sample, baseline, target, regions):
         original = model(sample)[0, target]
         masked = model(masked_images(sample, baseline, presence, regions))[:, target]
     return (original - masked).numpy()
+
+
+def deep_lift_rescale(model, sample, baseline, target):
+    """Captum DeepLIFT Rescale on an isolated copy of the fixed fitted model.
+
+    Return contributions (including input-minus-baseline multipliers) and
+    Captum's sum(contributions) - (f(sample) - f(baseline)) residual.
+    The caller must use separately instantiated supported nonlinear modules.
+    """
+    from copy import deepcopy
+    from captum.attr import DeepLift
+
+    if sample.shape != baseline.shape or sample.shape[0] != 1:
+        raise ValueError("sample and baseline must have the same single-example shape")
+    copied_model = torch.nn.Sequential(deepcopy(model)).eval()
+    inputs = sample.detach().clone().requires_grad_(True)
+    deterministic = torch.are_deterministic_algorithms_enabled()
+    warn_only = torch.is_deterministic_algorithms_warn_only_enabled()
+    # Captum's MaxPool rule uses max_unpool2d, which PyTorch does not register
+    # as deterministic. Keep the warning visible and restore the caller's state.
+    uses_maxpool = any(isinstance(layer, torch.nn.MaxPool2d) for layer in copied_model.modules())
+    try:
+        if deterministic and uses_maxpool:
+            torch.use_deterministic_algorithms(True, warn_only=True)
+        values, delta = DeepLift(copied_model, multiply_by_inputs=True).attribute(
+            inputs, baselines=baseline.detach().clone(), target=target,
+            return_convergence_delta=True,
+        )
+    finally:
+        torch.use_deterministic_algorithms(deterministic, warn_only=warn_only)
+    return values.detach(), delta.detach()
+
+
+def lrp_epsilon(model, sample, target, epsilon=1e-6):
+    """Captum LRP with explicit epsilon rules on affine and pooling modules.
+
+    This intentionally supports only the simple feed-forward architectures used
+    here: Conv2d, Linear, MaxPool2d, AvgPool2d, AdaptiveAvgPool2d and ReLU. ReLU
+    propagates relevance through Captum's supported activation hooks. Biases
+    remain unchanged. Epsilon stabilization and unallocated bias relevance mean
+    the input relevances need not sum to the selected logit.
+
+    Captum 0.9.0 returns output-scaled relevance, despite contrary wording in
+    its public docstring. Do not multiply it by the output again. The returned
+    residual is f(sample) - sum(input relevances), unlike DeepLIFT's sign.
+    """
+    from copy import deepcopy
+    from captum.attr import LRP
+    from captum.attr._utils.lrp_rules import EpsilonRule
+
+    if not np.isfinite(epsilon) or epsilon < 0:
+        raise ValueError("epsilon must be finite and nonnegative")
+    if sample.shape[0] != 1:
+        raise ValueError("LRP expects one input example")
+    copied_model = torch.nn.Sequential(deepcopy(model)).eval()
+    rule_layers = (torch.nn.Conv2d, torch.nn.Linear, torch.nn.MaxPool2d,
+                   torch.nn.AvgPool2d, torch.nn.AdaptiveAvgPool2d)
+    for module in copied_model.modules():
+        if len(list(module.children())):
+            continue
+        if isinstance(module, rule_layers):
+            module.rule = EpsilonRule(epsilon=epsilon)
+        elif not isinstance(module, torch.nn.ReLU):
+            raise TypeError(f"No specified LRP rule for {type(module).__name__}")
+    values, delta = LRP(copied_model).attribute(
+        sample.detach().clone().requires_grad_(True), target=target,
+        return_convergence_delta=True,
+    )
+    return values.detach(), delta.detach()

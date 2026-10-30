@@ -1,9 +1,11 @@
 """Regression checks for the text corpus loader used by the Anchor tutorial."""
 import ast
+import hashlib
 import json
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -30,7 +32,15 @@ class PolarityLoaderTests(unittest.TestCase):
             path = Path(directory)
             (path / 'rt-polarity.neg').write_bytes('bad caf\xe9\n\n'.encode('latin-1'))
             (path / 'rt-polarity.pos').write_bytes('tr\xe8s good\n'.encode('latin-1'))
-            texts, labels = polarity_loader()(path)
+            fixture_manifest = {"bundled": {
+                key: {"path": name, "sha256": hashlib.sha256((path / name).read_bytes()).hexdigest()}
+                for key, name in [("polarity_negative", "rt-polarity.neg"),
+                                  ("polarity_positive", "rt-polarity.pos")]
+            }}
+            # This small fixture has its own declared identity. Production uses
+            # the checked-in manifest; keep real checksum verification enabled.
+            with patch("xai_assets.manifest", return_value=fixture_manifest):
+                texts, labels = polarity_loader()(path)
         self.assertEqual(texts, ['bad caf\xe9', 'tr\xe8s good'])
         self.assertEqual(labels, [0, 1])
 

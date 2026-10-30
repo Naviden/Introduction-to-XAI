@@ -8,6 +8,8 @@ from publish_executed import ROOT, checked_notebook
 
 
 STUDIES = {
+    "regression": ("Tools/Evaluation_examples/Regression_Benchmark.ipynb", "validation/regression-benchmark"),
+    "text": ("Tools/TextComparison_examples/Shared_Text_Comparison.ipynb", "validation/text-comparison"),
     "evaluation": ("Tools/Evaluation_examples/Evaluation_and_Sensitivity.ipynb", "validation/evaluation-study"),
     "mixed-data": ("Tools/PracticalWorkflow_examples/Mixed_Data_Workflow.ipynb", "validation/mixed-data-workflow"),
     "recourse": ("Tools/CausalRecourse_examples/Causal_Recourse.ipynb", "Tools/CausalRecourse_examples/results"),
@@ -16,7 +18,7 @@ STUDIES = {
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--input", type=Path, required=True, help="Foundations runner output directory")
+    parser.add_argument("--input", type=Path, required=True, help="Runner output directory containing all study execution records")
     args = parser.parse_args()
     records = {r["notebook"]: r for r in json.loads((args.input / "results.json").read_text())}
     for notebook, _ in STUDIES.values():
@@ -48,7 +50,7 @@ def main():
         (target / "execution.json").write_text(json.dumps(records[notebook], indent=2) + "\n")
         lines.append(f"- [{name}]({name}/): [source notebook](../../{notebook}); "
                      f"{len(files)} data/manifest files plus the execution receipt.")
-    lines += ["", "Regenerate with `python scripts/check_notebooks.py --group foundations "
+    lines += ["", "Regenerate with `python scripts/check_notebooks.py --group all "
               "--output-dir validation/foundations-final`, then "
               "`python scripts/publish_results.py --input validation/foundations-final`. "
               "[Reading copies](../executed/README.md) include the plotted results.", ""]

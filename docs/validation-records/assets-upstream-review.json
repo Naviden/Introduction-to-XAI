@@ -1,0 +1,42 @@
+[
+  {
+    "asset": "nhanesi_X",
+    "url": "https://raw.githubusercontent.com/shap/shap/fc3e290e97ce12f76d1175d24c6e3023b4ca7d69/data/NHANESI_X.csv",
+    "bytes": 5791556,
+    "expected_sha256": "0fa1e524900008da254c365b501c96768e55b94858fdc4045886d887654a1ba8",
+    "downloaded_sha256": "0fa1e524900008da254c365b501c96768e55b94858fdc4045886d887654a1ba8",
+    "matches": true
+  },
+  {
+    "asset": "nhanesi_y",
+    "url": "https://raw.githubusercontent.com/shap/shap/fc3e290e97ce12f76d1175d24c6e3023b4ca7d69/data/NHANESI_y.csv",
+    "bytes": 292583,
+    "expected_sha256": "70c8d6ab022e7b080752b339ee8edc991f2fd203c294b5ca55b36bcb902aab93",
+    "downloaded_sha256": "70c8d6ab022e7b080752b339ee8edc991f2fd203c294b5ca55b36bcb902aab93",
+    "matches": true
+  },
+  {
+    "asset": "imagenet50_images",
+    "url": "https://raw.githubusercontent.com/shap/shap/fc3e290e97ce12f76d1175d24c6e3023b4ca7d69/data/imagenet50_224x224.npy",
+    "bytes": 7526528,
+    "expected_sha256": "7027529080119f98d72abab00865814348a550afc32defbca6eef9b336dec45d",
+    "downloaded_sha256": "7027529080119f98d72abab00865814348a550afc32defbca6eef9b336dec45d",
+    "matches": true
+  },
+  {
+    "asset": "imagenet50_labels",
+    "url": "https://raw.githubusercontent.com/shap/shap/fc3e290e97ce12f76d1175d24c6e3023b4ca7d69/data/imagenet50_labels.csv",
+    "bytes": 259,
+    "expected_sha256": "147c2226a3c7b55ff807009f23979e09838c0f34b2bfe2b0fa35024624cfcb31",
+    "downloaded_sha256": "147c2226a3c7b55ff807009f23979e09838c0f34b2bfe2b0fa35024624cfcb31",
+    "matches": true
+  },
+  {
+    "asset": "titanic_seaborn",
+    "url": "https://raw.githubusercontent.com/mwaskom/seaborn-data/71e2436a092d714350de0fc409ca8a8714e7e78f/titanic.csv",
+    "bytes": 57018,
+    "expected_sha256": "81787d320d7f7b03df935e91de8bd19e11d45c5bbcab86ef4d4a76dc91b7d4f2",
+    "downloaded_sha256": "81787d320d7f7b03df935e91de8bd19e11d45c5bbcab86ef4d4a76dc91b7d4f2",
+    "matches": true
+  }
+]

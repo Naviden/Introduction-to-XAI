@@ -1,0 +1,346 @@
+[
+  {
+    "notebook": "Theory/Basics.ipynb",
+    "mode": "execute",
+    "source_sha256": "86f4eca849baa0720db5b4341c8dc092786838e0ee40280d81c901fa241c0e4b",
+    "local_dependencies": {},
+    "status": "passed",
+    "executed_sha256": "7c30f887e553fdbf183c83d4feb14c3994c1f4435e37d6275fb63a6f42f43ba0",
+    "seconds": 5.94
+  },
+  {
+    "notebook": "Theory/Dimensions.ipynb",
+    "mode": "execute",
+    "source_sha256": "94d10cd0c4da066da72dd32468b0aab8a60d6b63babe17c68dbd93071ad1d1f7",
+    "local_dependencies": {
+      "xai_assets.py": "409c87c6764b50b8491de360339e31a9b88f7193cf0689b7d40d7018ec11752d",
+      "assets/manifest.json": "aad280fb65152ec97b244f724dfa31eb78dff8ace50779fddeaefbc39c2d9adf"
+    },
+    "status": "passed",
+    "executed_sha256": "0dee23446a03cfe646f16b33e27b244dbd2d048937354edfb2da74f312d6f105",
+    "seconds": 5.65
+  },
+  {
+    "notebook": "Tools/ALE_examples/ALE_example.ipynb",
+    "mode": "execute",
+    "source_sha256": "109eda072c2d914ce96381baf702d08ce2b25b8200fc25442e270d6e90d0c9b2",
+    "local_dependencies": {
+      "xai_assets.py": "409c87c6764b50b8491de360339e31a9b88f7193cf0689b7d40d7018ec11752d",
+      "assets/manifest.json": "aad280fb65152ec97b244f724dfa31eb78dff8ace50779fddeaefbc39c2d9adf"
+    },
+    "status": "passed",
+    "executed_sha256": "2179a41212a209f246a29ef2f3fba233d9a64538b2415f1c021fe4058cb6c42a",
+    "seconds": 9.01
+  },
+  {
+    "notebook": "Tools/ANCHOR_examples/Anchor_tabular.ipynb",
+    "mode": "execute",
+    "source_sha256": "b067389887c594bad1d7d0e61f43533a1aa866ef7d52679d683479756d598dc0",
+    "local_dependencies": {
+      "xai_assets.py": "409c87c6764b50b8491de360339e31a9b88f7193cf0689b7d40d7018ec11752d",
+      "assets/manifest.json": "aad280fb65152ec97b244f724dfa31eb78dff8ace50779fddeaefbc39c2d9adf"
+    },
+    "status": "passed",
+    "executed_sha256": "532fa2396954d1c6ee560980ada8eb318503a29d2fbbd552d44f582c999a0e9a",
+    "seconds": 43.02
+  },
+  {
+    "notebook": "Tools/Attention_examples/Attention_visualization.ipynb",
+    "mode": "execute",
+    "source_sha256": "03679ec8f2bf822105bc74d4b7e1eb323200373b42df5636958fc34a8a13f7cb",
+    "local_dependencies": {
+      "xai_assets.py": "409c87c6764b50b8491de360339e31a9b88f7193cf0689b7d40d7018ec11752d",
+      "assets/manifest.json": "aad280fb65152ec97b244f724dfa31eb78dff8ace50779fddeaefbc39c2d9adf"
+    },
+    "status": "passed",
+    "executed_sha256": "a4ebb2aa323d1ec44921a40a1f17f9a491998881690d0d6f1ffc1e5f5a2c5634",
+    "seconds": 7.4
+  },
+  {
+    "notebook": "Tools/CausalRecourse_examples/Causal_Recourse.ipynb",
+    "mode": "execute",
+    "source_sha256": "297ed674b11af52b93e61aea5cd23793e82f336857ee2c279d24972d990ce430",
+    "local_dependencies": {},
+    "status": "passed",
+    "executed_sha256": "5529c2b2e8dd8074fa5c434df3301e1fc6f2c4a9a1a730642a453196723abe75",
+    "seconds": 0.89
+  },
+  {
+    "notebook": "Tools/DiCE_examples/DiCE_example.ipynb",
+    "mode": "execute",
+    "source_sha256": "95b1b91c48413c2bd36deccbc4f1cd5e2a740f26f95de25308393b32814ca547",
+    "local_dependencies": {
+      "xai_assets.py": "409c87c6764b50b8491de360339e31a9b88f7193cf0689b7d40d7018ec11752d",
+      "assets/manifest.json": "aad280fb65152ec97b244f724dfa31eb78dff8ace50779fddeaefbc39c2d9adf"
+    },
+    "status": "passed",
+    "executed_sha256": "ad4c8233fe1ade02a8d8f9051c79a618e24015f9b41d5dade80c1410e3ec7ac2",
+    "seconds": 4.79
+  },
+  {
+    "notebook": "Tools/Evaluation_examples/Evaluation_and_Sensitivity.ipynb",
+    "mode": "execute",
+    "source_sha256": "2263fe509487384784034f2a51a58e511887fb07eccc4ec7c005de21c3355737",
+    "local_dependencies": {
+      "Tools/Evaluation_examples/evaluation_helpers.py": "8295a5eda6c8e3a07ef44df1ada0cb3078e52c68ed1e43fd41e1d34a078dbf23",
+      "Tools/Evaluation_examples/regression_helpers.py": "046e2cfc27c8170330cdc0ab61fca7f0aad1ddc67cef629a2c0e519a3ab1032e"
+    },
+    "status": "passed",
+    "executed_sha256": "0e647b69f03b5fc47b6f12cae2fd5929af0bba14a85440271b6c6aa7b1973de3",
+    "seconds": 6.47
+  },
+  {
+    "notebook": "Tools/Evaluation_examples/Regression_Benchmark.ipynb",
+    "mode": "execute",
+    "source_sha256": "228713283d21bd5abc50ef5a54a99a4d4653686d84794b9e42cef3eed43deaa1",
+    "local_dependencies": {
+      "Tools/Evaluation_examples/evaluation_helpers.py": "8295a5eda6c8e3a07ef44df1ada0cb3078e52c68ed1e43fd41e1d34a078dbf23",
+      "Tools/Evaluation_examples/regression_helpers.py": "046e2cfc27c8170330cdc0ab61fca7f0aad1ddc67cef629a2c0e519a3ab1032e"
+    },
+    "status": "passed",
+    "executed_sha256": "5c4448ed3a1fa527d4aaf10ee1060ab77e2c7b50e075ab731fec865ea0d22ebb",
+    "seconds": 23.66
+  },
+  {
+    "notebook": "Tools/FeatureImportanceComparison_examples/FeatureImportanceComparison.ipynb",
+    "mode": "execute",
+    "source_sha256": "4a6d09f6c06792461a66cba13baa2cd91111f93c50b6e0da394d71bef040ab52",
+    "local_dependencies": {},
+    "status": "passed",
+    "executed_sha256": "86a8c708a2a108af0a36e877c888c8841fead07015fd2fe9d3edc67f7d76d775",
+    "seconds": 4.63
+  },
+  {
+    "notebook": "Tools/GradCAM_examples/GradCAM_example.ipynb",
+    "mode": "execute",
+    "source_sha256": "e185b6c5c8c2da5be3ecacdd10f86ab2f194adae6e6806621357b08ca1e6fec6",
+    "local_dependencies": {
+      "xai_assets.py": "409c87c6764b50b8491de360339e31a9b88f7193cf0689b7d40d7018ec11752d",
+      "assets/manifest.json": "aad280fb65152ec97b244f724dfa31eb78dff8ace50779fddeaefbc39c2d9adf"
+    },
+    "status": "passed",
+    "executed_sha256": "a57af665cc9bbdfbb318819bba7bd69706dbdc432a2e18144c3eefd8dfcceb8a",
+    "seconds": 4.0
+  },
+  {
+    "notebook": "Tools/IntegratedGradients_examples/IntegratedGradients_example.ipynb",
+    "mode": "execute",
+    "source_sha256": "a8323215026347e3d24d9ac42d87381f690d2ee8171f3d1cdf04ba18f568cbe0",
+    "local_dependencies": {},
+    "status": "passed",
+    "executed_sha256": "0f553d1e43a92467fe33cf260757ed17a706935d53bbd341caa249256050df9e",
+    "seconds": 3.84
+  },
+  {
+    "notebook": "Tools/InterpretableModels_examples/Interpretable_Models_Comparison.ipynb",
+    "mode": "execute",
+    "source_sha256": "8df7798207c713c2a6c42192fcd0b88aa129da4409276b4a9ee4f0091c413029",
+    "local_dependencies": {},
+    "status": "passed",
+    "executed_sha256": "80bbd4ddbd659b0187b63652cbfdff7aea4cdca3800c7503d2f9740d8ea0def0",
+    "seconds": 5.13
+  },
+  {
+    "notebook": "Tools/LIME_examples/LIME_image.ipynb",
+    "mode": "execute",
+    "source_sha256": "d91540ed6ed6404ddec0e85b559c99df011e28a9b78cbe0ee6fb181d5582e3b3",
+    "local_dependencies": {
+      "xai_assets.py": "409c87c6764b50b8491de360339e31a9b88f7193cf0689b7d40d7018ec11752d",
+      "assets/manifest.json": "aad280fb65152ec97b244f724dfa31eb78dff8ace50779fddeaefbc39c2d9adf"
+    },
+    "status": "passed",
+    "executed_sha256": "17f8f88a1ed499b0530b84cfb9e0f9dafa7e2c87309bb2a14df83d2faed3b564",
+    "seconds": 18.73
+  },
+  {
+    "notebook": "Tools/LIME_examples/LIME_tabular.ipynb",
+    "mode": "execute",
+    "source_sha256": "4cd060cc21842e26d84ff30ea089c47a27c33665c6dd3ab8c5c5994ba5cdebdb",
+    "local_dependencies": {
+      "xai_assets.py": "409c87c6764b50b8491de360339e31a9b88f7193cf0689b7d40d7018ec11752d",
+      "assets/manifest.json": "aad280fb65152ec97b244f724dfa31eb78dff8ace50779fddeaefbc39c2d9adf"
+    },
+    "status": "passed",
+    "executed_sha256": "2ff949dc36b56398021279145ec6a6a2978817432fec807513378f6a1547fe10",
+    "seconds": 2.0
+  },
+  {
+    "notebook": "Tools/LIME_examples/LIME_textual.ipynb",
+    "mode": "execute",
+    "source_sha256": "b8ed409ba3a506faafd55e2855c8a5309ae3e4d5845881de00fe846fd4f963a9",
+    "local_dependencies": {
+      "xai_assets.py": "409c87c6764b50b8491de360339e31a9b88f7193cf0689b7d40d7018ec11752d",
+      "assets/manifest.json": "aad280fb65152ec97b244f724dfa31eb78dff8ace50779fddeaefbc39c2d9adf"
+    },
+    "status": "passed",
+    "executed_sha256": "8f07de03acd30116c70cb0981e68a2c1539e10e9e72ce1fedfaa2b0fa0038032",
+    "seconds": 16.44
+  },
+  {
+    "notebook": "Tools/Merlin_examples/20NG_example.ipynb",
+    "mode": "execute",
+    "source_sha256": "8f3e5c443564989dd0e259429e6b087c7529c220e93dfd30e82391a4f02890d8",
+    "local_dependencies": {
+      "xai_assets.py": "409c87c6764b50b8491de360339e31a9b88f7193cf0689b7d40d7018ec11752d",
+      "assets/manifest.json": "aad280fb65152ec97b244f724dfa31eb78dff8ace50779fddeaefbc39c2d9adf"
+    },
+    "status": "passed",
+    "executed_sha256": "34838d35749c11c22f47f6651476c6fc30d648fbccfbf091ec7c6fba7f7a6432",
+    "seconds": 54.66
+  },
+  {
+    "notebook": "Tools/MethodComparison_examples/Shared_Tabular_Case_Comparison.ipynb",
+    "mode": "execute",
+    "source_sha256": "b5bc1f0b3e5c56d513b0d0460d814b9ebfd2034d1a29a2df6374635bdf50fd22",
+    "local_dependencies": {},
+    "status": "passed",
+    "executed_sha256": "81c7ce17ec76b7427f2997c042f70dff4f0c9e5c02a7a4672ecdda2919b923f3",
+    "seconds": 47.34
+  },
+  {
+    "notebook": "Tools/NeuralComparison_examples/Shared_Image_Attribution.ipynb",
+    "mode": "execute",
+    "source_sha256": "c07436d202ceeff29c48be093fdc9c9fa4a2d746eab24fec0069520b6ec1820c",
+    "local_dependencies": {
+      "Tools/NeuralComparison_examples/attribution_helpers.py": "f422ea103d57b7d4b87eb482e916c9c8fcf9763b8752b0e08df3273d5784b163"
+    },
+    "status": "passed",
+    "executed_sha256": "c5628e4418d7ab2355b2ddd736f3581d44a8e0946d18529f2d877c904b36190f",
+    "seconds": 9.43
+  },
+  {
+    "notebook": "Tools/PermutationImportance_examples/PermutationImportance_example.ipynb",
+    "mode": "execute",
+    "source_sha256": "a3720cba8a9b24980db181bf5b5f62122f2d7effd51ddd09c64c87927e53aa7f",
+    "local_dependencies": {},
+    "status": "passed",
+    "executed_sha256": "fa13dc24aa86903ab4b6ac91fa3c56dd5350ab6420f928651b31d5c6673e822d",
+    "seconds": 3.53
+  },
+  {
+    "notebook": "Tools/PracticalWorkflow_examples/Mixed_Data_Workflow.ipynb",
+    "mode": "execute",
+    "source_sha256": "60d631494abcd6833f90ba9d2b27c50c02d047bf69c8d492ed1368fefd7158d8",
+    "local_dependencies": {
+      "Tools/PracticalWorkflow_examples/workflow_helpers.py": "a543c16daac8a9ec25c67ed54630e1928172db55a2c1f67f46dec8d7c3714604"
+    },
+    "status": "passed",
+    "executed_sha256": "61f1a7d864e914f6e696fa8600fb3ced49fbcf43222802e8d2ef5f1235eb5369",
+    "seconds": 2.46
+  },
+  {
+    "notebook": "Tools/RuleFit_examples/RuleFit_example.ipynb",
+    "mode": "execute",
+    "source_sha256": "86a3bc5f582fcd39e74b4bfe2c9c05d9a6080158393b115209a614a298f9ab8d",
+    "local_dependencies": {
+      "xai_assets.py": "409c87c6764b50b8491de360339e31a9b88f7193cf0689b7d40d7018ec11752d",
+      "assets/manifest.json": "aad280fb65152ec97b244f724dfa31eb78dff8ace50779fddeaefbc39c2d9adf"
+    },
+    "status": "passed",
+    "executed_sha256": "0fee21a157d5aabdc01af0e9bd3ab576e1976c5e0ee85f09c9607e6c5eff0ae3",
+    "seconds": 13.38
+  },
+  {
+    "notebook": "Tools/SHAP_examples/SHAP_summary_plot.ipynb",
+    "mode": "execute",
+    "source_sha256": "8b429e06ca9daee3965da85888dad647f89bb3f09a0ac38d2453ded2da8beeb7",
+    "local_dependencies": {},
+    "status": "passed",
+    "executed_sha256": "edb90477e78152ba48256fd99caf0b5a42b7f0daad617d6818de7e99167f50db",
+    "seconds": 2.9
+  },
+  {
+    "notebook": "Tools/SHAP_examples/SHAP_survival_model.ipynb",
+    "mode": "execute",
+    "source_sha256": "925a2f0cc08cc5343425e06cbac729b3e3c28b77176413a0275048681c05b0b0",
+    "local_dependencies": {
+      "xai_assets.py": "409c87c6764b50b8491de360339e31a9b88f7193cf0689b7d40d7018ec11752d",
+      "assets/manifest.json": "aad280fb65152ec97b244f724dfa31eb78dff8ace50779fddeaefbc39c2d9adf"
+    },
+    "status": "passed",
+    "executed_sha256": "67e32e74b8be1053f54df4993a6aaccfebeab255ec03980389dab5820f1b2a9e",
+    "seconds": 94.4
+  },
+  {
+    "notebook": "Tools/SHAP_examples/SHAP_tabular.ipynb",
+    "mode": "execute",
+    "source_sha256": "bc34b89a84870112010de1586b7c1cf2cce5df6ce8a6d10255c99c56257db6e0",
+    "local_dependencies": {},
+    "status": "passed",
+    "executed_sha256": "de2c8e8c548b5fd453eb7819d5478434a9ff14ebe231eb3797bf017395df7f52",
+    "seconds": 2.35
+  },
+  {
+    "notebook": "Tools/SHAP_text_image_examples/SHAP_text_image.ipynb",
+    "mode": "execute",
+    "source_sha256": "9c96ffce5cedb227cb373dbdf717e339ff758566981df00a18e3e7dd1e2dfd36",
+    "local_dependencies": {
+      "xai_assets.py": "409c87c6764b50b8491de360339e31a9b88f7193cf0689b7d40d7018ec11752d",
+      "assets/manifest.json": "aad280fb65152ec97b244f724dfa31eb78dff8ace50779fddeaefbc39c2d9adf"
+    },
+    "status": "passed",
+    "executed_sha256": "97440e00e1ee2406329cda4d4ac14395b1f34f2818a83a7126b7989f86784154",
+    "seconds": 39.35
+  },
+  {
+    "notebook": "Tools/Starter_examples/First_XAI_Comparison.ipynb",
+    "mode": "execute",
+    "source_sha256": "0c511c550246008b92783e556d61673b7c1be3947302844637f5b55cd4a7ece8",
+    "local_dependencies": {},
+    "status": "passed",
+    "executed_sha256": "aba0022818ece546ed29a28f344620cd897147f12dee2e3b7bdca518d780350d",
+    "seconds": 7.35
+  },
+  {
+    "notebook": "Tools/TextComparison_examples/Shared_Text_Comparison.ipynb",
+    "mode": "execute",
+    "source_sha256": "afbc48549cb5a22cb03f25ef814b5fcf1782838417aa5408f4ac6e1a2983c5bf",
+    "local_dependencies": {
+      "Tools/TextComparison_examples/text_helpers.py": "2a7db35bd084b158513969cf677f246b7dd4d1414f48dae13ce645d826bb4192",
+      "xai_assets.py": "409c87c6764b50b8491de360339e31a9b88f7193cf0689b7d40d7018ec11752d",
+      "assets/manifest.json": "aad280fb65152ec97b244f724dfa31eb78dff8ace50779fddeaefbc39c2d9adf"
+    },
+    "status": "passed",
+    "executed_sha256": "fd7e90278bda0bd9c358cc6277dbc2748f9a3b3b9a9ef262ae067593c6c51523",
+    "seconds": 5.84
+  },
+  {
+    "notebook": "Tools/Visual Explanation_example/PDP_ICE.ipynb",
+    "mode": "execute",
+    "source_sha256": "b274f6a97b4f8fa05f2760d5b10a910a8e5ede83f6087ad4f71206c285d07259",
+    "local_dependencies": {
+      "xai_assets.py": "409c87c6764b50b8491de360339e31a9b88f7193cf0689b7d40d7018ec11752d",
+      "assets/manifest.json": "aad280fb65152ec97b244f724dfa31eb78dff8ace50779fddeaefbc39c2d9adf"
+    },
+    "status": "passed",
+    "executed_sha256": "f5f46a4b48202fd58627feeaaadb138397d9114595eb87f46704f4f2669ff44a",
+    "seconds": 13.52
+  },
+  {
+    "notebook": "Practice/Core_XAI_Exercises.ipynb",
+    "mode": "execute",
+    "source_sha256": "8e1f548ee782fd8363f73c70a346b260919ffccc71910d3e7a2d5bb9640b28f7",
+    "local_dependencies": {},
+    "status": "passed",
+    "executed_sha256": "da863fca59b187bda708d7b465cc16a7d0ffe27fd961c9c0d05d0c5d8e76bc7a",
+    "seconds": 4.02
+  },
+  {
+    "notebook": "Practice/Instructor/Core_XAI_Solutions.ipynb",
+    "mode": "execute",
+    "source_sha256": "6a10441c882c67b369073f40a7e221ba82ebd3940fcf45ab5715bc0e15cad227",
+    "local_dependencies": {},
+    "status": "passed",
+    "executed_sha256": "d960e46dcdcaaaa7fd3ee6fbd0368ef136800e96c0d6c3339da434930487a4bc",
+    "seconds": 5.3
+  },
+  {
+    "notebook": "Practice/LIME_Practice_Notebook_student.ipynb",
+    "mode": "execute",
+    "source_sha256": "493e41d2cdf153e804b26a6667b4b4a20fcb99282e140d18e04daa3f52f68fe3",
+    "local_dependencies": {},
+    "status": "passed",
+    "executed_sha256": "1c5306afdcad4ca46ee53f3db94dfe255e4719c9c6facc0bb9096ad0be01239b",
+    "seconds": 1.26
+  }
+]

@@ -74,3 +74,93 @@ def test_gradcam_is_finite_and_handles_zero_or_negative_evidence(weight):
     assert np.isfinite(expanded).all()
     np.testing.assert_allclose(native, max(weight, 0.))
     np.testing.assert_allclose(expanded, native)
+
+
+def affine_module(bias=0.):
+    model = torch.nn.Sequential(torch.nn.Linear(2, 2))
+    with torch.no_grad():
+        model[0].weight.copy_(torch.tensor([[-1., 0.], [2., 3.]]))
+        model[0].bias.copy_(torch.tensor([4., bias]))
+    return model.eval()
+
+
+def test_deeplift_rescale_reconstructs_a_fixed_target_reference_difference():
+    pytest.importorskip('captum')
+    model = affine_module(bias=5.)
+    sample, reference = torch.tensor([[2., 3.]]), torch.tensor([[1., 1.]])
+    original = {key: value.clone() for key, value in model.state_dict().items()}
+    actual, delta = helpers.deep_lift_rescale(model, sample, reference, target=1)
+    torch.testing.assert_close(actual, torch.tensor([[2., 6.]]))
+    torch.testing.assert_close(actual.sum(), model(sample)[0, 1]-model(reference)[0, 1])
+    torch.testing.assert_close(delta, torch.zeros(1), atol=1e-6, rtol=0)
+    for key, value in model.state_dict().items():
+        torch.testing.assert_close(value, original[key])
+    assert all(not module._forward_hooks and not module._backward_hooks for module in model.modules())
+
+
+def test_deeplift_rescale_crosses_relu_threshold_instead_of_using_endpoint_gradient():
+    pytest.importorskip('captum')
+    model = torch.nn.Sequential(torch.nn.Linear(1, 1), torch.nn.ReLU(), torch.nn.Linear(1, 1, bias=False))
+    with torch.no_grad():
+        model[0].weight.fill_(1.)
+        model[0].bias.fill_(-1.)
+        model[2].weight.fill_(2.)
+    sample, reference = torch.tensor([[2.]]), torch.tensor([[0.]])
+    actual, delta = helpers.deep_lift_rescale(model, sample, reference, 0)
+    # Endpoint gradient * (x-reference) would incorrectly give 4; Rescale gives 2.
+    torch.testing.assert_close(actual, torch.tensor([[2.]]))
+    torch.testing.assert_close(delta, torch.zeros(1), atol=1e-6, rtol=0)
+
+
+def test_lrp_returns_logit_scaled_relevance_without_double_scaling():
+    pytest.importorskip('captum')
+    model = affine_module(bias=0.)
+    sample = torch.tensor([[2., 3.]])
+    actual, delta = helpers.lrp_epsilon(model, sample, 1, epsilon=0.)
+    torch.testing.assert_close(actual, torch.tensor([[4., 9.]]))
+    torch.testing.assert_close(actual.sum(), model(sample)[0, 1])
+    torch.testing.assert_close(delta, torch.zeros(1), atol=1e-6, rtol=0)
+    # A second output multiplication would yield [52, 117] and fail this test.
+    assert not hasattr(model[0], 'rule')
+    assert not model[0]._forward_hooks and not model[0]._backward_hooks
+
+
+def test_lrp_exposes_bias_and_epsilon_relevance_residuals():
+    pytest.importorskip('captum')
+    model = affine_module(bias=5.)
+    sample = torch.tensor([[2., 3.]])
+    actual, delta = helpers.lrp_epsilon(model, sample, 1, epsilon=1.)
+    # z = 18, epsilon = 1: each relevance is x_i*w_i * 18/(18+1).
+    expected = torch.tensor([[4., 9.]]) * 18 / 19
+    torch.testing.assert_close(actual, expected)
+    torch.testing.assert_close(delta, torch.tensor([18.])-expected.sum())
+    assert float(delta[0]) > 5  # unallocated bias plus epsilon absorption
+
+
+def test_lrp_zero_output_is_finite():
+    pytest.importorskip('captum')
+    model = affine_module(bias=0.)
+    actual, delta = helpers.lrp_epsilon(model, torch.zeros(1, 2), 1, epsilon=1e-6)
+    assert torch.isfinite(actual).all()
+    torch.testing.assert_close(actual, torch.zeros(1, 2))
+    torch.testing.assert_close(delta, torch.zeros(1))
+
+
+def test_deeplift_maxpool_restores_strict_deterministic_state():
+    pytest.importorskip('captum')
+    model = torch.nn.Sequential(torch.nn.MaxPool2d(2), torch.nn.Flatten(), torch.nn.Linear(1, 1, bias=False))
+    with torch.no_grad():
+        model[2].weight.fill_(2.)
+    sample = torch.tensor([[[[1., 2.], [3., 4.]]]])
+    baseline = torch.zeros_like(sample)
+    original_mode = torch.are_deterministic_algorithms_enabled()
+    original_warning = torch.is_deterministic_algorithms_warn_only_enabled()
+    try:
+        torch.use_deterministic_algorithms(True, warn_only=False)
+        values, delta = helpers.deep_lift_rescale(model, sample, baseline, 0)
+        torch.testing.assert_close(values.sum(), torch.tensor(8.))
+        torch.testing.assert_close(delta, torch.zeros(1), atol=1e-6, rtol=0)
+        assert torch.are_deterministic_algorithms_enabled()
+        assert not torch.is_deterministic_algorithms_warn_only_enabled()
+    finally:
+        torch.use_deterministic_algorithms(original_mode, warn_only=original_warning)

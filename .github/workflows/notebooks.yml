@@ -37,15 +37,19 @@ jobs:
       - name: Install lightweight dependencies
         if: matrix.group == 'foundations'
         run: python -m pip install --require-hashes -r requirements-tabular-linux.lock
-      - name: Install full dependencies
-        if: matrix.group != 'foundations'
-        run: |
-          python -m pip install --upgrade pip
-          python -m pip install torch==2.14.1 --index-url https://download.pytorch.org/whl/cpu
-          python -m pip install -r requirements-dev.txt
-      - name: Install MERLIN
-        if: matrix.group == 'special'
-        run: python -m pip install -r requirements-merlin.txt
+      - name: Install neural dependencies
+        if: matrix.group == 'neural' || matrix.group == 'image-training'
+        run: python -m pip install --require-hashes -r requirements-neural-linux.lock
+      - name: Install full optional stack
+        if: matrix.group == 'core' || matrix.group == 'special'
+        run: python -m pip install --require-hashes -r requirements-full-linux.lock
+      - name: Cache checked public assets
+        uses: actions/cache@v6.1.0
+        with:
+          path: |
+            validation/cache/
+            validation/assets/
+          key: public-assets-${{ runner.os }}-${{ matrix.group }}-${{ hashFiles('assets/manifest.json') }}
       - name: Check dependency compatibility
         run: python -m pip check
       - name: Validate notebook structure and syntax

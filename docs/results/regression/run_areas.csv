@@ -1,0 +1,91 @@
+scenario,seed,baseline,method,removal_area,scaled_area
+Diabetes (six fixed features),11,Joint empirical donors,LIME,59.043889985667285,0.799851938817195
+Diabetes (six fixed features),11,Joint empirical donors,Random ranking,38.60237314078965,0.5229361244169465
+Diabetes (six fixed features),11,Joint empirical donors,SHAP Exact,59.79289362530542,0.8099984927365103
+Diabetes (six fixed features),11,Training mean,LIME,46.38655629858067,0.6283863918769445
+Diabetes (six fixed features),11,Training mean,Random ranking,26.511949424700656,0.3591503566976674
+Diabetes (six fixed features),11,Training mean,SHAP Exact,46.816635566523146,0.6342125618056597
+Diabetes (six fixed features),22,Joint empirical donors,LIME,43.851989316994946,0.5717499465679874
+Diabetes (six fixed features),22,Joint empirical donors,Random ranking,33.33627281588522,0.43464418600210397
+Diabetes (six fixed features),22,Joint empirical donors,SHAP Exact,43.486875415696375,0.566989527330227
+Diabetes (six fixed features),22,Training mean,LIME,29.514777651444604,0.38481886017060357
+Diabetes (six fixed features),22,Training mean,Random ranking,22.725219428777415,0.29629540635488916
+Diabetes (six fixed features),22,Training mean,SHAP Exact,30.016973507435868,0.39136657803475966
+Diabetes (six fixed features),33,Joint empirical donors,LIME,46.97469218402118,0.6005622523377923
+Diabetes (six fixed features),33,Joint empirical donors,Random ranking,29.738892244765207,0.380205921064499
+Diabetes (six fixed features),33,Joint empirical donors,SHAP Exact,46.35444862480766,0.5926325597394874
+Diabetes (six fixed features),33,Training mean,LIME,29.979968180446185,0.38328802975293563
+Diabetes (six fixed features),33,Training mean,Random ranking,17.62691802046906,0.22535669944735584
+Diabetes (six fixed features),33,Training mean,SHAP Exact,27.615262798161087,0.3530557339257048
+Diabetes (six fixed features),44,Joint empirical donors,LIME,52.10629616427041,0.6708963545598035
+Diabetes (six fixed features),44,Joint empirical donors,Random ranking,41.21525599113218,0.5306684034790453
+Diabetes (six fixed features),44,Joint empirical donors,SHAP Exact,52.80891852526342,0.6799429922086649
+Diabetes (six fixed features),44,Training mean,LIME,44.15138282431397,0.5684726024705984
+Diabetes (six fixed features),44,Training mean,Random ranking,35.69745185059654,0.4596237321903815
+Diabetes (six fixed features),44,Training mean,SHAP Exact,45.34240668067438,0.5838076698664244
+Diabetes (six fixed features),55,Joint empirical donors,LIME,42.44411473091455,0.5532121903516977
+Diabetes (six fixed features),55,Joint empirical donors,Random ranking,25.15425959287059,0.32785801127597936
+Diabetes (six fixed features),55,Joint empirical donors,SHAP Exact,42.41700136040986,0.5528587974919382
+Diabetes (six fixed features),55,Training mean,LIME,37.71144142760813,0.4915270172496143
+Diabetes (six fixed features),55,Training mean,Random ranking,19.719722274197267,0.2570248153742273
+Diabetes (six fixed features),55,Training mean,SHAP Exact,38.55771692858866,0.5025572843786734
+Synthetic additive,11,Joint empirical donors,LIME,2.860836287244391,1.0980894489299275
+Synthetic additive,11,Joint empirical donors,Random ranking,1.696260672175238,0.65108442417883
+Synthetic additive,11,Joint empirical donors,SHAP Exact,2.841190625209333,1.0905487538212537
+Synthetic additive,11,Training mean,LIME,1.876490106322209,0.7202628112490067
+Synthetic additive,11,Training mean,Random ranking,1.0659170886617313,0.4091364171072415
+Synthetic additive,11,Training mean,SHAP Exact,2.0049963521314154,0.76958802194836
+Synthetic additive,22,Joint empirical donors,LIME,1.330262988375105,0.504146326741083
+Synthetic additive,22,Joint empirical donors,Random ranking,1.1438114184175814,0.4334844539154609
+Synthetic additive,22,Joint empirical donors,SHAP Exact,1.3545455775135287,0.5133490018698954
+Synthetic additive,22,Training mean,LIME,0.915436449105807,0.34693434848196814
+Synthetic additive,22,Training mean,Random ranking,0.9008657294162129,0.34141230143286877
+Synthetic additive,22,Training mean,SHAP Exact,0.9979253262349106,0.3781961852503738
+Synthetic additive,33,Joint empirical donors,LIME,2.317574231521867,0.8764228739092486
+Synthetic additive,33,Joint empirical donors,Random ranking,1.4610395784880361,0.5525124023461337
+Synthetic additive,33,Joint empirical donors,SHAP Exact,2.3718059512632457,0.8969313517074198
+Synthetic additive,33,Training mean,LIME,1.6940164072295307,0.6406158248914396
+Synthetic additive,33,Training mean,Random ranking,1.1226182490269245,0.4245336778140918
+Synthetic additive,33,Training mean,SHAP Exact,1.8403909911230265,0.695969406122349
+Synthetic additive,44,Joint empirical donors,LIME,2.6262132912002722,1.0166583771478257
+Synthetic additive,44,Joint empirical donors,Random ranking,1.8309652494457762,0.7088023525556262
+Synthetic additive,44,Joint empirical donors,SHAP Exact,2.5795594303048572,0.9985977578277798
+Synthetic additive,44,Training mean,LIME,1.3908580889972202,0.5384282884946407
+Synthetic additive,44,Training mean,Random ranking,1.0145076957618087,0.392735712302252
+Synthetic additive,44,Training mean,SHAP Exact,1.3935488738104982,0.5394699437671533
+Synthetic additive,55,Joint empirical donors,LIME,2.7957410527564965,1.0124719031651865
+Synthetic additive,55,Joint empirical donors,Random ranking,1.9365545330138194,0.7013192626300232
+Synthetic additive,55,Joint empirical donors,SHAP Exact,2.8032787621587074,1.0152016692057282
+Synthetic additive,55,Training mean,LIME,2.2037281232436787,0.7980756317897466
+Synthetic additive,55,Training mean,Random ranking,1.6037960214461773,0.5808114483712148
+Synthetic additive,55,Training mean,SHAP Exact,2.262949691308711,0.8195226015182597
+Synthetic nonlinear proxy,11,Joint empirical donors,LIME,1.4998290927919478,0.7500471268240282
+Synthetic nonlinear proxy,11,Joint empirical donors,Random ranking,0.9464866179811121,0.47332697559067916
+Synthetic nonlinear proxy,11,Joint empirical donors,SHAP Exact,1.5006964190240553,0.7504808666091396
+Synthetic nonlinear proxy,11,Training mean,LIME,0.8632797003574018,0.43171616153494413
+Synthetic nonlinear proxy,11,Training mean,Random ranking,0.4911080428092447,0.24559743389398495
+Synthetic nonlinear proxy,11,Training mean,SHAP Exact,0.8839643239891061,0.4420603018099643
+Synthetic nonlinear proxy,22,Joint empirical donors,LIME,2.0768620140605334,0.9211026936112493
+Synthetic nonlinear proxy,22,Joint empirical donors,Random ranking,1.324800421522086,0.5875581663586367
+Synthetic nonlinear proxy,22,Joint empirical donors,SHAP Exact,2.332163523859543,1.0343306821665026
+Synthetic nonlinear proxy,22,Training mean,LIME,2.014792253915518,0.8935743249115888
+Synthetic nonlinear proxy,22,Training mean,Random ranking,1.1618289782449356,0.515279202051901
+Synthetic nonlinear proxy,22,Training mean,SHAP Exact,2.2359326485436,0.9916516221894833
+Synthetic nonlinear proxy,33,Joint empirical donors,LIME,1.2901913051078024,0.5879242389898983
+Synthetic nonlinear proxy,33,Joint empirical donors,Random ranking,0.827573353306518,0.3771149534373889
+Synthetic nonlinear proxy,33,Joint empirical donors,SHAP Exact,1.2843586359232346,0.5852663636980397
+Synthetic nonlinear proxy,33,Training mean,LIME,0.7470982259003052,0.34044343205090766
+Synthetic nonlinear proxy,33,Training mean,Random ranking,0.533135947628049,0.24294346508651218
+Synthetic nonlinear proxy,33,Training mean,SHAP Exact,0.7234102580454366,0.3296491177355379
+Synthetic nonlinear proxy,44,Joint empirical donors,LIME,1.6389646523337293,0.7795485358683735
+Synthetic nonlinear proxy,44,Joint empirical donors,Random ranking,1.1242978141325737,0.5347551050836189
+Synthetic nonlinear proxy,44,Joint empirical donors,SHAP Exact,1.711627525843693,0.8141095232429486
+Synthetic nonlinear proxy,44,Training mean,LIME,1.2592651898303804,0.598950278521562
+Synthetic nonlinear proxy,44,Training mean,Random ranking,0.7980285992518841,0.37957012998546436
+Synthetic nonlinear proxy,44,Training mean,SHAP Exact,1.2886756384563165,0.6129389097790664
+Synthetic nonlinear proxy,55,Joint empirical donors,LIME,1.5293543596605161,0.6780939904687473
+Synthetic nonlinear proxy,55,Joint empirical donors,Random ranking,0.9924465577282001,0.44003670072008205
+Synthetic nonlinear proxy,55,Joint empirical donors,SHAP Exact,1.5226171753346471,0.6751068186761575
+Synthetic nonlinear proxy,55,Training mean,LIME,1.209885901913339,0.5364462160505498
+Synthetic nonlinear proxy,55,Training mean,Random ranking,0.8376234171383459,0.37139032026788743
+Synthetic nonlinear proxy,55,Training mean,SHAP Exact,1.2014669086200207,0.5327133540608255

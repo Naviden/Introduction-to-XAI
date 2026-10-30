@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "study": "Mixed-data raw-feature workflow",
-  "git_commit": "55ceba77b45708972a0ed792a0faa4bd0b8b78c4",
+  "git_commit": "f8cd64fa7b86af6b56c3be546206452c558f4333",
   "git_dirty": true,
   "source_sha256": {
     "Mixed_Data_Workflow.ipynb": "60d631494abcd6833f90ba9d2b27c50c02d047bf69c8d492ed1368fefd7158d8",
@@ -1492,7 +1492,7 @@
       0.23756706413120024
     ],
     "evaluated_rows": 3072,
-    "seconds": 0.009339083102531731
+    "seconds": 0.0097731250571087
   },
   "environment": {
     "python": "3.11.16 (main, Aug 12 2026, 23:03:19) [Clang 21.0.0 (clang-2100.3.34.2)]",
