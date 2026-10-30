@@ -7,6 +7,10 @@ and adapt the workflow to your own model and data.
 The collection includes worked theory, reproducible notebooks, research protocols,
 student exercises and separate instructor materials.
 
+**New to XAI?** Follow the [beginner guide](docs/METHOD_GUIDE.md): learn the key
+terms, read one worked comparison without installing anything, then run it and
+check what each explanation supports.
+
 ## From context to an explanation message
 
 The learning and method-selection framework follows **Figure 1 and Sections 3–5
@@ -27,13 +31,13 @@ to the black box must be checked. A method name does not specify its audience
 or presentation. Natural-language fluency alone does not establish explanation
 faithfulness or human benefit.
 
-Start with the updated [Dimensions notebook](Theory/Dimensions.ipynb), which
+The updated [Dimensions notebook](Theory/Dimensions.ipynb)
 includes the original Figure 1, the paper's six dimensions, and runnable examples
 of inspection, surrogate explanation, SHAP, counterfactuals and template-based
-messages. [Read it with outputs](docs/executed/Theory/Dimensions.ipynb), then use
-the [method-selection guide](docs/METHOD_GUIDE.md) to choose a workflow. The guide
-also explains differences between the figure's examples and the paper's prose
-and survey categories.
+messages. [Read it with outputs](docs/executed/Theory/Dimensions.ipynb) after the
+beginner walkthrough. The [detailed method reference](docs/METHOD_REFERENCE.md)
+maps questions to implementations and explains differences between the figure's
+examples and the paper's prose and survey categories.
 
 **Reference:** Cambria, E., Malandri, L., Mercorio, F., Mezzanzanica, M., & Nobani,
 N. (2023). *A survey on XAI and natural language explanations*. **Information
@@ -113,15 +117,17 @@ Each notebook also has an **Open in Colab** button; follow the
 For exact resolved Mac/Linux environments, use the hash-checked lockfiles in the
 [reproducibility guide](docs/REPRODUCIBILITY.md).
 
-Prefer to read first? [Validated notebooks with outputs](docs/executed/README.md)
-are committed reading copies. [Recorded evaluation tables](docs/results/README.md)
+Prefer to read first? Open the [starter with outputs](docs/executed/Tools/Starter_examples/First_XAI_Comparison.ipynb)
+alongside the [beginner walkthrough](docs/METHOD_GUIDE.md#your-first-walkthrough).
+More [notebooks with outputs](docs/executed/README.md) are available.
+[Recorded evaluation tables](docs/results/README.md)
 include raw measurements and assumptions. Source notebooks remain easy to edit.
 
 ## Choose a learning path
 
 | Path | Suggested sequence |
 | --- | --- |
-| **Beginner** | [Basics](Theory/Basics.ipynb) → [paper-based explanation dimensions](Theory/Dimensions.ipynb) → [lightweight starter](Tools/Starter_examples/First_XAI_Comparison.ipynb) → [method-selection guide](docs/METHOD_GUIDE.md). Basics includes a neural example requiring the full environment; the starter is independent. |
+| **Beginner** | [Guided starter walkthrough](docs/METHOD_GUIDE.md) → [Dimensions with outputs](docs/executed/Theory/Dimensions.ipynb) → [interpretable models](Tools/InterpretableModels_examples/Interpretable_Models_Comparison.ipynb) → [core exercises](Practice/Core_XAI_Exercises.ipynb). The guide includes prerequisites and checkpoints. Running Basics or Dimensions in full is optional and needs packages beyond the lightweight profile. |
 | **Practitioner** | [Interpretable models](Tools/InterpretableModels_examples/Interpretable_Models_Comparison.ipynb) → [mixed-data workflow](Tools/PracticalWorkflow_examples/Mixed_Data_Workflow.ipynb) → [evaluation protocol](docs/EVALUATION.md) → [causal recourse](Tools/CausalRecourse_examples/Causal_Recourse.ipynb). |
 | **Researcher** | [Evaluation and sensitivity lab](Tools/Evaluation_examples/Evaluation_and_Sensitivity.ipynb) → [regression benchmark](Tools/Evaluation_examples/Regression_Benchmark.ipynb) → [shared image](Tools/NeuralComparison_examples/Shared_Image_Attribution.ipynb) and [text](Tools/TextComparison_examples/Shared_Text_Comparison.ipynb) comparisons → [human-study design](docs/HUMAN_STUDY.md). |
 | **Teacher / learner** | [Core exercises](Practice/Core_XAI_Exercises.ipynb) → [separate instructor solutions](Practice/Instructor/Core_XAI_Solutions.ipynb) and [rubric](Practice/Instructor/Core_XAI_Rubric.md). The student TODO cells remain intentionally unfinished. |
@@ -169,7 +175,7 @@ provide a protocol, preregistration, participant-information draft and reporting
 template. These are study-design materials; no participants or empirical human
 study results are claimed.
 
-See [coverage boundaries and selection criteria](docs/METHOD_GUIDE.md) and the
+See [coverage boundaries and selection criteria](docs/METHOD_REFERENCE.md) and the
 [roadmap](docs/ROADMAP.md) for remaining families and research extensions.
 
 ## Full environment and optional tools

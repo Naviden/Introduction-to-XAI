@@ -54,6 +54,7 @@ Install the example's dependency profile from the table above, then change the
 working directory to the source notebook's folder. For the starter, for example:
 
 ```python
+%pip install -r /content/Introduction-to-XAI/requirements-tabular.txt
 %cd /content/Introduction-to-XAI/Tools/Starter_examples
 ```
 

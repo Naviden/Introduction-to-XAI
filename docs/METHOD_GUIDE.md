@@ -1,213 +1,230 @@
-# Choose an explanation from context to message
+# Choose an XAI method: a beginner's path
 
-This guide applies **Figure 1 and Sections 3–5 of Cambria et al. (2023)**,
-[*A survey on XAI and natural language explanations*](https://doi.org/10.1016/j.ipm.2022.103111).
-Its three stages are **Context definition → Explanation generation → Message
-generation**, with six dimensions developed below. See the updated
-[Dimensions notebook](../Theory/Dimensions.ipynb) for the original Figure 1 and
-worked examples, or [read it with outputs](executed/Theory/Dimensions.ipynb).
+Explainable AI (XAI) helps you examine how a model makes predictions. Start with
+one model and one question. By the end of this path, you should be able to read
+three common explanations, check what they actually support, and choose your next
+notebook.
 
-The paper studies XAI systems with an emphasis on natural-language explanations.
-The method mappings here are **our applications of its framework**, not the
-paper's coding or ranking of these experiments. Its categories describe different
-choices in a workflow and can overlap; a method name alone does not settle them.
+**Start now:** [read the first comparison with its plots and results](executed/Tools/Starter_examples/First_XAI_Comparison.ipynb).
+You do not need to install anything to follow it. Keep this guide open alongside
+the notebook and use the walkthrough below.
 
-## 1. Context definition
+[Before you start](#before-you-start) · [First walkthrough](#your-first-walkthrough) ·
+[Choose your next method](#choose-your-next-method) · [Learning sequence](#continue-in-this-order) ·
+[The paper's taxonomy](#connect-your-example-to-the-papers-taxonomy)
 
-### Explanation Goal
+Already familiar with SHAP, LIME and explanation evaluation? Go to the
+[detailed taxonomy and method reference](METHOD_REFERENCE.md), which retains the
+full method tables, access requirements, evaluation checks and coverage limits.
 
-| Goal in Figure 1 / §3.1 | What to select and verify |
+## Before you start
+
+For **reading**, you need only the ideas in this table. For **running and editing**
+the notebook, you should also be comfortable running Python cells and reading a
+pandas table. You do not need neural networks or the SHAP mathematics first.
+
+| Term | Meaning in the first notebook |
 | --- | --- |
-| **Model Explanation** | Fit an interpretable surrogate to mimic the black box. Assess fidelity to that model over a stated population, separately from accuracy against observed outcomes. |
-| **Outcome Explanation** | Explain a specified output for a selected input. Record the target, reference and question being answered. |
-| **Model Inspection** | Examine aspects of model behaviour or mechanism through a representation, without necessarily fitting a surrogate. State what the inspection actually reveals. |
+| Feature | An input column, such as a measured cell radius. One row is one case. |
+| Model and prediction | A fitted random forest takes those measurements and produces a score for a class. |
+| Target class and probability | We explain the model's probability for **malignant**, encoded as class 1. A score of 0.70 means the model outputs 70% for that class; it does not establish that the estimate is well calibrated. |
+| Training and test data | The model learns from training rows. Separate test rows let us check predictions on cases it did not learn from. |
+| Global and local | Global describes behaviour over a set of cases. Local concerns one selected case. Neither automatically tells you what happens for every case. |
+| Reference or baseline | The starting value against which a contribution is measured. Its definition is part of the explanation. |
+| Surrogate and fidelity | A surrogate is a simpler model fitted to imitate another model. Fidelity is how well it matches that model, which differs from accuracy against the true labels. |
 
-Local/global scope does not replace these goals: a global importance summary is
-not automatically a Model Explanation in the paper's surrogate sense. A limited
-forest impurity-importance chart is an inspection; a small tree fitted to the
-forest's predictions is a surrogate explanation. The [Dimensions notebook](../Theory/Dimensions.ipynb)
-implements both and measures fidelity separately from predictive accuracy.
+The starter uses a bundled historical breast-cancer dataset as a teaching example.
+Its explanations describe this fitted classifier; they are not clinical advice or
+evidence that changing a measurement would change a diagnosis.
 
-Training an interpretable model directly on observed outcomes is a separate
-**intrinsic-model design** choice. Section 3.1 discusses transparent-box design as
-background; Figure 1 organizes an explanation pipeline around a black box.
+### Read, run, or adapt
 
-### Audience
+| What you want to do | Where to go |
+| --- | --- |
+| Understand the example first | [Notebook with saved outputs](executed/Tools/Starter_examples/First_XAI_Comparison.ipynb). Read the text and plots in order; no setup is needed. |
+| Run it on your computer | Follow [Start here](../README.md#start-here), using `requirements-tabular.txt`, then open the [source notebook](../Tools/Starter_examples/First_XAI_Comparison.ipynb). Choose **Restart Kernel and Run All**. |
+| Try it in a browser | Use **Open in Colab** on the source notebook and follow the [Colab setup instructions](REPRODUCIBILITY.md#google-colab). The badge opens the notebook; dependencies still need setup. |
+| Use your own table and model | Finish the walkthrough first, then follow the [mixed-data workflow](../Tools/PracticalWorkflow_examples/Mixed_Data_Workflow.ipynb) for missing values, categories and preprocessing. |
 
-Figure 1, drawing on Tomsett et al., shows six roles: **Creator, Operator,
-Executor, Decision-subject, Data-subject and Examiner**. Identify the actual role
-and task: debugging a pipeline, acting on a recommendation, understanding a
-decision that affects them, or auditing the system can require different evidence.
-Roles can overlap. Section 3.2 and Table 1 operationalize audiences more broadly
-as **End users, Developers and Decision-makers**; these are not one-to-one
-replacements for the six roles in the figure.
+The starter runs on CPU with the lightweight environment. Its data are bundled;
+there are no data or model downloads after installing the packages. For platform
+support and exact environments, see [reproducibility](REPRODUCIBILITY.md).
 
-Specify what the reader should be able to understand or do after seeing the
-explanation. Appropriate reliance and task performance are more informative
-evaluation goals than maximizing agreement with the model.
+## Your first walkthrough
 
-## 2. Explanation generation
+Keep the model, test data and selected class fixed. The notebook asks **three
+different questions**, so its charts need not rank the features in the same order.
+The section names below match the notebook.
 
-| Dimension | Figure 1 / relevant section | Selection implication |
+### 1. Check the predictor before explaining it
+
+Read **“Fit once and keep the test set separate.”** Find the number of training
+and test cases and the two reported metrics. Accuracy measures the fraction of
+correct class predictions. ROC AUC measures how well scores rank positive cases
+above negative cases across thresholds; it is not percentage accuracy.
+
+Then read **“Fix one case and one output.”** The notebook deliberately selects a
+correctly classified malignant test case with a score near 0.70. This makes a
+readable illustration, not a representative sample of all predictions.
+
+**Checkpoint:** finish the sentence: “I am explaining this forest's probability
+of ___ for row ___.” If you cannot name the model, case and output, pause before
+interpreting an attribution plot.
+
+### 2. Read a global ranking: permutation importance
+
+Read **“Global question: what happens when a feature is shuffled?”** The notebook
+shuffles one column among test rows and measures how much ROC AUC falls. A larger
+positive bar means the model's ranking performance suffered more under that
+shuffle. Error bars describe variation across repeated shuffles.
+
+**Checkpoint:** identify the horizontal-axis units: **ROC AUC loss**, not a change
+in this one case's probability. A small bar does not prove the feature is unused;
+another correlated measurement can carry similar information. Shuffling can
+also create unrealistic combinations of measurements.
+
+### 3. Read one prediction: SHAP
+
+Read **“SHAP: an additive explanation of this prediction.”** SHAP assigns signed
+contributions to features under a specified reference. Here the reference uses
+training sample counts stored in the trees. Follow the waterfall from its
+reference value to the selected class probability: positive contributions add
+to the reference and negative contributions subtract from it in that calculation.
+
+The [saved starter run](executed/Tools/Starter_examples/First_XAI_Comparison.ipynb)
+reports these rounded values:
+
+```text
+reference probability + sum of SHAP contributions = model probability
+        0.3746        +          0.3299           =       0.7045
+```
+
+**Checkpoint:** locate the notebook's reconstruction check. It verifies that the
+contributions add up to the explained output. It does not prove that the model
+is correct, that the reference is the only sensible choice, or that a feature
+caused the outcome. Other notebooks can explain **log-odds** instead of
+probability, so always read the units before interpreting the bars.
+
+### 4. Check a local approximation: LIME
+
+Read **“LIME: how well does a simple local story fit?”** LIME creates modified
+inputs around the case, asks the forest for their predictions, and fits a small
+weighted linear model to approximate them. The displayed conditions belong to
+this local approximation.
+
+Inspect **both** diagnostics:
+
+| Diagnostic | What to ask | Saved starter run |
 | --- | --- | --- |
-| **Explanator Type** | Figure 1 lists decision trees, decision rules, salient masks, prototype selection and neuron activation. Section 4.1 / Table 1 also use **Feature Inspection (FIN)** alongside trees, rules and masks. | Choose an explanation mechanism or artefact compatible with the model, data, access and goal. Not every type pictured is implemented here. |
-| **Structure** | Feature importance; Sensitivity analysis; Direct Answers (§4.2). | Decide whether to organize the answer as contributions, responses to input/model changes, or an explicit what/how/why answer. The authors allow the first two to be restricted forms of direct answers. |
-| **Explanation Type** | Plain-fact; Contrastive; Counterfactual (§4.3). | State the question. For a contrastive question, identify the **fact**, **foil** and **contrast class**. A counterfactual can answer a contrastive question. |
+| Weighted local R² | How well does the small model match the forest across LIME's sampled neighbourhood? Values closer to 1 indicate a better fit on those samples. | **0.205**: the local summary fits poorly. |
+| Case approximation gap | How far apart are the two predictions at the selected case? | LIME **0.6735**, forest **0.7045**; a gap of **0.0310**, or 3.10 percentage points. |
 
-**Feature Inspection** is an explanator category in the prose; **Feature
-importance** is a structure. A salient mask likewise differs from the choice to
-display an image heatmap. The figure, prose and survey table use somewhat
-different illustrative/operational categories; do not silently treat them as
-one identical list.
+**Checkpoint:** explain why a fairly close prediction at one point does not
+rescue a poor fit across the sampled neighbourhood. LIME's sampled inputs can
+also be unrealistic. Its weights are not SHAP values and should not be averaged
+with them. These numbers describe the saved run; reruns can vary.
 
-Contrastive questions may compare properties of the same object (**P-contrast**),
-different objects (**O-contrast**), or an object over time (**T-contrast**). When
-comparing times or model versions, state whether inputs, preprocessing or the
-model changed. A model-level counterfactual input is not by itself a feasible or
-causally effective action.
+### 5. Write a conclusion that the evidence supports
 
-### Match the question to an implementation
+A suitable conclusion for this run is:
 
-The groups below indicate the goal of the stated use, not an exclusive label
-for the algorithm. For example, SHAP can explain one outcome or be aggregated
-into an inspection summary. The **Access / scope** and checking columns add
-repository guidance beyond Figure 1's six dimensions.
+> For the selected case, the forest assigns a malignant-class probability of
+> 0.7045. SHAP reconstructs that prediction relative to its stated reference.
+> LIME's approximation is close at the case but fits its sampled neighbourhood
+> poorly, so its displayed conditions need further checking. Neither result
+> establishes what would happen after a real-world intervention.
 
-#### Model Explanation: approximate the black box
+**Try one change:** in the LIME code cell, change `random_state=SEED` to
+`random_state=123` inside `LimeTabularExplainer`. Rerun that cell and the final
+diagnostics cell, keeping the global `SEED`, fitted forest and query unchanged.
+Compare the selected conditions, local R² and case gap. Explain why a change in
+the explanation need not mean the forest's prediction changed. Then attempt the
+notebook's other next experiments.
 
-| Your question | Start with | Access / scope | Check before interpreting |
-| --- | --- | --- | --- |
-| Can a small model approximate the predictor? | [Tree / RuleFit comparison](../Tools/MethodComparison_examples/Shared_Tabular_Case_Comparison.ipynb) | Predictions used as surrogate labels | Fidelity to the predictor separately from accuracy against observed outcomes |
-| What changed between model versions? | [MERLIN](../Tools/Merlin_examples/20NG_example.ipynb) | Two models + representative cases | Fidelity of both explanatory surrogates and coverage of the comparison population |
+## Choose your next method
 
-#### Outcome Explanation: a selected prediction or case
+Choose the **question** first. The links below are starting points, not a ranking
+of methods. If you are unsure, complete the three-method starter before branching.
 
-| Your question | Start with | Access / scope | Check before interpreting |
-| --- | --- | --- | --- |
-| Which features contribute to this prediction? | [SHAP and LIME starter](../Tools/Starter_examples/First_XAI_Comparison.ipynb) | Model predictions; SHAP implementation may need internals | Target class, probability vs logit, SHAP background, LIME neighborhood and local fit |
-| Which conditions usually preserve this decision? | [Anchors](../Tools/ANCHOR_examples/Anchor_tabular.ipynb) | Prediction function + perturbation distribution; local rule | Precision, coverage, uncertainty and the sampling distribution; no universal guarantee |
-| Which other inputs get a different decision? | [DiCE](../Tools/DiCE_examples/DiCE_example.ipynb) | Prediction function + feature constraints; local counterfactuals | Validity, proximity, diversity, feasibility, immutable attributes and search failures |
-| Which image regions affect a neural score? | [Shared image attribution](../Tools/NeuralComparison_examples/Shared_Image_Attribution.ipynb) · [read outputs](executed/Tools/NeuralComparison_examples/Shared_Image_Attribution.ipynb) | Gradients/rules for gradient, DeepLIFT and LRP methods; predictions for perturbations | Same model/input/target, baseline, propagation rule, units, reconstruction residuals, map resolution, masking and randomization controls |
-| Which words contribute to this text prediction? | [Shared text comparison](../Tools/TextComparison_examples/Shared_Text_Comparison.ipynb) · [read outputs](executed/Tools/TextComparison_examples/Shared_Text_Comparison.ipynb) | One TF-IDF classifier, word-type groups and an explicit deletion distribution | Selected class/log-odds, repeated words, TF-IDF renormalization, held-out local fit, masking artifacts and Anchors precision/coverage |
+| Your question | Start with | Check before trusting the answer |
+| --- | --- | --- |
+| Can I use a model whose own rules or terms I can inspect? | [Interpretable models](../Tools/InterpretableModels_examples/Interpretable_Models_Comparison.ipynb): small tree, logistic regression, additive models and EBM | Check performance on unseen data; a readable model can still be wrong. |
+| Which inputs help performance across many cases? | Permutation importance in the [starter](../Tools/Starter_examples/First_XAI_Comparison.ipynb) | Name the metric, use held-out data, and consider correlated inputs. |
+| How are contributions assigned to this one prediction? | SHAP in the [starter](../Tools/Starter_examples/First_XAI_Comparison.ipynb) | Fix the class, units and reference; check reconstruction. |
+| Can a simple approximation summarize behaviour near this case? | LIME in the [starter](../Tools/Starter_examples/First_XAI_Comparison.ipynb) | Inspect neighbourhood fit and the case gap; repeat the sampling. |
+| How does the model's prediction vary as an input changes? | [PDP and ICE](../Tools/Visual%20Explanation_example/PDP_ICE.ipynb); later [ALE](../Tools/ALE_examples/ALE_example.ipynb) | Check whether the edited inputs are plausible. A response curve is not a causal effect. |
+| Which changed inputs receive a different model decision? | [DiCE](../Tools/DiCE_examples/DiCE_example.ipynb); later [causal recourse](../Tools/CausalRecourse_examples/Causal_Recourse.ipynb) | Check the new prediction and allowed changes separately. An impossible change is not useful advice. |
+| Which words or image regions matter to a selected score? | [Read the text comparison](executed/Tools/TextComparison_examples/Shared_Text_Comparison.ipynb) or [image comparison](executed/Tools/NeuralComparison_examples/Shared_Image_Attribution.ipynb) | Keep the input, model and target fixed; inspect what deletion, masking or a reference image means. |
 
-#### Model Inspection: examine model behaviour or mechanisms
+PDP means **partial dependence plot**: a model response averaged over cases.
+ICE means **individual conditional expectation**: a response curve for each
+case. ALE means **accumulated local effects**: accumulated local model changes
+over intervals supported by the data. DiCE generates diverse counterfactual
+inputs. The [detailed reference](METHOD_REFERENCE.md#match-the-question-to-an-implementation)
+adds rules, surrogates, attention, survival models and evaluation methods.
 
-| Your question | Start with | Access / scope | Check before interpreting |
-| --- | --- | --- | --- |
-| Which inputs help predictive performance? | [Permutation / drop-column](../Tools/FeatureImportanceComparison_examples/FeatureImportanceComparison.ipynb) | Predictions + labeled evaluation data; global; drop-column refits | Metric, data split, feature dependencies, grouped importance, repeat variability |
-| How does model response vary with an input? | [PDP / ICE](../Tools/Visual%20Explanation_example/PDP_ICE.ipynb), [ALE](../Tools/ALE_examples/ALE_example.ipynb) | Prediction function + representative features; population or individual response/effect curves | Support of edited inputs, correlated variables, averaging, ALE bins and centering |
-| What do attention heads attend to? | [Attention visualization](../Tools/Attention_examples/Attention_visualization.ipynb) | Attention weights | Attention weights alone do not establish faithful or causal importance |
-| Which features and interactions contribute to survival-model scores across cases? | [Survival SHAP](../Tools/SHAP_examples/SHAP_survival_model.ipynb) | Compatible survival model; aggregated per-case attributions and interaction summaries | Censoring, held-out concordance, explained full-data model versus held-out validation model, log-hazard vs survival probability, prediction horizon |
+The table mixes lightweight and optional examples. Check the
+[notebook environment table](../README.md#core-comparisons-and-laboratories) and
+[dependency profiles](REPRODUCIBILITY.md) before running a new branch. The full
+shared-tabular comparison and neural examples are later steps.
 
-#### Additional design, adaptation and evaluation questions
+## Continue in this order
 
-These questions support the workflow but are not additional Explanation Goal
-categories in Figure 1. Intrinsic design, adaptation, causal recourse and
-evaluation need their own assumptions.
+| Step | Activity | You are ready to move on when… |
+| --- | --- | --- |
+| 1 | Complete the starter walkthrough above. | You can distinguish a performance drop, an additive contribution and a local approximation, and name one limitation of each. |
+| 2 | [Read Dimensions with outputs](executed/Theory/Dimensions.ipynb), including the paper's Figure 1. | You can state your question and audience, choose the kind of evidence to generate, and describe how to present it. Reading requires no extra environment. |
+| 3 | [Read](executed/Tools/InterpretableModels_examples/Interpretable_Models_Comparison.ipynb) or [run the interpretable-model comparison](../Tools/InterpretableModels_examples/Interpretable_Models_Comparison.ipynb). Start with the small tree and logistic regression, then the additive models. | You can separate model accuracy from readability, and reconstruct a prediction in the right units. It uses the same lightweight profile. |
+| 4 | Attempt [Core XAI exercises](../Practice/Core_XAI_Exercises.ipynb), then consult the separate [solutions](../Practice/Instructor/Core_XAI_Solutions.ipynb). | You can check units, dependent features and allowed counterfactual changes. The TODO cells are intentionally unfinished; running the template is not completing the exercises. |
+| 5 | Adapt the [mixed-data workflow](../Tools/PracticalWorkflow_examples/Mixed_Data_Workflow.ipynb), or explore the [evaluation and sensitivity lab](../Tools/Evaluation_examples/Evaluation_and_Sensitivity.ipynb). | You can explain your preprocessing, test more than one case, and report when an explanation changes or fails. |
 
-| Your question | Start with | Access / scope | Check before interpreting |
-| --- | --- | --- | --- |
-| Can a simpler model solve this task? | [Logistic regression, tree, spline GAM and EBM](../Tools/InterpretableModels_examples/Interpretable_Models_Comparison.ipynb) · [read outputs](executed/Tools/InterpretableModels_examples/Interpretable_Models_Comparison.ipynb) | Training data; intrinsic, local and global | Held-out performance, complexity, scaling, shape functions, interactions and exact term/logit reconstruction |
-| How do I explain my mixed-data pipeline? | [Mixed-data workflow](../Tools/PracticalWorkflow_examples/Mixed_Data_Workflow.ipynb) | Raw rows, fitted preprocessing and prediction function | Train-only fitting, missingness, unseen categories, original-feature groups and class-index mapping |
-| Which actions could change the decision? | [Causal recourse](../Tools/CausalRecourse_examples/Causal_Recourse.ipynb) | An explicit causal model + actionable variables | Identifiability/assumptions, downstream effects, cost, constraints and model changes |
-| How reliable and costly are explanations across tasks? | [Evaluation and sensitivity](../Tools/Evaluation_examples/Evaluation_and_Sensitivity.ipynb), [regression benchmark](../Tools/Evaluation_examples/Regression_Benchmark.ipynb) · [read regression outputs](executed/Tools/Evaluation_examples/Regression_Benchmark.ipynb) | Repeated splits/cases, model predictions and reference explanations | Paired controls, perturbation assumptions, SD versus confidence intervals, measured prediction calls/rows, time and traced allocation limits |
-| Do explanations help intended users? | [Human-study materials](HUMAN_STUDY.md) | Study protocol, preregistration and reporting templates | Appropriate participants/tasks, model errors, counterbalancing, participant dependence, decision quality and reliance; no empirical human results are included |
+Before the additive-model sections, learn one additional scale: **log-odds** is
+`log(p / (1 - p))`. A log-odds value of 0 corresponds to probability 0.5. Add the
+model's terms on the log-odds scale to get a total `z`, then convert it with
+`p = 1 / (1 + exp(-z))` (the sigmoid function). Adding individual probability
+changes is not the same calculation. **GAM** means
+generalized additive model; **EBM** means Explainable Boosting Machine. The
+comparison notebook explains and checks their fitted terms.
 
-The [complete tabular comparison](../Tools/MethodComparison_examples/Shared_Tabular_Case_Comparison.ipynb)
-is useful after the starter. Most sections explain one forest; Integrated Gradients
-explains a separately trained neural network. Raw attribution magnitudes across
-different models, units and reference distributions are not interchangeable.
+[Basics](../Theory/Basics.ipynb) is optional background reading. Running all of it
+requires the neural/full environment because it includes TensorFlow. Running
+[Dimensions](../Theory/Dimensions.ipynb) also needs packages beyond the starter's
+lightweight profile. Neither full execution is a prerequisite for this path.
 
-## 3. Message generation
+## Connect your example to the paper's taxonomy
 
-**Presentation** is the sixth dimension: how the raw explanation is communicated
-to the chosen audience (§5). Figure 1 shows **Graphics, Images, Reports, Texts and
-Dialogue System**. Section 5.1 groups four families (Graphics/plots, Texts, Images,
-Reports) and discusses dialogue within its natural-language treatment; Table 1
-uses Graphic, Image, Rule, Text and Dialogue System. These differences do not
-make presentation interchangeable with the explanation algorithm.
+Cambria et al. (2023) organize explanation design into **Context definition →
+Explanation generation → Message generation**. In everyday terms: decide what
+someone needs to understand, produce evidence that addresses it, then communicate
+that evidence appropriately. Here is how the starter's SHAP example can be
+recorded using the six dimensions developed in the paper:
 
-| Presentation choice | Practical application and check |
-| --- | --- |
-| Graphics/plots | Use a bar chart, waterfall, tree or response curve with the target, units and reference clearly labelled. |
-| Images | Display a mask or heatmap over the input; preserve the selected class, resolution and masking assumptions. An image heatmap is distinct from a numeric heatmap plot. |
-| Reports | Show contributions, surrogate fidelity or counterfactual candidates in a table with the relevant context and checks. |
-| Texts | Distinguish rules and word annotations from natural-language sentences. Ground every stated value and conclusion in the underlying explanation. |
-| Dialogue System | Support user questions and follow-up responses through an actual interaction mechanism. A fixed paragraph alone is not dialogue. |
+| Stage | Dimension | Concrete choice for this example |
+| --- | --- | --- |
+| Context definition | Explanation Goal | **Outcome Explanation:** explain the selected forest prediction. |
+| Context definition | Audience | A **Creator/developer** checking the classifier. |
+| Explanation generation | Explanator Type | Feature-based inspection, using **Feature Inspection** from §4.1 to describe this application. |
+| Explanation generation | Structure | **Feature importance:** signed contributions under the stated reference. |
+| Explanation generation | Explanation Type | **Plain-fact:** describe this prediction; no explicit alternative class or action is requested. |
+| Message generation | Presentation | A **graphic** (waterfall) and a short grounded **text** describing the result and its limits. |
 
-The [Dimensions notebook](../Theory/Dimensions.ipynb) presents the same SHAP result
-as a waterfall, table and audience-specific template text. This is a small
-**template-based NLG** example, distinguished in §5.1 from end-to-end generation.
-The [shared text comparison](../Tools/TextComparison_examples/Shared_Text_Comparison.ipynb)
-explains text inputs; that task is distinct from generating explanations in
-natural language. The repository does not provide a general dialogue manager.
+This mapping is our application of the paper, not its evaluation of these
+notebooks. In its terminology, **Model Explanation** uses an interpretable
+surrogate to approximate a black box; **Model Inspection** examines aspects of
+model behaviour. These goals differ from simply saying “global” or “local.”
+The figure and paper text use some different illustrative categories, explained
+in the [detailed taxonomy reference](METHOD_REFERENCE.md).
 
-Check that shorter messages preserve the target, reference, units and limits of
-the numerical result. Presentation quality or fluency does not demonstrate
-fidelity, correctness of the prediction or usefulness to people. Use the
-[human-study materials](HUMAN_STUDY.md) to plan an evaluation of comprehension,
-decision quality and appropriate reliance; no human-study results are claimed.
+See the [updated Dimensions notebook](../Theory/Dimensions.ipynb) for the original
+Figure 1 and worked examples, or [read it with outputs](executed/Theory/Dimensions.ipynb).
 
-## Record the six dimensions and the implementation checks
-
-1. **Context:** Explanation Goal and Audience, with a concrete question and task.
-2. **Generation:** Explanator Type, Structure and Explanation Type; state the fact,
-   foil and contrast class when applicable.
-3. **Message:** Presentation, the evidence it communicates and any information
-   omitted or available through follow-up.
-4. **Implementation:** model, preprocessing, output/class, units, data split and
-   population; intrinsic/post-hoc construction and model access where relevant.
-5. **Definition:** reference values, background distribution, perturbations,
-   neighborhood, feature grouping and algorithm settings.
-6. **Evaluation:** model performance, explanation fidelity/stability, variability
-   and cost, plus human utility where actually measured.
-7. **Interpretation:** supported conclusions, a failure case and what the result
-   cannot establish, particularly any predictive-versus-causal distinction.
-
-Use the [evaluation protocol](EVALUATION.md) and
-[reproducibility guide](REPRODUCIBILITY.md) alongside a method notebook.
-The [core exercises](../Practice/Core_XAI_Exercises.ipynb) ask learners to check
-output units, dependent features and counterfactual validity. Complete
-[instructor solutions](../Practice/Instructor/Core_XAI_Solutions.ipynb) and a
-[grading rubric](../Practice/Instructor/Core_XAI_Rubric.md) are separate from the
-student template.
-
-## Coverage boundaries
-
-The collection covers classification, regression and a survival example with
-tabular, image and text-classification data. The intrinsic-model comparison
-includes both a spline GAM and native Explainable Boosting Machines, with and
-without interactions. Exact additive reconstruction describes the fitted model;
-it does not turn its terms into causal effects.
-
-The shared CNN comparison includes DeepLIFT Rescale and epsilon-LRP. It records
-reference/rule choices and residuals, retains a failed DeepLIFT reference check,
-and does not cover every variant or architecture. The text comparison uses one
-word-type deletion protocol; its artificial deletions and Anchors precision
-estimates do not establish behavior on natural-language paraphrases. The
-regression benchmark distinguishes a known generating function from its fitted
-predictor, and measures public prediction calls and traced allocations rather
-than total arithmetic work or full process memory.
-
-These compact experiments teach a protocol, not a universal method ranking.
-The paper's AHP selection model (§6) is conditional on user preferences, criteria
-weights and survey coding; it is not an empirical leaderboard. We do not
-reproduce that ranking here.
-Bike-sharing uses a chronological split but is not a sequence-attribution
-example. Attention visualization is not a generative-language-model explanation.
-Concept explanations (TCAV/concept bottlenecks), prototypes/criticisms,
-training-data influence, GNNs, temporal attribution and generative or mechanistic
-interpretability remain extension topics. Human-study templates are available;
-participant studies have not been conducted as part of this collection. See the
-[roadmap](ROADMAP.md) for inclusion criteria and remaining work.
-
-## Reference
-
-Cambria, E., Malandri, L., Mercorio, F., Mezzanzanica, M., & Nobani, N. (2023).
-*A survey on XAI and natural language explanations*. **Information Processing &
-Management, 60**(1), 103111.
+**Reference:** Cambria, E., Malandri, L., Mercorio, F., Mezzanzanica, M., & Nobani,
+N. (2023). *A survey on XAI and natural language explanations*. **Information
+Processing & Management, 60**(1), 103111.
 [doi:10.1016/j.ipm.2022.103111](https://doi.org/10.1016/j.ipm.2022.103111).
-Figure 1 is on p. 4; Sections 3–5 develop the context, generation and presentation
-dimensions. [BibTeX](../Theory/references.bib) ·
-[Dimensions notebook](../Theory/Dimensions.ipynb) ·
-[Notebook with outputs](executed/Theory/Dimensions.ipynb).
+Figure 1, p. 4; Sections 3–5. [BibTeX](../Theory/references.bib).
+
+For a project report, use the [evaluation protocol](EVALUATION.md) and
+[reproducibility guide](REPRODUCIBILITY.md). For methods outside this collection,
+see the [coverage boundaries](METHOD_REFERENCE.md#coverage-boundaries) and
+[roadmap](ROADMAP.md). There is no single best explainer for every question.
