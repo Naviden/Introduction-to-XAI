@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+import copy
 import hashlib
 import json
 import os
@@ -13,6 +14,86 @@ from urllib.parse import unquote, urlsplit, quote
 import nbformat
 
 ROOT = Path(__file__).resolve().parents[1]
+
+# Only this optional notebook-widget warning is omitted. Numerical and model
+# warnings must remain visible, even when their local filenames are normalized.
+WIDGET_WARNING = re.compile(
+    r"^.*\bTqdmWarning: IProgress not found\. Please update jupyter and ipywidgets\."
+    r" See https://ipywidgets\.readthedocs\.io/en/stable/user_install\.html\r?\n"
+    r"(?:[ \t]+from \.autonotebook import tqdm as notebook_tqdm\r?\n)?",
+    re.MULTILINE,
+)
+LOCAL_PATH = re.compile(
+    r"(?:/(?:Users|home)/|[A-Za-z]:[\\/]Users[\\/]|/(?:private/)?(?:tmp|var/folders)/)"
+    r"[^\s<>\"']+"
+)
+
+
+def portable_text(text, root=ROOT):
+    """Normalize machine-specific paths without changing diagnostic messages."""
+    root_text = str(root.resolve())
+    def replace(match):
+        path = match.group(0).replace("\\", "/")
+        if "/site-packages/" in path:
+            return "site-packages/" + path.split("/site-packages/", 1)[1]
+        # Keep line numbers and sentence delimiters around a redacted path.
+        suffix = re.search(r"(?::\d+(?::\d+)?)?[.,;:()\[\]{}]*$", path).group()
+        return "[local-path]" + suffix
+
+    # URL paths such as https://example.org/home/tutorial are not local paths.
+    parts = re.split(r"(https?://[^\s<>\"']+)", text)
+    for index in range(0, len(parts), 2):
+        # Handle the known checkout first, including checkout paths with spaces.
+        part = parts[index].replace(root_text + os.sep, "./")
+        part = re.sub(re.escape(root_text) + r"(?=$|[\s<>\"'])", ".", part)
+        part = re.sub(r"\./[^\s<>\"']*?site-packages/", "site-packages/", part)
+        parts[index] = LOCAL_PATH.sub(replace, part)
+    return "".join(parts)
+
+
+def portable_value(value, root=ROOT):
+    """Normalize paths in nested output data/metadata without touching numbers."""
+    if isinstance(value, str):
+        return portable_text(value, root)
+    if isinstance(value, list):
+        return [portable_value(item, root) for item in value]
+    if isinstance(value, dict):
+        return {key: portable_value(item, root) for key, item in value.items()}
+    return value
+
+
+def prepare_public_notebook(notebook, root=ROOT):
+    """Clean a copy for publication; retain the original execution as evidence."""
+    public = copy.deepcopy(notebook)
+    public.metadata = portable_value(public.metadata, root)
+    for cell in public.cells:
+        cell.metadata = portable_value(cell.metadata, root)
+        if cell.cell_type != "code":
+            continue
+        outputs = []
+        for output in cell.get("outputs", []):
+            # A warning can be split across consecutive stderr stream messages.
+            if (output.output_type == "stream" and output.name == "stderr"
+                    and outputs and outputs[-1].output_type == "stream"
+                    and outputs[-1].name == "stderr"):
+                outputs[-1].text += output.text
+            else:
+                outputs.append(output)
+        cleaned = []
+        for output in outputs:
+            if output.output_type == "stream" and output.name == "stderr":
+                output.text = WIDGET_WARNING.sub("", output.text)
+                if not output.text:
+                    continue
+            for key in ("text", "traceback", "evalue", "metadata"):
+                if key in output:
+                    output[key] = portable_value(output[key], root)
+            for mime, value in output.get("data", {}).items():
+                if mime.startswith("text/") or mime == "application/json":
+                    output.data[mime] = portable_value(value, root)
+            cleaned.append(output)
+        cell.outputs = cleaned
+    return public
 
 
 def checked_notebook(directory, record, root=ROOT):
@@ -80,6 +161,7 @@ def main():
     prepared = [(r, checked_notebook(args.input, r)) for r in records]
     args.destination.mkdir(parents=True, exist_ok=True)
     for record, notebook in prepared:
+        notebook = prepare_public_notebook(notebook)
         relative = Path(record["notebook"])
         destination = args.destination / relative
         destination.parent.mkdir(parents=True, exist_ok=True)
@@ -97,7 +179,10 @@ def main():
              "Use the source links below to run or adapt them. "
              "Relative imports in the source assume its original directory.", "",
              "The manifests record source hashes, measured times and software/platform versions. "
-             "They describe a particular run; outputs can change with data, seeds, versions or hardware.", ""]
+             "They describe a particular run; outputs can change with data, seeds, versions or hardware.", "",
+             "Published outputs use portable paths and omit the optional tqdm widget-availability warning. "
+             "Other warnings and computed results are retained. Executed-artifact hashes refer to the "
+             "original, unmodified validation files.", ""]
     for path in sorted(args.destination.rglob("*.ipynb")):
         relative = path.relative_to(args.destination)
         title = path.stem.replace("_", " ")

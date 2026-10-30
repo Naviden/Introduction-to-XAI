@@ -116,7 +116,12 @@ python scripts/publish_results.py --input validation/all
 ```
 
 The publisher rejects failed runs, changed sources/helpers, modified execution
-artifacts and unexecuted code cells. Inspect plots before committing. Large legacy
+artifacts and unexecuted code cells. After those checks, published copies normalize
+local filesystem paths and omit only tqdm's optional `IProgress` widget-availability
+warning. Other warnings, numerical results and plots are retained; source cells
+are unchanged apart from relocated Markdown links. The `executed_sha256` receipt
+identifies the original validation artifact, before this presentation cleanup.
+Raw validation files remain unchanged. Inspect plots before committing. Large legacy
 JavaScript-heavy outputs are left as CI artifacts rather than copied into Git.
 
 ## Runtime and CI

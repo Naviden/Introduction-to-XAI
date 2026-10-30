@@ -4,6 +4,8 @@ These notebooks can be read on GitHub without installing Python. Use the source 
 
 The manifests record source hashes, measured times and software/platform versions. They describe a particular run; outputs can change with data, seeds, versions or hardware.
 
+Published outputs use portable paths and omit the optional tqdm widget-availability warning. Other warnings and computed results are retained. Executed-artifact hashes refer to the original, unmodified validation files.
+
 - [Core XAI Exercises](Practice/Core_XAI_Exercises.ipynb) · [source notebook](../../Practice/Core_XAI_Exercises.ipynb)
 - [Core XAI Solutions](Practice/Instructor/Core_XAI_Solutions.ipynb) · [source notebook](../../Practice/Instructor/Core_XAI_Solutions.ipynb)
 - [Dimensions](Theory/Dimensions.ipynb) · [source notebook](../../Theory/Dimensions.ipynb)
