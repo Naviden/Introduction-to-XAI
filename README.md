@@ -98,6 +98,11 @@ More [notebooks with outputs](docs/executed/README.md) are available.
 [Recorded evaluation tables](docs/results/README.md)
 include raw measurements and assumptions. Source notebooks remain easy to edit.
 
+Optional browser exercises: explore local approximations with the
+[LIME Explainer](https://nobani.it/tools/lime-explainer), or feature coalitions and
+additive contributions with the [SHAP Explainer](https://nobani.it/tools/shap-explainer).
+These use separate toy examples; the notebooks provide the fitted-model comparisons.
+
 ## Choose a learning path
 
 | Path | Suggested sequence |

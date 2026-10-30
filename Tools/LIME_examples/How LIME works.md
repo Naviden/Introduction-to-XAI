@@ -42,6 +42,16 @@ distance weight
 
 A point twice as far away does not get half the weight. These weights specify a regression problem only after model outputs, the intercept, encoded features and regularization are supplied; they do not by themselves establish any fitted coefficient.
 
+## Optional browser exercise
+
+Use the [LIME Explainer](https://nobani.it/tools/lime-explainer) to visualize
+perturbations and a local linear fit for a toy two-feature classifier. Keep the
+model and selected point fixed, vary the kernel width, and compare the weighted
+neighbourhood, coefficients and local R². Then increase the perturbation count.
+How much do the results vary across repeated runs? Fresh samples can change the
+fit even when settings stay fixed. This demonstration uses separate data and
+settings from the notebooks.
+
 ## Limitations and checks
 
 A sparse explanation can fit its sampled neighborhood poorly. Report local weighted fit and the gap at the query, and repeat sampling with multiple seeds/kernel widths. Perturbations can create unrealistic correlated-feature combinations, unnatural text, or masked images unlike training data. A stable approximation in this artificial neighborhood need not remain faithful elsewhere. The notebooks provide full fitted examples in [tabular](LIME_tabular.ipynb), [text](LIME_textual.ipynb), and [image](LIME_image.ipynb) settings.

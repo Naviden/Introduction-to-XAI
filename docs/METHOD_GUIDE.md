@@ -105,6 +105,12 @@ is correct, that the reference is the only sensible choice, or that a feature
 caused the outcome. Other notebooks can explain **log-odds** instead of
 probability, so always read the units before interpreting the bars.
 
+**Optional browser exercise:** open the
+[SHAP Explainer](https://nobani.it/tools/shap-explainer), change one feature and
+select **Compute SHAP**. Follow the waterfall, inspect a feature's coalition
+contributions, and check that the base value plus the contributions reconstructs
+the prediction. The demo uses its own toy model and reference.
+
 ### 4. Check a local approximation: LIME
 
 Read **“LIME: how well does a simple local story fit?”** LIME creates modified
@@ -123,6 +129,13 @@ Inspect **both** diagnostics:
 rescue a poor fit across the sampled neighbourhood. LIME's sampled inputs can
 also be unrealistic. Its weights are not SHAP values and should not be averaged
 with them. These numbers describe the saved run; reruns can vary.
+
+**Optional browser exercise:** in the
+[LIME Explainer](https://nobani.it/tools/lime-explainer), keep the toy classifier
+and selected point fixed, change the kernel width, and select **Explain selected
+point**. Compare the local line, coefficients and R². Freshly sampled neighbours
+can also change the result. This two-feature example helps visualize the local
+fit before working with the notebook's larger table.
 
 ### 5. Write a conclusion that the evidence supports
 

@@ -57,6 +57,16 @@ Full probability: 0.939118
 
 Each feature has the same marginal contribution in every order because the logit is additive. Applying the sigmoid separately to each attribution would destroy additivity. To explain probability instead, define a probability-valued game and recompute its Shapley values.
 
+## Optional browser exercise
+
+Use the [SHAP Explainer](https://nobani.it/tools/shap-explainer) to explore a
+four-feature toy model. Change an input, compute the attributions, and inspect
+the waterfall and coalition breakdown. For one feature, examine how its
+marginal contribution varies across coalitions; check the displayed base value
+plus all contributions against the prediction. The demo defines its own model
+and reference, so interpret its results using those choices rather than the
+zero-reference logit game above.
+
 ## Limitations and checks
 
 Additivity checks numerical reconstruction, not causality or explanation usefulness. Background selection, correlated features, feature grouping and masking choices can change results. Compare sensible backgrounds and inspect approximation error. Mean absolute SHAP is a dataset summary of attribution magnitude; it is not a measure of held-out accuracy loss or proof of a feature's real-world effect.
