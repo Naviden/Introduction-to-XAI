@@ -38,6 +38,31 @@ profiles. `requirements.txt` remains the normal full teaching requirements;
 `requirements-full.txt` adds MERLIN and validation. Hash locks include transitive
 packages, but source distributions may use platform build tooling.
 
+## Google Colab
+
+Each notebook has an **Open in Colab** badge. Badges on saved reading copies open
+the corresponding source notebook. Opening a notebook does not copy the rest of
+the repository or install its packages; see the [Colab FAQ](https://research.google.com/colaboratory/faq.html#using-colab).
+
+Before running an example, clone the repository in your Colab runtime:
+
+```python
+!git clone https://github.com/Naviden/Introduction-to-XAI.git /content/Introduction-to-XAI
+```
+
+Install the example's dependency profile from the table above, then change the
+working directory to the source notebook's folder. For the starter, for example:
+
+```python
+%cd /content/Introduction-to-XAI/Tools/Starter_examples
+```
+
+Other notebooks need their own source directory so local helpers, checked assets
+and bundled data can be found. Colab runtime versions can differ from the tested
+Python 3.11 profiles; check compatibility before installing a lockfile. These
+badges provide convenient opening links, not a claim that Colab execution has
+been validated. Java-dependent examples still need the documented Java runtime.
+
 ## Refresh locks deliberately
 
 Use a current `uv`; review dependency changes and rerun the associated notebooks.

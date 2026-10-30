@@ -73,6 +73,8 @@ python -m notebook
 
 Open [First XAI Comparison](Tools/Starter_examples/First_XAI_Comparison.ipynb)
 and use **Restart Kernel and Run All**. Run notebooks from their own directories.
+Each notebook also has an **Open in Colab** button; follow the
+[Colab setup note](docs/REPRODUCIBILITY.md#google-colab) for dependencies and local files.
 For exact resolved Mac/Linux environments, use the hash-checked lockfiles in the
 [reproducibility guide](docs/REPRODUCIBILITY.md).
 

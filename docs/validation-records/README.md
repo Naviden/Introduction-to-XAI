@@ -7,6 +7,10 @@ three worked mathematical examples passed. EBM and both new practice notebooks
 also ran in the lightweight profile, which has neither TensorFlow nor PyTorch.
 Student TODO cells intentionally remain exercises.
 
+Colab badges and setup links were added later as Markdown-only changes. These
+receipts identify the source files before that presentation update; code cells
+and saved results were preserved.
+
 - [All notebook execution receipts](results.json): source/helper/asset hashes,
   measured duration, status and executed-artifact identity.
 - [Installed environment](environment.json): package versions and platform.
