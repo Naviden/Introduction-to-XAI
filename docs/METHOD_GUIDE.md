@@ -11,10 +11,10 @@ the notebook and use the walkthrough below.
 
 [Before you start](#before-you-start) · [First walkthrough](#your-first-walkthrough) ·
 [Choose your next method](#choose-your-next-method) · [Learning sequence](#continue-in-this-order) ·
-[The paper's taxonomy](#connect-your-example-to-the-papers-taxonomy)
+[Document your explanation](#document-your-explanation)
 
 Already familiar with SHAP, LIME and explanation evaluation? Go to the
-[detailed taxonomy and method reference](METHOD_REFERENCE.md), which retains the
+[detailed method reference](METHOD_REFERENCE.md), which lists the
 full method tables, access requirements, evaluation checks and coverage limits.
 
 ## Before you start
@@ -173,7 +173,7 @@ shared-tabular comparison and neural examples are later steps.
 | Step | Activity | You are ready to move on when… |
 | --- | --- | --- |
 | 1 | Complete the starter walkthrough above. | You can distinguish a performance drop, an additive contribution and a local approximation, and name one limitation of each. |
-| 2 | [Read Dimensions with outputs](executed/Theory/Dimensions.ipynb), including the paper's Figure 1. | You can state your question and audience, choose the kind of evidence to generate, and describe how to present it. Reading requires no extra environment. |
+| 2 | [Read Dimensions with outputs](executed/Theory/Dimensions.ipynb) to explore goals, audiences and ways to present an explanation. | You can state your question and audience, choose the kind of evidence to generate, and describe how to present it. Reading requires no extra environment. |
 | 3 | [Read](executed/Tools/InterpretableModels_examples/Interpretable_Models_Comparison.ipynb) or [run the interpretable-model comparison](../Tools/InterpretableModels_examples/Interpretable_Models_Comparison.ipynb). Start with the small tree and logistic regression, then the additive models. | You can separate model accuracy from readability, and reconstruct a prediction in the right units. It uses the same lightweight profile. |
 | 4 | Attempt [Core XAI exercises](../Practice/Core_XAI_Exercises.ipynb), then consult the separate [solutions](../Practice/Instructor/Core_XAI_Solutions.ipynb). | You can check units, dependent features and allowed counterfactual changes. The TODO cells are intentionally unfinished; running the template is not completing the exercises. |
 | 5 | Adapt the [mixed-data workflow](../Tools/PracticalWorkflow_examples/Mixed_Data_Workflow.ipynb), or explore the [evaluation and sensitivity lab](../Tools/Evaluation_examples/Evaluation_and_Sensitivity.ipynb). | You can explain your preprocessing, test more than one case, and report when an explanation changes or fails. |
@@ -191,38 +191,25 @@ requires the neural/full environment because it includes TensorFlow. Running
 [Dimensions](../Theory/Dimensions.ipynb) also needs packages beyond the starter's
 lightweight profile. Neither full execution is a prerequisite for this path.
 
-## Connect your example to the paper's taxonomy
+## Document your explanation
 
-Cambria et al. (2023) organize explanation design into **Context definition →
-Explanation generation → Message generation**. In everyday terms: decide what
-someone needs to understand, produce evidence that addresses it, then communicate
-that evidence appropriately. Here is how the starter's SHAP example can be
-recorded using the six dimensions developed in the paper:
+Before sharing a result, answer three questions:
 
-| Stage | Dimension | Concrete choice for this example |
-| --- | --- | --- |
-| Context definition | Explanation Goal | **Outcome Explanation:** explain the selected forest prediction. |
-| Context definition | Audience | A **Creator/developer** checking the classifier. |
-| Explanation generation | Explanator Type | Feature-based inspection, using **Feature Inspection** from §4.1 to describe this application. |
-| Explanation generation | Structure | **Feature importance:** signed contributions under the stated reference. |
-| Explanation generation | Explanation Type | **Plain-fact:** describe this prediction; no explicit alternative class or action is requested. |
-| Message generation | Presentation | A **graphic** (waterfall) and a short grounded **text** describing the result and its limits. |
+1. **What does the reader need to understand?** Name the question, audience,
+   model and output. For the starter, a developer is examining one forest
+   prediction for one selected case.
+2. **What evidence answers that question?** State the method, reference, units
+   and checks. For SHAP here, that means signed probability contributions under
+   the tree-path reference, with a reconstruction check.
+3. **How will you communicate the result?** Choose a plot, table or text that
+   the reader can interpret, and state the limits. A waterfall and a short
+   explanation can show how contributions add up without claiming causation.
 
-This mapping is our application of the paper, not its evaluation of these
-notebooks. In its terminology, **Model Explanation** uses an interpretable
-surrogate to approximate a black box; **Model Inspection** examines aspects of
-model behaviour. These goals differ from simply saying “global” or “local.”
-The figure and paper text use some different illustrative categories, explained
-in the [detailed taxonomy reference](METHOD_REFERENCE.md).
-
-See the [updated Dimensions notebook](../Theory/Dimensions.ipynb) for the original
-Figure 1 and worked examples, or [read it with outputs](executed/Theory/Dimensions.ipynb).
-
-**Reference:** Cambria, E., Malandri, L., Mercorio, F., Mezzanzanica, M., & Nobani,
-N. (2023). *A survey on XAI and natural language explanations*. **Information
-Processing & Management, 60**(1), 103111.
-[doi:10.1016/j.ipm.2022.103111](https://doi.org/10.1016/j.ipm.2022.103111).
-Figure 1, p. 4; Sections 3–5. [BibTeX](../Theory/references.bib).
+For a more formal vocabulary, the [Dimensions notebook](../Theory/Dimensions.ipynb)
+and [detailed reference](METHOD_REFERENCE.md) discuss the context, explanation
+and message stages of [Cambria et al. (2023)](https://doi.org/10.1016/j.ipm.2022.103111).
+This is one organizing framework for these choices; the method tutorials also
+provide their own primary references and checks.
 
 For a project report, use the [evaluation protocol](EVALUATION.md) and
 [reproducibility guide](REPRODUCIBILITY.md). For methods outside this collection,

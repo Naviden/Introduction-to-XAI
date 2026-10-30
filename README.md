@@ -1,49 +1,24 @@
 # Introduction to Explainable AI
 
-An executable XAI learning and reference collection for researchers and practitioners.
-Define the explanation context, generate an explanation, and communicate it to its
-intended audience. Compare methods on shared cases, evaluate their limitations,
-and adapt the workflow to your own model and data.
-The collection includes worked theory, reproducible notebooks, research protocols,
-student exercises and separate instructor materials.
+Learn to choose, run and evaluate XAI methods through reproducible Python
+notebooks. Explore interpretable models, feature attributions, response curves,
+rules and counterfactuals for tabular, image and text data. Compare methods on
+shared cases, examine their limitations, and adapt the examples to your own work.
 
 **New to XAI?** Follow the [beginner guide](docs/METHOD_GUIDE.md): learn the key
 terms, read one worked comparison without installing anything, then run it and
 check what each explanation supports.
 
-## From context to an explanation message
+## What is included
 
-The learning and method-selection framework follows **Figure 1 and Sections 3–5
-of Cambria et al. (2023)**: **Context definition → Explanation generation →
-Message generation**. The paper focuses on selecting XAI systems that make use
-of natural-language explanations; we apply its roadmap to the repository's
-worked examples and keep implementation checks distinct from the taxonomy.
-
-| Stage | Dimensions in the paper | Decisions to make |
-| --- | --- | --- |
-| **Context definition** | Explanation Goal; Audience | Explain the model through a surrogate, explain an outcome, or inspect the model? Who needs the explanation, and for what task? |
-| **Explanation generation** | Explanator Type; Structure; Explanation Type | Which artefact or mechanism supports the answer? Is it organized as feature importance, sensitivity analysis or direct answers? Is the question plain-fact, contrastive or counterfactual? |
-| **Message generation** | Presentation | How should the evidence reach the audience: graphics, images, reports, texts or dialogue? |
-
-A global importance chart is a limited **Model Inspection**, while **Model
-Explanation** in the paper refers to an interpretable surrogate whose fidelity
-to the black box must be checked. A method name does not specify its audience
-or presentation. Natural-language fluency alone does not establish explanation
-faithfulness or human benefit.
-
-The updated [Dimensions notebook](Theory/Dimensions.ipynb)
-includes the original Figure 1, the paper's six dimensions, and runnable examples
-of inspection, surrogate explanation, SHAP, counterfactuals and template-based
-messages. [Read it with outputs](docs/executed/Theory/Dimensions.ipynb) after the
-beginner walkthrough. The [detailed method reference](docs/METHOD_REFERENCE.md)
-maps questions to implementations and explains differences between the figure's
-examples and the paper's prose and survey categories.
-
-**Reference:** Cambria, E., Malandri, L., Mercorio, F., Mezzanzanica, M., & Nobani,
-N. (2023). *A survey on XAI and natural language explanations*. **Information
-Processing & Management, 60**(1), 103111.
-[doi:10.1016/j.ipm.2022.103111](https://doi.org/10.1016/j.ipm.2022.103111) ·
-[BibTeX](Theory/references.bib).
+- **Worked examples:** explanations alongside the model, data and assumptions
+  needed to interpret them.
+- **Shared comparisons:** several methods applied to the same tabular, image or
+  text case, with differences in their outputs explained.
+- **Evaluation tools:** reconstruction checks, sensitivity experiments, failure
+  cases and reproducibility records.
+- **Learning materials:** a beginner walkthrough, method references, exercises,
+  instructor solutions and human-study templates.
 
 ## Example outputs
 
@@ -156,9 +131,9 @@ calls from arithmetic work and traced allocations from total process memory.
 
 ## Individual methods
 
-These implementation groups are navigation aids. Use the paper's six dimensions
-above to describe a particular application; local/global scope, model access and
-intrinsic/post-hoc construction are additional practical axes.
+Browse by method family below, or use the [beginner guide](docs/METHOD_GUIDE.md)
+and [detailed reference](docs/METHOD_REFERENCE.md) to choose by question, data type
+and model access.
 
 | Area | Examples |
 | --- | --- |
@@ -177,6 +152,16 @@ study results are claimed.
 
 See [coverage boundaries and selection criteria](docs/METHOD_REFERENCE.md) and the
 [roadmap](docs/ROADMAP.md) for remaining families and research extensions.
+
+## Theory and sources
+
+[Basics](Theory/Basics.ipynb) introduces interpretable models and surrogates.
+[Dimensions](Theory/Dimensions.ipynb) explores explanation goals, audiences and
+presentation through worked examples; a [copy with outputs](docs/executed/Theory/Dimensions.ipynb)
+is available for reading. Its taxonomy lesson draws on
+[Cambria et al. (2023)](https://doi.org/10.1016/j.ipm.2022.103111), with Figure 1
+and full attribution in the notebook. Individual method tutorials cite their
+original papers and implementation documentation.
 
 ## Full environment and optional tools
 

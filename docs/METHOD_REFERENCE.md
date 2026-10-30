@@ -1,20 +1,21 @@
-# XAI taxonomy and detailed method reference
+# XAI method reference
 
-New to XAI? Begin with the [guided beginner path](METHOD_GUIDE.md), which teaches
-the vocabulary and walks through one model before comparing methods. This page
-is the detailed reference for selecting and documenting an explanation.
+Use this reference to match a question to an implementation, check the model
+access it requires, and decide what evidence to report. New to XAI? Begin with
+the [guided beginner path](METHOD_GUIDE.md).
 
-This guide applies **Figure 1 and Sections 3–5 of Cambria et al. (2023)**,
-[*A survey on XAI and natural language explanations*](https://doi.org/10.1016/j.ipm.2022.103111).
-Its three stages are **Context definition → Explanation generation → Message
-generation**, with six dimensions developed below. See the updated
-[Dimensions notebook](../Theory/Dimensions.ipynb) for the original Figure 1 and
-worked examples, or [read it with outputs](executed/Theory/Dimensions.ipynb).
+[Methods by question](#match-the-question-to-an-implementation) ·
+[Reporting checklist](#record-the-six-dimensions-and-the-implementation-checks) ·
+[Coverage boundaries](#coverage-boundaries)
 
-The paper studies XAI systems with an emphasis on natural-language explanations.
-The method mappings here are **our applications of its framework**, not the
-paper's coding or ranking of these experiments. Its categories describe different
-choices in a workflow and can overlap; a method name alone does not settle them.
+The taxonomy terminology below follows one organizing framework,
+[Cambria et al. (2023)](https://doi.org/10.1016/j.ipm.2022.103111), alongside
+practical implementation and evaluation checks. The method mappings are our
+applications of that framework, not the paper's evaluation or ranking of these
+experiments. Categories can overlap; a method name alone does not settle them.
+The [Dimensions notebook](../Theory/Dimensions.ipynb) illustrates the framework
+with Figure 1 and worked examples; [saved outputs](executed/Theory/Dimensions.ipynb)
+are also available. Full source details appear in the [reference](#reference).
 
 ## 1. Context definition
 
