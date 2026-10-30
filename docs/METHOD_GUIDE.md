@@ -210,4 +210,4 @@ Management, 60**(1), 103111.
 Figure 1 is on p. 4; Sections 3–5 develop the context, generation and presentation
 dimensions. [BibTeX](../Theory/references.bib) ·
 [Dimensions notebook](../Theory/Dimensions.ipynb) ·
-[Validated reading copy](executed/Theory/Dimensions.ipynb).
+[Notebook with outputs](executed/Theory/Dimensions.ipynb).

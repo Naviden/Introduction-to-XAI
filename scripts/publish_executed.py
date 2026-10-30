@@ -86,12 +86,6 @@ def main():
         for cell in notebook.cells:
             if cell.cell_type == "markdown":
                 cell.source = relocate_links(cell.source, ROOT / relative, destination)
-        source_link = quote(os.path.relpath(ROOT / relative, destination.parent), safe="/.-_")
-        notebook.cells.insert(0, nbformat.v4.new_markdown_cell(
-            f"**Validated reading copy.** Run the [source notebook]({source_link}) in its original directory. "
-            f"This snapshot includes checked outputs; source SHA-256: `{record['source_sha256']}`. "
-            "Timings describe this recorded environment, not a performance guarantee."
-        ))
         nbformat.write(notebook, destination)
     # Multiple validation batches can be published without erasing prior snapshots.
     batch = args.input.name
@@ -99,15 +93,17 @@ def main():
     manifests.mkdir(exist_ok=True)
     (manifests / f"{batch}-results.json").write_text(json.dumps(records, indent=2) + "\n")
     shutil.copyfile(args.input / "environment.json", manifests / f"{batch}-environment.json")
-    lines = ["# Executed reading copies", "", "These versioned snapshots can be read on GitHub without installing Python. "
-             "Use the source link inside each notebook to run or adapt it. "
+    lines = ["# Notebooks with outputs", "", "These notebooks can be read on GitHub without installing Python. "
+             "Use the source links below to run or adapt them. "
              "Relative imports in the source assume its original directory.", "",
              "The manifests record source hashes, measured times and software/platform versions. "
              "They describe a particular run; outputs can change with data, seeds, versions or hardware.", ""]
     for path in sorted(args.destination.rglob("*.ipynb")):
         relative = path.relative_to(args.destination)
         title = path.stem.replace("_", " ")
-        lines.append(f"- [{title}]({quote(relative.as_posix(), safe='/.-_')})")
+        source_link = quote(os.path.relpath(ROOT / relative, args.destination), safe="/.-_")
+        lines.append(f"- [{title}]({quote(relative.as_posix(), safe='/.-_')}) "
+                     f"· [source notebook]({source_link})")
     lines += ["", "Regenerate using `scripts/check_notebooks.py`, then "
               "`scripts/publish_executed.py --input validation/<run>`. "
               "Publication rejects changed sources, failed runs and unexecuted cells.", ""]
